@@ -1,0 +1,15 @@
+.small,
+.medium{
+    height: 2rem;
+    border-radius: .6rem;
+    background-color: gray;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+.small{
+    width: 2rem;
+}
+.medium{
+    width: 4rem;
+}

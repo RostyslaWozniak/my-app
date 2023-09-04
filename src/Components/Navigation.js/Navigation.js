@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import "./Navigation.css"
 
 const list = [
     {name: "Home", path: "/" },
@@ -16,9 +17,11 @@ const Navigation = () => {
         </li>
     ))
     return ( 
-        <ul>
-            {navigation}
-        </ul>
+        <div className="navigation">
+            <ul>
+                {navigation}
+            </ul>
+        </div>
      );
 }
  

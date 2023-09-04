@@ -1,0 +1,23 @@
+* {
+  margin: 0;
+  padding: 0; 
+  box-sizing: border-box;
+}
+html{ 
+  width: 80%;
+  margin: 0 auto;
+  height: 100vh; 
+}
+.body{
+ display: flex;
+  
+ 
+}
+.page{
+  flex-grow: 1;
+  background-color: rgb(252, 63, 63);
+  display: flex;
+  flex-direction: column;
+   text-align: center;
+}
+

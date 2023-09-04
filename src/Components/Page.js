@@ -1,11 +1,13 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import HomePage from '../Pages/HomePage';
-import MenuPage from '../Pages/MenuPage';
+import MenuPage from '../Pages/Menu/MenuPage';
 import OrderPage from '../Pages/OrderPage';
 import ContactPage from '../Pages/ContactPage';
-import AdminPage from '../Pages/AdminPage';
+import AdminPage from '../Pages/Admin/AdminPage';
 import ErrorPage from '../Pages/ErrorPage';
+
+
 
 const Pages = () => {
     return ( 

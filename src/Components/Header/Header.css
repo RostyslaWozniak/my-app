@@ -1,0 +1,11 @@
+.header{
+    height: 10rem;
+    overflow: hidden;
+    position: relative;
+}
+.header img{
+    width: 100%;
+    background-size: cover;
+    position: absolute;
+    top: -50%;
+}

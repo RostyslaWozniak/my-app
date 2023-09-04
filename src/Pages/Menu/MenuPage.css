@@ -1,0 +1,25 @@
+/* .menu-container{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+    text-align: center;
+} */
+.menu-container h1{
+    color: white;
+    margin-top: 2rem;
+}
+.menu-container ul li{
+    list-style: none;
+    color: white;
+    font-size: 2rem;
+    line-height: 4rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: .1rem dashed white;
+    margin: 2rem 4rem;
+}
+.menu-container ul li p {
+    width: 50%;
+   
+}
