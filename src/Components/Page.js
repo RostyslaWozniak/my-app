@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import HomePage from '../Pages/HomePage';
 import MenuPage from '../Pages/Menu/MenuPage';
-import OrderPage from '../Pages/OrderPage';
+import OrderPage from '../Pages/Order/OrderPage';
 import AdminPage from '../Pages/Admin/AdminPage';
 import ErrorPage from '../Pages/ErrorPage';
 

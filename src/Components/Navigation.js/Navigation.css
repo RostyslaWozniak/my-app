@@ -1,6 +1,6 @@
 .navigation{
     background-color: grey;
-    height: 70vh;
+    min-height: 70vh;
     width: 10rem;   
 }
 .navigation ul{
@@ -10,11 +10,20 @@
     list-style: none;
     line-height: 5rem;
     font-size: 1.5rem;
+    
 }
 .navigation a{
+    border-left: .5rem solid grey;
     color: white;
     text-decoration: none;
+    padding: 1.5rem;
+    
+}
+.navigation a:hover{
+    color: rgb(246, 144, 144);
 }
 .navigation a.active{
-    color: black;
+    border-left: .5rem solid red;
+    color: red;
+    
 }

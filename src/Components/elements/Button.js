@@ -1,13 +1,7 @@
 import { useState } from 'react';
 import './Button.css'
 
-const Button = ({name, type, }) => {
- 
-    
-    const handleClick = () => {
-        console.log("click")
-    }
-
+const Button = ({name, type, handleClick}) => {
     return ( 
         <button 
         className={type}
