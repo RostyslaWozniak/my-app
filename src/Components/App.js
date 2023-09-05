@@ -3,7 +3,7 @@ import { AppProvider } from "./AppContext";
 import Header from "./Header/Header";
 import Navigation from "./Navigation.js/Navigation";
 import Page from "./Page";
-import Footer from "./Footer";
+import Footer from "./Footer/Footer";
 import '../App.css'
 
 function App() {

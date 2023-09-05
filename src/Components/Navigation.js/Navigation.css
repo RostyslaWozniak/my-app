@@ -1,7 +1,8 @@
 .navigation{
     background-color: grey;
     min-height: 70vh;
-    width: 10rem;   
+    width: 10rem;  
+    border-right: .1rem solid white; 
 }
 .navigation ul{
     display: flex;

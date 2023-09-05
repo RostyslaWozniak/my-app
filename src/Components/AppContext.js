@@ -15,17 +15,16 @@ export const AppProvider = ({children}) => {
         {id: 2, name: "pierogi", price: 18.99, ingredients: "ciasto, ziemniaki, smietana"},
         {id: 3, name: "mizeria", price: 11.99, ingredients: "ogórki, koperek, smietana"},
     ]);
-//sprawdzenie czy artykuł został zamówiony
-    const [isArticleOrdered, setIsArticleOrdered] = useState(false)
-
+//ilość zamówionych artykułów
+const [quantity, setQuantity] = useState(0)
 //Order
     const [orderArray, setOrderArray] = useState([]);
 
 // dodawanie do zamówienia
     const handleAddToOrder = (id) => {
         const cloneArray = [...orderArray];
-        const item = menuArray.filter(el =>el.id === id)
-        
+        const item = menuArray.filter(el => el.id === id)
+     
         cloneArray.push(
             {
             id: Math.floor(Math.random() * new Date()),
@@ -34,14 +33,17 @@ export const AppProvider = ({children}) => {
             ingredients: item[0].ingredients,
             }
         )
+        setQuantity(prevState => prevState + 1)
         setOrderArray(cloneArray);
+        
     }
-//usuwanie elementu z zamówienoia
-    const handleDeleteElementFromArder = (id) => {
+//usuwanie elementu z zamówienia
+    const handleDeleteElementFromOrder = (id) => {
         const cloneArray = [...orderArray];
         const index = cloneArray.findIndex(el => el.id === id)
         cloneArray.splice(index, 1);
         setOrderArray(cloneArray);
+        setQuantity(prevState => prevState - 1)
     }
 //obsługa inputów Admina
     const handleInputValue = (e) => {
@@ -67,6 +69,7 @@ export const AppProvider = ({children}) => {
                 name: adminInputName,
                 price: adminInputPrice,
                 ingredients: adminInputIngredients,
+                
             }
         );
         setMenuArray(cloneArray);
@@ -81,11 +84,11 @@ export const AppProvider = ({children}) => {
             adminInputName,
             adminInputPrice,
             adminInputIngredients,
-            isArticleOrdered,
             menuArray,
             orderArray,
+            quantity,
             handleAddToOrder,
-            handleDeleteElementFromArder,
+            handleDeleteElementFromOrder,
             handleInputValue,
             handleSubmit,
             

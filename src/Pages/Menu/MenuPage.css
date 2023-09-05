@@ -1,0 +1,6 @@
+.menu-container .buttons{
+    min-width: 8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

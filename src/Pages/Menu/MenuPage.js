@@ -2,40 +2,22 @@ import React, { useContext } from 'react';
 
 import { AppContext } from '../../Components/AppContext';
 
-import Button from '../../Components/elements/Button';
-
 import './MenuPage.css'
+import ListElementMenuPage from './ListElementMenuPage';
 
 const MenuPage = () => {
 
-    const { menuArray, handleAddToOrder, orderArray, isArticleOrdered } = useContext(AppContext);       
-        const buttons = (
-            <div >
-                <Button
-                name="+"
-                type="small"
-                />
-                {orderArray.length}
-                <Button
-                name="-"
-                type="small"
-                />
-            </div>
-
-        )
+    const { menuArray } = useContext(AppContext);       
+        
+       
         
         const item = menuArray.map(el => (
-            <li key={el.id}>
-                <p>{el.name}</p>
-                <p>{el.price} zł</p>
-                {isArticleOrdered
-                ?  buttons
-                :  <Button 
-                name="dodaj"
-                type="medium"
-                handleClick={() => handleAddToOrder(el.id)}
-            />}
-            </li>
+            <ListElementMenuPage
+            key={el.id}
+            id={el.id}
+            name={el.name}
+            price={el.price}
+            />
         ))
     return ( 
         <div className="menu-container">

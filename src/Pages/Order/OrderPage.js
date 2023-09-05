@@ -1,13 +1,15 @@
 import React, { useContext } from 'react';
 
 import { AppContext } from '../../Components/AppContext';
-import Button from '../../Components/elements/Button';
+
 import { ListElementOrderPage } from './ListElementOrderPage';
+
 const OrderPge = () => {
     const { orderArray } = useContext(AppContext);
-    const item = orderArray.map((el, indx) => (
+    const item = orderArray.map((el, index) => (
         <ListElementOrderPage
         key={el.id}
+        index={index}
         id={el.id}
         name={el.name}
         price={el.price}

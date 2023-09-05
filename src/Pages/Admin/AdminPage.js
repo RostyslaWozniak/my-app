@@ -33,7 +33,7 @@ const AdminPage = () => {
                     <p>Cena: </p> 
                     <input 
                     name="price"
-                    type="number"
+                    type="text"
                     placeholder="wpisz cenę..."
                     onChange={handleInputValue}
                     value={adminInputPrice}
