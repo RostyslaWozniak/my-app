@@ -1,4 +1,5 @@
 import { BrowserRouter as Router } from "react-router-dom";
+import { AppProvider } from "./AppContext";
 import Header from "./Header/Header";
 import Navigation from "./Navigation.js/Navigation";
 import Page from "./Page";
@@ -7,16 +8,18 @@ import '../App.css'
 
 function App() {
   return (
-    <Router>
-      <Header/>
-      <div className="body">
-        <Navigation/>
-        <div className="page">
-          <Page/>
+    <AppProvider>
+      <Router>
+        <Header/>
+        <div className="body">
+          <Navigation/>
+          <div className="page">
+            <Page/>
+          </div>
         </div>
-      </div>
-      <Footer/>
-    </Router>
+        <Footer/>
+      </Router>
+    </AppProvider>
   );
 }
 

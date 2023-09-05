@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+
+import { AppContext } from '../../Components/AppContext';
 
 import Button from '../../Components/elements/Button';
 
@@ -15,17 +17,18 @@ const articles = [
 ]
 
 const MenuPage = () => {
-    
-    const item = articles.map(el => (
-        <li key={el.id}>
-            <p>{el.name}</p>
-            <p>{el.price} zł</p>
-            <Button 
-                name="dodaj"
-                type="medium"
-            /> 
-        </li>
-    ))
+
+    const { menuArray } = useContext(AppContext);
+        const item = menuArray.map(el => (
+            <li key={el.id}>
+                <p>{el.name}</p>
+                <p>{el.price} zł</p>
+                <Button 
+                    name="dodaj"
+                    type="medium"
+                /> 
+            </li>
+        ))
     return ( 
         <div className="menu-container">
             <h1>Menu</h1>

@@ -1,22 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 
 import Button from '../../Components/elements/Button';
 import './AdminPage.css'
+import { AppContext } from '../../Components/AppContext';
 
 
 
 const AdminPage = () => {
-    const [inputName, setInputName] = useState("")
-    const [inputPrice, setInputPrice] = useState("")
-    const [inputIngridients, setInputIngridients] = useState("")
+    const { 
+        adminInputName,
+        adminInputPrice,
+        adminInputIngredients,
+        handleInputValue,
+        handleSubmit,
+         } = useContext(AppContext);
 
-    const handleInputValue = (e) => {
-        setInputName(e.target.value)
-    }
-    const handleSubmit = (e) => {
-        e.preventDefault()
-    
-    }
     return ( 
         <div className="admin-container">
             <h1>Admin</h1>
@@ -24,25 +22,31 @@ const AdminPage = () => {
                 <label htmlFor="">
                     <p>Nazwa:</p> 
                     <input 
+                    name="name"
                     type="text"
                     placeholder="wpisz nazwę..."
                     onChange={handleInputValue}
+                    value={adminInputName}
                     />
                 </label>
                 <label htmlFor="">
                     <p>Cena: </p> 
                     <input 
+                    name="price"
                     type="number"
                     placeholder="wpisz cenę..."
                     onChange={handleInputValue}
+                    value={adminInputPrice}
                     />
                 </label>
                 <label htmlFor="">
                     <p>Składniki</p>
                     <input 
+                    name="ingridients"
                     type="text"
                     placeholder="wpisz składniki..."
                     onChange={handleInputValue}
+                    value={adminInputIngredients}
                     />
                 </label>
                 <Button 
