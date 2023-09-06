@@ -5,23 +5,21 @@ import { AppContext } from '../../Components/AppContext';
 import { ListElementOrderPage } from './ListElementOrderPage';
 
 const OrderPge = () => {
-    const { orderArray } = useContext(AppContext);
+    const { orderArray, orderQuantity } = useContext(AppContext);
     const item = orderArray.map((el, index) => (
         <ListElementOrderPage
         key={el.id}
         index={index}
-        id={el.id}
-        name={el.name}
-        price={el.price}
+        {...el}
         />
     ))
         
   
     return ( 
         <div className="order-container">
-            <h1>Twoje zamówienie</h1>
+            <h1>Twoje zamówienie {`(${orderQuantity})` || null}</h1>
             <ul>
-                {item}           
+                {orderQuantity === 0 ? <b>Brak zamówionych dań</b> : item}           
             </ul>
         </div>
      );

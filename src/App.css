@@ -1,47 +1,44 @@
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0; 
-  box-sizing: border-box;
 }
 html{ 
-  width: 80%;
-  margin: 0 auto;
   height: 100vh; 
+  margin: 0 auto;
+  width: 90%;
 }
 .body{
  display: flex;
 }
 .page{
-  flex-grow: 1;
   background-color: rgb(252, 63, 63);
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
+  padding: 3rem 5rem;
   text-align: center;
 }
 .page h1{
   color: white;
-  margin-top: 2rem;
 }
 .page ul li{
-  list-style: none;
-  color: white;
-  font-size: 2rem;
-  line-height: 4rem;
-  display: flex;
-  justify-content: space-around;
   align-items: center;
   border-bottom: .1rem dashed white;
-  margin: 2rem 4rem;
-}
-.page ul li p {
-  width: 50%; 
+  color: white;
+  display: flex;
+  font-size: 1.5rem;
+  justify-content: space-between;
+  line-height: 4rem;
+  list-style: none;
+  padding: 1rem 2rem 0 2rem;
 }
 .footer{
-  height: 5rem;
-  background-color: gray;
-  display: flex;
-  justify-content: space-around;
   align-items: center;
-  color: black;
+  background-color: gray;
   border-top: .1rem solid white;
+  color: black;
+  display: flex;
+  height: 5rem;
+  justify-content: space-around;
 }

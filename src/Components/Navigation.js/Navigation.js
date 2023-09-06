@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AppContext } from '../AppContext';
 import { NavLink } from 'react-router-dom';
 import "./Navigation.css"
 
-const list = [
-    {name: "Home", path: "/" },
-    {name: "Menu", path: "/menu" },
-    {name: "Zamówinie", path: "/order" },
-    {name: "Admin", path: "/admin" },
-]
-
 const Navigation = () => {
+
+    const { orderQuantity } = useContext(AppContext);
+
+    const list = [
+        {name: "Home", path: "/" },
+        {name: "Menu", path: "/menu" },
+        {name: `Order ${orderQuantity === 0 ? "" : `(${orderQuantity})`}`, path: "/order" },
+        {name: "Admin", path: "/admin" },
+    ]
+
     const navigation = list.map(el => (
         <li key={el.name}>
             <NavLink to={el.path}>{el.name}</NavLink>

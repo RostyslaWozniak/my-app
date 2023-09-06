@@ -11,9 +11,11 @@ const MenuPage = () => {
         
        
         
-        const item = menuArray.map(el => (
+        const item = menuArray.map((el, indx) => (
+            
             <ListElementMenuPage
             key={el.id}
+            indx={indx}
             id={el.id}
             name={el.name}
             price={el.price}

@@ -9,42 +9,60 @@ export const AppProvider = ({children}) => {
     const [adminInputPrice, setInputPrice] = useState("");
     const [adminInputIngredients, setInputIngridients] = useState("");
 
-//Menu
+//Stan Menu 
     const [menuArray, setMenuArray] = useState([
         {id: 1, name: "barszcz", price: 12.99, ingredients: "buraki, ziemniaki, smietana"},
         {id: 2, name: "pierogi", price: 18.99, ingredients: "ciasto, ziemniaki, smietana"},
-        {id: 3, name: "mizeria", price: 11.99, ingredients: "ogórki, koperek, smietana"},
+        {id: 3, name: "mizeria", price: 11.99, ingredients: "ogórki, koperek, smietana",},
     ]);
-//ilość zamówionych artykułów
-const [quantity, setQuantity] = useState(0)
-//Order
-    const [orderArray, setOrderArray] = useState([]);
+//Stan Order
+    const [orderArray, setOrderArray] = useState([])
 
-// dodawanie do zamówienia
-    const handleAddToOrder = (id) => {
-        const cloneArray = [...orderArray];
-        const item = menuArray.filter(el => el.id === id)
-     
-        cloneArray.push(
-            {
-            id: Math.floor(Math.random() * new Date()),
-            name: item[0].name,
-            price: item[0].price,
-            ingredients: item[0].ingredients,
+////////////////////////////////////////////////////////////
+
+//sprawdenie ilości artykułow
+    const  getItemQuantity = (id) => {
+        return orderArray.find(item => item.id === id)?.quantity || 0;
+    }
+//zwiększenie ilości artykułów
+    const increaseItemQuantity = (id) => {
+        setOrderArray(currentItems => {
+            if(currentItems.find(item => item.id === id) == null){
+                return [...currentItems, { id, quantity: 1 }]
+            } else {
+                return currentItems.map(item => {
+                    if(item.id === id){
+                        return { ...item, quantity: item.quantity + 1}
+                    } else {
+                        return item
+                    }
+                })
             }
-        )
-        setQuantity(prevState => prevState + 1)
-        setOrderArray(cloneArray);
-        
+        })
     }
+//zmniejszenie ilości artykułów
+const decreaseItemQuantity = (id) => {
+    setOrderArray(currentItems => {
+        if(currentItems.find(item => item.id === id)?.quantity === 1){
+            return currentItems.filter(item => item.id !== id)
+        } else {
+            return currentItems.map(item => {
+                if(item.id === id){
+                    return { ...item, quantity: item.quantity - 1}
+                } else {
+                    return item
+                }
+            })
+        }
+    })
+}
 //usuwanie elementu z zamówienia
-    const handleDeleteElementFromOrder = (id) => {
-        const cloneArray = [...orderArray];
-        const index = cloneArray.findIndex(el => el.id === id)
-        cloneArray.splice(index, 1);
-        setOrderArray(cloneArray);
-        setQuantity(prevState => prevState - 1)
-    }
+const removeFromOrderArray = (id) => {
+    setOrderArray(currentItems => {
+        return currentItems.filter(item => item.id !== id)
+    })
+}
+const orderQuantity = orderArray.reduce((quantity, item) => item.quantity + quantity, 0)
 //obsługa inputów Admina
     const handleInputValue = (e) => {
         switch(e.target.name){
@@ -69,7 +87,6 @@ const [quantity, setQuantity] = useState(0)
                 name: adminInputName,
                 price: adminInputPrice,
                 ingredients: adminInputIngredients,
-                
             }
         );
         setMenuArray(cloneArray);
@@ -86,12 +103,14 @@ const [quantity, setQuantity] = useState(0)
             adminInputIngredients,
             menuArray,
             orderArray,
-            quantity,
-            handleAddToOrder,
-            handleDeleteElementFromOrder,
+            orderQuantity,
             handleInputValue,
             handleSubmit,
-            
+
+            getItemQuantity,
+            increaseItemQuantity,
+            decreaseItemQuantity,
+            removeFromOrderArray,
         }}
         >
             {children}
