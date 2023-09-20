@@ -6,13 +6,8 @@ import './MenuPage.css'
 import ListElementMenuPage from './ListElementMenuPage';
 
 const MenuPage = () => {
-
     const { menuArray } = useContext(AppContext);       
-        
-       
-        
         const item = menuArray.map((el, indx) => (
-            
             <ListElementMenuPage
             key={el.id}
             indx={indx}

@@ -1,15 +1,35 @@
+:root{
+    --accept: green;
+    --reject: red;
+}
+
 .small,
-.medium{
+.medium,
+.large{
     height: 2rem;
     border-radius: .6rem;
     background-color: gray;
     color: white;
     font-size: 1rem;
     cursor: pointer;
+    margin: .5rem;
 }
 .small{
     width: 2rem;
 }
 .medium{
     width: 4rem;
+}
+.large{
+    width: 8rem;
+    /* margin: auto; */
+}
+.accept{
+    background-color: var(--accept);
+}
+.delete{
+    background-color: var(--reject);
+}
+button:hover{
+    opacity: 1;
 }

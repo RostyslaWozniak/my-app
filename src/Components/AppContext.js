@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+
 export const AppContext = React.createContext();
 
 export const AppProvider = ({children}) => {
@@ -17,7 +18,8 @@ export const AppProvider = ({children}) => {
     ]);
 //Stan Order
     const [orderArray, setOrderArray] = useState([])
-
+// stan złozónego zamówienia
+    const [acceptedOrdersArray, setAcceptedOrdersArray] = useState([]);
 ////////////////////////////////////////////////////////////
 
 //sprawdenie ilości artykułow
@@ -63,6 +65,13 @@ const removeFromOrderArray = (id) => {
     })
 }
 const orderQuantity = orderArray.reduce((quantity, item) => item.quantity + quantity, 0)
+//przujęcie zamówienia
+
+const handleOrederIsSend = () => {
+    alert("Zamówienie wysłano");
+   
+    console.log(acceptedOrdersArray)
+}
 //obsługa inputów Admina
     const handleInputValue = (e) => {
         switch(e.target.name){
@@ -85,7 +94,7 @@ const orderQuantity = orderArray.reduce((quantity, item) => item.quantity + quan
             {
                 id: Math.floor(Math.random() * new Date()),
                 name: adminInputName,
-                price: adminInputPrice,
+                price: Number(adminInputPrice),
                 ingredients: adminInputIngredients,
             }
         );
@@ -105,8 +114,8 @@ const orderQuantity = orderArray.reduce((quantity, item) => item.quantity + quan
             orderArray,
             orderQuantity,
             handleInputValue,
+            handleOrederIsSend,
             handleSubmit,
-
             getItemQuantity,
             increaseItemQuantity,
             decreaseItemQuantity,

@@ -1,21 +1,23 @@
 import { useContext } from "react"
 import Button from "../../Components/elements/Button"
 import { AppContext } from "../../Components/AppContext"
-
-export const ListElementOrderPage = ({id, quantity, index}) => {
+import {formatCurency} from '../../tools/formatCurency'
+export const ListElementOrderPage = ({id, quantity, indx}) => {
     const { removeFromOrderArray, menuArray  } = useContext(AppContext)
         const item = menuArray.find(el => el.id === id);
+        const nr = `${indx + 1}.`
     return( 
         <li key={id}>
-            <b>{index + 1}.</b>
+            <b>{nr}</b>
             <p>{item.name} </p>
             <p>x{quantity}</p>
-            <p>{item.price}</p>
+            <p>{formatCurency(item.price)}</p>
             <Button
             name="usuń"
-            type="medium"
+            type="medium delete"
             handleClick={() => removeFromOrderArray(id)}
             />
         </li>
+
     )
 }

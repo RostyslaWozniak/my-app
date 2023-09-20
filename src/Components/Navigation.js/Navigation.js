@@ -1,20 +1,22 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../AppContext';
+import { LoginContext } from '../LoginContext';
 import { NavLink } from 'react-router-dom';
 import "./Navigation.css"
 
 const Navigation = () => {
 
     const { orderQuantity } = useContext(AppContext);
-
-    const list = [
+    const { isAdminLogged, isUserLogged } = useContext(LoginContext); 
+    const user = isUserLogged ? {name: "Logout", path: "/logout"} : {name: "Login", path: "/login"}
+    const navNames = [
         {name: "Home", path: "/" },
         {name: "Menu", path: "/menu" },
         {name: `Order ${orderQuantity === 0 ? "" : `(${orderQuantity})`}`, path: "/order" },
-        {name: "Admin", path: "/admin" },
+        isAdminLogged ? {name: "Admin", path: "/admin"} : user,
     ]
 
-    const navigation = list.map(el => (
+    const navigation = navNames.map(el => (
         <li key={el.name}>
             <NavLink to={el.path}>{el.name}</NavLink>
         </li>
