@@ -19,7 +19,9 @@ export const LoginProvider = ({children}) => {
     const [ registerNameInput, setRegisterNameInput ] = useState("");
     const [ registerPasswordInput, setRegisterPasswordInput ] = useState("");
     const [ registerPasswordInput2, setRegisterPasswordInput2 ] = useState("");
-    const [ arrOfRegistrateUsers, setArrOfRegistrateUsers ] = useState([]);
+    const [ arrOfRegistrateUsers, setArrOfRegistrateUsers ] = useState([
+        {name: "Rostik", password: "12345"}
+    ]);
  //obsługa inputów Logowania oraz rejestracji 
     const handleInputLoginValue = (e) => {
         switch (e.target.name) {
@@ -42,16 +44,21 @@ export const LoginProvider = ({children}) => {
         if(nameInput === admin.name && passwordInput === admin.password) {
             setIsAdminLogged(!isAdminLogged);
             navigate('/admin');
-        }else if(arrOfRegistrateUsers > 0){
-            arrOfRegistrateUsers.forEach(user => {
-                if(nameInput === user.name && passwordInput === user.password){
-                    console.log(`${nameInput} jesteś zalogowany `)
-                }else{
-                    console.log('Błedne dane logowania')
-                }
-            })
+            console.log("jestes zalogowany jako admin")
+            return;
+        }else if(arrOfRegistrateUsers.length > 0){
+            if(arrOfRegistrateUsers.find(user => user.password === passwordInput 
+                && user.name === nameInput)){
+                console.log(`${nameInput} jesteś zalogowany `)
+                setIsUserLogged(!isUserLogged);
+                navigate('/');
+            }else{
+                setPasswordInput("");
+                return console.log('Błedne dane logowania1');
+            }
         }else{
-            console.log('Błedne dane logowania')
+            setPasswordInput("");
+            return console.log('Błedne dane logowania2')
         }
          
         setNameInput("");
@@ -72,12 +79,10 @@ export const LoginProvider = ({children}) => {
                          console.log('Takie imię już istnieje');
                     }else {
                         isNameValid = true;
-                        console.log(`${user.name} jesteś zalogowany `)
                     }
                 })
             }else{
                 isNameValid = true;
-                console.log(`${registerNameInput} jesteś zalogowany `)
             }    
         }
         if(registerPasswordInput.length < 5){
@@ -99,13 +104,14 @@ export const LoginProvider = ({children}) => {
             setRegisterNameInput("");
             setRegisterPasswordInput("");
             setRegisterPasswordInput2("");
+            console.log(`${registerNameInput} jesteś zalogowany `)
         }
     }
     // wylogowanie użytkownika
         const handleUserLogout = () => {
             setIsUserLogged(!isUserLogged);
             console.log('jesteś wylogowany')
-            navigate('/');
+            navigate('/login');
         }
     return(
         <LoginContext.Provider value={{
@@ -125,3 +131,5 @@ export const LoginProvider = ({children}) => {
         </LoginContext.Provider>
     )
 }
+
+

@@ -7,7 +7,7 @@ const Logout = () => {
     return ( 
         <>
             <h1>Wylogowanie</h1>
-            <p>Czy napewno chcesz się wylogować</p>
+            <p>Czy napewno chcesz się wylogować?</p>
                 <Button
                 name="Tak"
                 type="large"
