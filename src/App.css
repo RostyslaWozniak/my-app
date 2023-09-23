@@ -22,18 +22,6 @@
   --accept-color: rgb(82, 136, 82);
   --reject-color: rgb(215, 24, 24);
 } */
-/* :root{
-  --border-radius: 10px;
-  --border-px: 2px;
-  --border-button: 7px;
-  --primary-color: #E2495B;;
-  --secondary-color: #FFFEE6;
-  --font-color: #000; 
-  --white-color: #E5E5E5; 
-  --black-color: #E2495B;
-  --accept-color: rgb(123, 187, 123);
-  --reject-color: rgb(250, 123, 123);
-} */
 * {
   box-sizing: border-box;
   margin: 0;

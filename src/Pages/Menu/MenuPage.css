@@ -7,6 +7,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    line-height: 1rem;
 }
 .menu-container .button{
     justify-content: flex-end;
