@@ -1,34 +1,29 @@
-:root{
-    --accept: green;
-    --reject: red;
-}
-
 .small,
 .medium,
 .large{
-    height: 2rem;
-    border-radius: .6rem;
-    background-color: gray;
-    color: white;
-    font-size: 1rem;
+    height: 30px;
+    border-radius: var(--border);
+    background-color: var(--secondary-color);
+    color: var(--font-color);
+    font-size: 0.8rem;
     cursor: pointer;
-    margin: .5rem;
+    margin: 10px;
 }
 .small{
-    width: 2rem;
+    width: 30px;
 }
 .medium{
-    width: 4rem;
+    width: 80px;
 }
 .large{
-    width: 8rem;
-    /* margin: auto; */
+    height: 40px;
+    width: 140px;
 }
 .accept{
-    background-color: var(--accept);
+    background-color: var(--accept-color);
 }
 .delete{
-    background-color: var(--reject);
+    background-color: var(--reject-color);
 }
 button:hover{
     opacity: 1;

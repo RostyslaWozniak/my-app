@@ -1,18 +1,17 @@
-
-.order-container h3{
+.order-container i{
     line-height: 20rem;
     font-size: 1.5rem
 }
 .order-container .result-container b,
 .order-container .result-container button{
     position: absolute;
-    bottom: 2rem;
+    bottom: 40px;
 }
 .order-container .result-container b{
     font-size: 1.5rem;
-    left: 7rem;
+    left: 100px;
 }
 .order-container .result-container button{
-    width: 7rem;
-    right: 7rem;
+    width: 100px;
+    right: 100px;
 } 

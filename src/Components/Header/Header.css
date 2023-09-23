@@ -1,11 +1,12 @@
 .header{
-    height: 10rem;
+    height: 150px;
     overflow: hidden;
     position: relative;
+    border-radius: var(--border)
 }
 .header img{
-    width: 100%;
-    background-size: cover;
+    width: 100vw;
+    background-size:cover;
     position: absolute;
-    top: -50%;
+    top: -70%;
 }

@@ -1,6 +1,6 @@
 .login-container{
     margin: 0 auto;
-    width: 25rem;
+    width: 400px;
 }
 .login-container div{
     display: flex;
@@ -9,5 +9,5 @@
 }
 .login-container a{
     text-decoration: none;
-    color: white;
+    color: var(--font-color);
 }

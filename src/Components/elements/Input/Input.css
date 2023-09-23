@@ -1,23 +1,27 @@
 .label-input-element{
     width: 100%;
     display: flex;
+    color: var(--font-color);
     font-size: 1.5rem;
     justify-content: space-between;
     align-items: center;
-    border-bottom: .1rem dashed white; 
-    padding: 1rem;
-    margin: 1rem auto;
+    border-bottom: 1.5px dashed; 
+    padding: 15px;
+    margin: 15px auto;
 }
 .label-input-element input{
-    border-radius: .6rem;
+    background-color: var(--secondary-color);
+    border-radius: var(--border-button);
+    color: var(--font-color);
     font-size: 1rem;
-    height: 2rem;
-    margin: 0 1rem;
-    outline: none;
-    padding: 1rem;
-    width: 60%;
+    height: 40px;
+    padding: 0 15px; 
+    width: 70%;
+}
+.label-input-element input::placeholder{
+    color: var(--font-color)
 }
 .label-input-element p{
     width: 50%;
-    color: white;
+    color: var(--font-color);
 } 

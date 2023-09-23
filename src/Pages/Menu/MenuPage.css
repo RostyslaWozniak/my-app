@@ -1,10 +1,15 @@
 .menu-container .button,
 .menu-container .buttons{
-    min-width: 8rem;
+    min-width: 120px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 .menu-container .button{
     justify-content: flex-end;
+}
+.menu-container i{
+    margin: 0 20px;
+    font-size: .8rem;
+    line-height: 1rem;
 }
