@@ -29,9 +29,9 @@ const LogIn = () => {
             <form onSubmit={handleLoginSubmit}>              
                {showInputs}
                <div>
-                    <Link to="/login/registration">Zarejestruj się</Link>
+                    <Link to="/login/registration"><i>Zarejestruj się</i></Link>
                     <Button 
-                        name="Zaloguj"
+                        name="Zaloguj się"
                         type="large"
                     />
                 </div>

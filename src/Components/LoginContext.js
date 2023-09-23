@@ -20,7 +20,8 @@ export const LoginProvider = ({children}) => {
     const [ registerPasswordInput, setRegisterPasswordInput ] = useState("");
     const [ registerPasswordInput2, setRegisterPasswordInput2 ] = useState("");
     const [ arrOfRegistrateUsers, setArrOfRegistrateUsers ] = useState([
-        {name: "Rostik", password: "12345"}
+        {name: "Rostik", password: "12345"},
+        {name: "Pusheen", password: "09876"}
     ]);
  //obsługa inputów Logowania oraz rejestracji 
     const handleInputLoginValue = (e) => {
@@ -44,21 +45,21 @@ export const LoginProvider = ({children}) => {
         if(nameInput === admin.name && passwordInput === admin.password) {
             setIsAdminLogged(!isAdminLogged);
             navigate('/admin');
-            console.log("jestes zalogowany jako admin")
+            console.log("jesteś zalogowany/a jako admin")
             return;
         }else if(arrOfRegistrateUsers.length > 0){
             if(arrOfRegistrateUsers.find(user => user.password === passwordInput 
                 && user.name === nameInput)){
-                console.log(`${nameInput} jesteś zalogowany `)
+                console.log(`${nameInput} jesteś zalogowany/a `)
                 setIsUserLogged(!isUserLogged);
                 navigate('/');
             }else{
                 setPasswordInput("");
-                return console.log('Błedne dane logowania1');
+                return console.log('Błedne dane logowania');
             }
         }else{
             setPasswordInput("");
-            return console.log('Błedne dane logowania2')
+            return console.log('Błedne dane logowania')
         }
          
         setNameInput("");
@@ -74,19 +75,17 @@ export const LoginProvider = ({children}) => {
             console.log('imię powinno mieć min 3 znaki')
         }else{
             if(arrOfRegistrateUsers.length > 0){
-                arrOfRegistrateUsers.forEach(user => {
-                    if(user.name === registerNameInput){
-                         console.log('Takie imię już istnieje');
-                    }else {
-                        isNameValid = true;
-                    }
-                })
+                if(arrOfRegistrateUsers.find(user => user.name === registerNameInput)){
+                    console.log('Takie imię już istnieje');
+                }else {
+                    isNameValid = true;
+                }
             }else{
                 isNameValid = true;
             }    
         }
         if(registerPasswordInput.length < 5){
-            console.log('hasło powinne mieć min 5 znaków')
+            console.log('hasło powinno mieć min 5 znaków')
         }else {
             isPasswordValid = true;
         }
@@ -107,6 +106,11 @@ export const LoginProvider = ({children}) => {
             console.log(`${registerNameInput} jesteś zalogowany `)
         }
     }
+    //wylogowanie admina
+    const handleAdminLogout = () => {
+        setIsAdminLogged(!isAdminLogged)
+        navigate('/login');
+    }
     // wylogowanie użytkownika
         const handleUserLogout = () => {
             setIsUserLogged(!isUserLogged);
@@ -122,6 +126,7 @@ export const LoginProvider = ({children}) => {
             registerNameInput,
             registerPasswordInput,
             registerPasswordInput2,
+            handleAdminLogout,
             handleInputLoginValue,
             handleLoginSubmit,
             handleRegisterSubmit,

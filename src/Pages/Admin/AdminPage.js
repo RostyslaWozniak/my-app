@@ -15,7 +15,7 @@ const AdminPage = () => {
         handleInputValue,
         handleSubmit,
     } = useContext(AppContext);
-    const { isAdminLogged } = useContext(LoginContext);
+    const { isAdminLogged, handleAdminLogout } = useContext(LoginContext);
     const formInputsArray = [
         {label: "Nazwa", name: "name", type: "text", placeholder: "Wpisz nazwę...", onChange: handleInputValue, value: adminInputName},
         {label: "Cena", name: "price", type: "text", placeholder: "Wpisz cenę...", onChange: handleInputValue, value: adminInputPrice},
@@ -41,8 +41,13 @@ const AdminPage = () => {
                 <Button 
                     name="dodaj"
                     type="large"
-                    />
+                />
             </form> 
+            <Button 
+                name="wyloguj się"
+                type="large delete"
+                handleClick={handleAdminLogout}
+            />
         </div>
        
      );

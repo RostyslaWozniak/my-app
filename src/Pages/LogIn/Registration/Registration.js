@@ -34,7 +34,7 @@ const Registration = () => {
                 {showInputs}
                 <Button
                     name="Zarejestruj się"
-                    type="large"
+                    type="large accept"
                 />
             </form>
         </>

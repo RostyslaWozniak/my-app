@@ -1,3 +1,6 @@
+.menu-container{
+    width: 100%;
+}
 .menu-container .button,
 .menu-container .buttons{
     min-width: 120px;

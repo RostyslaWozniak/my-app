@@ -1,17 +1,16 @@
+.order-container{
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 .order-container i{
-    line-height: 20rem;
-    font-size: 1.5rem
-}
-.order-container .result-container b,
-.order-container .result-container button{
-    position: absolute;
-    bottom: 40px;
-}
-.order-container .result-container b{
     font-size: 1.5rem;
-    left: 100px;
+    margin: 30px 0;
 }
-.order-container .result-container button{
-    width: 100px;
-    right: 100px;
-} 
+.order-container .result-container {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
