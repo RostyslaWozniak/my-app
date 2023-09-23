@@ -2,7 +2,7 @@
 .medium,
 .large{
     height: 30px;
-    border-radius: var(--border);
+    border-radius: var(--border-button);
     background-color: var(--secondary-color);
     color: var(--font-color);
     font-size: 0.8rem;
@@ -11,13 +11,19 @@
 }
 .small{
     width: 30px;
+    position: relative;
+    overflow: hidden;
 }
 .medium{
     width: 80px;
+    position: relative;
+    overflow: hidden;
 }
 .large{
     height: 40px;
     width: 140px;
+    position: relative;
+    overflow: hidden;
 }
 .accept{
     background-color: var(--accept-color);
@@ -25,6 +31,22 @@
 .delete{
     background-color: var(--reject-color);
 }
-button:hover{
-    opacity: 1;
+.small:hover::before,
+.medium:hover::before,
+.large:hover::before{
+    transform: translateX(2000%) rotate(30deg);
+}
+.small::before,
+.medium::before,
+.large::before{
+    content: "";
+    display: block;
+    width: 20px;
+    height: 50px;
+    background-color: var(--white-color);
+    position: absolute;
+    transform: rotate(30deg);
+    top: -5px;
+    left: -35px;
+    transition: .2s ease-in-out;
 }

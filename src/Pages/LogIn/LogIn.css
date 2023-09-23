@@ -11,3 +11,6 @@
     text-decoration: none;
     color: var(--font-color);
 }
+.login-container a:hover{
+    color: var(--secondary-color);
+}
