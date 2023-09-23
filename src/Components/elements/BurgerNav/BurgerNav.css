@@ -1,0 +1,44 @@
+.burger-nav{
+    opacity: 0;
+    width: 40px;
+    height: 4px;
+    background-color: var(--font-color);
+    position: absolute;
+    top: 30px;
+    left: 15px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: .7s ease-in-out;  
+    resize:both;
+    z-index: 2;
+} 
+.burger-nav::before,
+.burger-nav::after{
+    border-radius: var(--border-radius);
+    content: '';
+    display: block;
+    position: absolute;
+    width: 40px;
+    height: 4px;
+    background-color: var(--font-color);
+    transition: .7s ease-in-out;     
+}
+.burger-nav::before{
+    top: -15px;
+    background-color: var(--font-color);
+}
+.burger-nav::after{
+    bottom: -15px;
+    background-color: var(--font-color);
+} 
+.burger-nav-active{
+    transform: translateX(130px);
+    background: var(--secondary-color);
+    z-index: 2;    
+}
+.burger-nav-active::before{
+    transform: translate(0, 15px) rotate(45deg) ;
+}
+.burger-nav-active::after{
+    transform: translate(0, -15px) rotate(-45deg);
+}

@@ -20,8 +20,14 @@ export const AppProvider = ({children}) => {
     const [orderArray, setOrderArray] = useState([])
 // stan złozónego zamówienia
     const [acceptedOrdersArray, setAcceptedOrdersArray] = useState([]);
-////////////////////////////////////////////////////////////
 
+//stan BurgerNav
+    const [isBurgerNavActive, setIsBurgerNavActive] = useState(false)
+////////////////////////////////////////////////////////////
+//BurgerNav function
+    const handleBurgerNav = () => {
+        setIsBurgerNavActive(!isBurgerNavActive);
+    } 
 //sprawdenie ilości artykułow
     const  getItemQuantity = (id) => {
         return orderArray.find(item => item.id === id)?.quantity || 0;
@@ -77,12 +83,11 @@ const handleOrederIsSend = () => {
         switch(e.target.name){
             case "name":
                 return setInputName(e.target.value);
-                break;
             case "price":
                 return setInputPrice(e.target.value);
-                break;
             case "ingridients": 
-                return setInputIngridients(e.target.value)
+                return setInputIngridients(e.target.value);
+            default: return;
         }
     }
 
@@ -110,10 +115,12 @@ const handleOrederIsSend = () => {
             adminInputName,
             adminInputPrice,
             adminInputIngredients,
+            isBurgerNavActive,
             menuArray,
             orderArray,
             orderQuantity,
             handleInputValue,
+            handleBurgerNav,
             handleOrederIsSend,
             handleSubmit,
             getItemQuantity,

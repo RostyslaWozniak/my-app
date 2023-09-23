@@ -8,9 +8,12 @@ import LogIn from '../Pages/LogIn/LogIn';
 import Logout from '../Pages/LogIn/Logout/Logout';
 import Registration from '../Pages/LogIn/Registration/Registration'
 import ErrorPage from '../Pages/ErrorPage';
+import BurgerNav from './elements/BurgerNav/BurgerNav';
 
 const Pages = () => {
     return ( 
+        <>
+        <BurgerNav/>
         <Routes>
             <Route path="/" element={<HomePage/>}/>
             <Route path="/menu" element={<MenuPage/>}/>
@@ -21,6 +24,7 @@ const Pages = () => {
             <Route path="/login/registration" element={<Registration/>}/>
             <Route path="*" element={<ErrorPage/>}/>
         </Routes>
+        </>
      );
 }
 export default Pages;
