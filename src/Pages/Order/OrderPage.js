@@ -44,7 +44,7 @@ const OrderPge = () => {
                     {orderQuantity !== 0 && item}               
                 </ul>
             </div>
-            {orderQuantity === 0 && <h2>Brak zamówionych dań :(</h2>}
+            {orderQuantity === 0 && <i>Brak zamówionych dań :(</i>}
             <div className="order-sum">
                 {orderQuantity === 0 
                 ?

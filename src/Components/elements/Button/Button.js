@@ -1,6 +1,6 @@
 import './Button.css'
 
-const Button = ({name, type, handleClick, isDisabled}) => {
+const Button = ({name, type, handleClick, isDisabled }) => {
     const word = 'word'
     return ( 
         <button 

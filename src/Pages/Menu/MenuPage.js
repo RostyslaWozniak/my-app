@@ -1,10 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import Button from '../../Components/elements/Button/Button';
 import ListElement from '../../Components/elements/ListElement/ListElement';
 import { AppContext } from '../../Components/AppContext';
 import './MenuPage.css'
 
 const MenuPage = () => {
+    const lunchRef = useRef(null);
+    const saladsRef = useRef(null);
+    const dessertsRef = useRef(null);
+    const drinksRef = useRef(null);
     const { menuArray } = useContext(AppContext);    
     const { getItemQuantity, increaseItemQuantity, decreaseItemQuantity} = useContext(AppContext);
         const item = menuArray.map((el, indx) => {
@@ -17,7 +21,7 @@ const MenuPage = () => {
             handleClick={() => increaseItemQuantity(el.id)}
             />
         </div>
-    : 
+        : 
         <div className="buttons">
             <Button
             type="small delete"
@@ -39,14 +43,53 @@ const MenuPage = () => {
             name={el.name}
             price={el.price}
             ingredients={el.ingredients}
+            kategory={el.kategory}
             button={buttons}
             />
         )})
+        const lunch = item.filter(el => el.props.kategory === "obiady");
+        const salads = item.filter(el => el.props.kategory === "sałatki");
+        const desserts = item.filter(el => el.props.kategory === "desery");
+        const drinks = item.filter(el => el.props.kategory === "napoje");
+        
+        const handleScroll = (ref) => {
+            ref.current?.scrollIntoView({behavior: 'smooth'})
+        }
     return ( 
         <div className="menu-container">
             <h1>Menu</h1>
+            <div className="menu-buttons">
+                <Button 
+                name="Obiady"
+                type="Xlarge"
+                handleClick={() => handleScroll(lunchRef)}
+                />  
+                <Button 
+                name="sałatki"
+                type="Xlarge"
+                handleClick={() => handleScroll(saladsRef)}
+                />  
+                <Button 
+                name="desery"
+                type="Xlarge"
+                handleClick={() => handleScroll(dessertsRef)}
+                />  
+                <Button 
+                name="napoje"
+                type="Xlarge"
+                handleClick={() => handleScroll(drinksRef)}
+                />  
+            </div>
+            
             <ul>
-                {item}
+                <h2 ref={lunchRef} >Obiady</h2>
+                {lunch}
+                <h2 ref={saladsRef}>Sałątki</h2>
+                {salads}
+                <h2 ref={dessertsRef}>Desery</h2>
+                {desserts}
+                <h2 ref={drinksRef}>Napoje</h2>
+                {drinks}
             </ul>
         </div>
      );

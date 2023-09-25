@@ -24,14 +24,10 @@ button{
 .delete{
     background-color: var(--reject-color);
 }
-.small:hover::before,
-.medium:hover::before,
-.large:hover::before{
+button:hover::before{
     transform: translateX(2000%) rotate(30deg);
 }
-.small::before,
-.medium::before,
-.large::before{
+button::before{
     content: "";
     display: block;
     width: 20px;

@@ -55,12 +55,13 @@ html{
   margin-bottom: 40px;
 }
 .page h2{
-  margin: 20px 0;
+  margin: 40px 0;
   padding: 10px 20px;
   font-style: italic;
   font-weight: 100;
   border: var(--border-px) solid var(--white-color);
   border-radius: var(--border-radius);
+  color: var(--secondary-color)
 }
 .footer{
   align-items: center;
