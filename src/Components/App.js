@@ -3,7 +3,7 @@ import { AppProvider } from "./AppContext";
 import { LoginProvider } from "./LoginContext";
 import Header from "./Header/Header";
 import Navigation from "./Navigation.js/Navigation";
-import Page from "./Page";
+import Pages from "./Pages";
 import Footer from "./Footer/Footer";
 import '../App.css'
 
@@ -16,7 +16,7 @@ function App() {
           <div className="body">
             <Navigation/>
             <div className="page">
-              <Page/>
+              <Pages/>
             </div>
           </div>
           <Footer/>

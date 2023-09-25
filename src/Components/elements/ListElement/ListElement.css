@@ -1,0 +1,16 @@
+.list-element{
+    align-items: center;
+    border-bottom: 1.5px dashed var(--font-color);
+    color: var(--font-color);
+    display: flex;
+    font-size: 1.5rem;
+    justify-content: space-between;
+    list-style: none;
+    padding: 15px;
+    gap: 10px 20px;
+}
+.list-element i{
+    margin: 0 20px;
+    font-size: .8rem;
+    line-height: 1rem;
+}

@@ -9,12 +9,14 @@ export const AppProvider = ({children}) => {
     const [adminInputName, setInputName] = useState("");
     const [adminInputPrice, setInputPrice] = useState("");
     const [adminInputIngredients, setInputIngridients] = useState("");
+    const [adminInputKategory, setInputKategory] = useState("");
 
 //Stan Menu 
     const [menuArray, setMenuArray] = useState([
-        {id: 1, name: "barszcz", price: 12.99, ingredients: "buraki, ziemniaki, smietana"},
-        {id: 2, name: "pierogi", price: 18.99, ingredients: "ciasto, ziemniaki, smietana"},
-        {id: 3, name: "mizeria", price: 11.99, ingredients: "ogórki, koperek, smietana",},
+        {id: 1, name: "barszcz", price: 12.99, ingredients: "buraki, ziemniaki, smietana", kategory: "obiady",},
+        {id: 2, name: "pierogi", price: 18.99, ingredients: "ciasto, mięso z indyka, smietana", kategory: "obiady",},
+        {id: 3, name: "koleslaw", price: 11.99, ingredients: "kapusta, marchewka, jabko", kategory: "sałątki",},
+        {id: 4, name: "piwerko", price: 17.99, ingredients: null, kategory: "napoje",},
     ]);
 //Stan Order
     const [orderArray, setOrderArray] = useState([])
@@ -87,6 +89,8 @@ const handleOrederIsSend = () => {
                 return setInputPrice(e.target.value);
             case "ingridients": 
                 return setInputIngridients(e.target.value);
+            case "kategory": 
+                return setInputKategory(e.target.value);
             default: return;
         }
     }
@@ -101,12 +105,14 @@ const handleOrederIsSend = () => {
                 name: adminInputName,
                 price: Number(adminInputPrice),
                 ingredients: adminInputIngredients,
+                kategory: adminInputKategory,
             }
         );
         setMenuArray(cloneArray);
         setInputName("");
         setInputPrice("");
         setInputIngridients("");
+        setInputKategory("");
     }
    
     return(
@@ -115,6 +121,7 @@ const handleOrederIsSend = () => {
             adminInputName,
             adminInputPrice,
             adminInputIngredients,
+            adminInputKategory,
             isBurgerNavActive,
             menuArray,
             orderArray,

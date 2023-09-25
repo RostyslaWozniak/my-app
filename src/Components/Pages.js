@@ -5,10 +5,12 @@ import MenuPage from '../Pages/Menu/MenuPage';
 import OrderPage from '../Pages/Order/OrderPage';
 import AdminPage from '../Pages/Admin/AdminPage';
 import LogIn from '../Pages/LogIn/LogIn';
-import Logout from '../Pages/LogIn/Logout/Logout';
-import Registration from '../Pages/LogIn/Registration/Registration'
+import Logout from '../Pages/LogIn/Logout';
+import Registration from '../Pages/LogIn/Registration'
 import ErrorPage from '../Pages/ErrorPage';
 import BurgerNav from './elements/BurgerNav/BurgerNav';
+import AddArticle from '../Pages/Admin/AddArticle';
+import EditMenu from '../Pages/Admin/EditMenu';
 
 const Pages = () => {
     return ( 
@@ -18,10 +20,18 @@ const Pages = () => {
             <Route path="/" element={<HomePage/>}/>
             <Route path="/menu" element={<MenuPage/>}/>
             <Route path="/order" element={<OrderPage/>}/>
-            <Route path="/admin" element={<AdminPage/>}/>
-            <Route path="/login" element={<LogIn/>}/>
+
+            <Route path="/admin" element={<AdminPage/>}>
+                <Route path="add" element={<AddArticle/>}/>
+                <Route path="edit" element={<EditMenu/>}/>
+            </Route>
+
+            <Route path="/login">
+                <Route index element={<LogIn/>}/>
+                <Route path="registration" element={<Registration/>}/>
+            </Route>
             <Route path="/logout" element={<Logout/>}/>
-            <Route path="/login/registration" element={<Registration/>}/>
+            
             <Route path="*" element={<ErrorPage/>}/>
         </Routes>
         </>

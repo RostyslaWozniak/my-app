@@ -1,29 +1,22 @@
-.small,
-.medium,
-.large{
+button{
     height: 30px;
     border-radius: var(--border-button);
     background-color: var(--secondary-color);
     color: var(--font-color);
     font-size: 0.8rem;
     cursor: pointer;
-    margin: 10px;
+    position: relative;
+    overflow: hidden;
 }
 .small{
     width: 30px;
-    position: relative;
-    overflow: hidden;
 }
 .medium{
     width: 80px;
-    position: relative;
-    overflow: hidden;
 }
 .large{
     height: 40px;
     width: 140px;
-    position: relative;
-    overflow: hidden;
 }
 .accept{
     background-color: var(--accept-color);
