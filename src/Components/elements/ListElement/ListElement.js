@@ -4,10 +4,10 @@ import './ListElement.css';
 const ListElement = ({id, name, price, ingredients, button, quantity }) => {
     return ( 
         <li key={id} className="list-element">
-                <div><p>{name}</p></div>
+                <div className="name"><p>{name}</p></div>
                 <div><i>{quantity == null ? ingredients : quantity + "X"}</i></div>
-                <div><p>{formatCurency(price)}</p></div>
-                <div>{button}</div>
+                <div className="price"><p>{formatCurency(price)}</p></div>
+                <div className="button">{button}</div>
         </li>
      );
 }

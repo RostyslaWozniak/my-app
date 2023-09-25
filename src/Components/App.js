@@ -6,6 +6,7 @@ import Navigation from "./Navigation.js/Navigation";
 import Pages from "./Pages";
 import Footer from "./Footer/Footer";
 import '../App.css'
+import '../MediaScrin.css'
 
 function App() {
   return (

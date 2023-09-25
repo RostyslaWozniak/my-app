@@ -27,14 +27,11 @@
         width: 100%;
         gap: 20px;
     }
-    .menu-container i{
-        display: none;
-    }
 /* ListElement */
     .page ul li{
         display: flex;
-        flex-wrap: wrap;
-        padding: 15px auto;
+        
+        
     }
   
 }
@@ -49,7 +46,7 @@
     }
 /* ListElement */
     .page ul li{
-        justify-content: center;
+       flex-direction: column;
       }
 /* Input */
     .label-input-element{

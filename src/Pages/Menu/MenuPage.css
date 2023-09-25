@@ -26,9 +26,6 @@
     transition: .4s ease-in-out;
     border: var(--border-px) solid; 
 }
-.menu-container .list-element div{
-    width: 25%;
-}
 .menu-container .menu-buttons .Xlarge:hover{
     background: linear-gradient(to top, var(--secondary-color), var(--black-color));
     color: var(--black-color);
