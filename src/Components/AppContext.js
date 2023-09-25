@@ -31,14 +31,9 @@ export const AppProvider = ({children}) => {
     const [orderArray, setOrderArray] = useState([])
 // stan złozónego zamówienia
     const [acceptedOrdersArray, setAcceptedOrdersArray] = useState([]);
-
 //stan BurgerNav
     const [isBurgerNavActive, setIsBurgerNavActive] = useState(false)
 ////////////////////////////////////////////////////////////
-//BurgerNav function
-    const handleBurgerNav = () => {
-        setIsBurgerNavActive(!isBurgerNavActive);
-    } 
 //sprawdenie ilości artykułow
     const  getItemQuantity = (id) => {
         return orderArray.find(item => item.id === id)?.quantity || 0;
@@ -136,13 +131,13 @@ const handleOrederIsSend = () => {
             orderArray,
             orderQuantity,
             handleInputValue,
-            handleBurgerNav,
             handleOrederIsSend,
             handleSubmit,
             getItemQuantity,
             increaseItemQuantity,
             decreaseItemQuantity,
             removeFromOrderArray,
+            setIsBurgerNavActive,
         }}
         >
             {children}

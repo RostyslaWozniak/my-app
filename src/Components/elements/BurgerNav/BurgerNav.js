@@ -3,7 +3,10 @@ import { AppContext } from '../../AppContext';
 import './BurgerNav.css'
 
 const BurgerNav = () => {
-    const { handleBurgerNav, isBurgerNavActive } = useContext(AppContext);
+    const { setIsBurgerNavActive, isBurgerNavActive } = useContext(AppContext);
+    const handleBurgerNav = () => {
+        setIsBurgerNavActive(!isBurgerNavActive);
+    } 
     const activeNavClass = isBurgerNavActive && "burger-nav-active";
     return ( 
         <div onClick={handleBurgerNav} className={`burger-nav  ${activeNavClass}`}></div>
