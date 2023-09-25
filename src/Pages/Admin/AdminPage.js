@@ -6,50 +6,37 @@ import './AdminPage.css'
 import { AppContext } from '../../Components/AppContext';
 import { LoginContext } from '../../Components/LoginContext';
 import ErrorPage from '../ErrorPage'
+import { NavLink, Outlet } from 'react-router-dom';
 
 const AdminPage = () => {
-    const { 
-        adminInputName,
-        adminInputPrice,
-        adminInputIngredients,
-        handleInputValue,
-        handleSubmit,
-    } = useContext(AppContext);
     const { isAdminLogged, handleAdminLogout } = useContext(LoginContext);
-    const formInputsArray = [
-        {label: "Nazwa", name: "name", type: "text", placeholder: "Wpisz nazwę...", onChange: handleInputValue, value: adminInputName},
-        {label: "Cena", name: "price", type: "text", placeholder: "Wpisz cenę...", onChange: handleInputValue, value: adminInputPrice},
-        {label: "Składniki", name: "ingridients", type: "text", placeholder: "Wpisz składniki...", onChange: handleInputValue, value: adminInputIngredients},
-    ];
-    const showInputs = formInputsArray.map((input, id) => (
-        <Input 
-            key={id}
-            label={input.label}
-            name={input.name}
-            type={input.type}
-            placeholder={input.placeholder}
-            onChange={input.onChange}   
-            value={input.value}
-        />
-    ))
+    
     if(!isAdminLogged) return <ErrorPage/>;
-    return ( 
+    return (
         <div className="admin-container">
             <h1>Admin</h1>
-            <form onSubmit={handleSubmit}>
-                {showInputs}
+            <div className="admin-nav">
+                <NavLink to={"/admin/add"}>
+                    <Button 
+                        name="Dodaj artykuł"
+                        type="large"
+                    />
+                </NavLink>
+                <NavLink to={"/admin/edit"}>
+                    <Button 
+                        name="Edytuj menu"
+                        type="large"
+                    />
+                </NavLink>
                 <Button 
-                    name="dodaj"
-                    type="large"
+                    name="wyloguj się"
+                    type="large delete"
+                    handleClick={handleAdminLogout}
                 />
-            </form> 
-            <Button 
-                name="wyloguj się"
-                type="large delete"
-                handleClick={handleAdminLogout}
-            />
+            </div>
+            <Outlet/>
         </div>
-       
+      
      );
 }
 export default AdminPage;

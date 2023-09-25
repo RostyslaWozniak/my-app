@@ -14,3 +14,20 @@
 .login-container a:hover{
     color: var(--secondary-color);
 }
+/* styli rejestracja */
+.registration-container{
+    margin: 0 auto;
+    width: 400px;
+    height: 100%;
+}
+/* styli wylogowanie */
+.logout-container{
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+.logout-container i {
+    font-size: 1.5rem
+}

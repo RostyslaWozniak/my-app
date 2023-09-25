@@ -1,8 +1,8 @@
 import React, { useContext} from 'react';
-import { LoginContext } from '../../../Components/LoginContext';
-import Input from '../../../Components/elements/Input/Input'
-import Button from '../../../Components/elements/Button';
-import './Registration.css';
+import { LoginContext } from '../../Components/LoginContext';
+import Input from '../../Components/elements/Input/Input'
+import Button from '../../Components/elements/Button';
+import './LogIn.css';
 
 const Registration = () => {
     const { handleInputLoginValue, 

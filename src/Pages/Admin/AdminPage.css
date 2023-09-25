@@ -1,4 +1,13 @@
 .admin-container{
-    margin: 0 auto;
-    width: 400px;
+    width: 100%;
+    
+}
+.admin-container .admin-nav{
+   display: flex;
+   justify-content: space-around;
+}
+.admin-container .edit-buttons{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }

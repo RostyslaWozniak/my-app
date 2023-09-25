@@ -3,13 +3,14 @@
 }
 .menu-container .button,
 .menu-container .buttons{
-    min-width: 120px;
+    min-width: 100px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     line-height: 1rem;
 }
 .menu-container .button{
+    display: flex;
     justify-content: flex-end;
 }
 .menu-container i{
