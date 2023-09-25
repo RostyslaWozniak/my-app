@@ -1,11 +1,10 @@
 import React, { useContext } from 'react';
-import {formatCurency} from '../../tools/formatCurency'
 import { AppContext } from '../../Components/AppContext';
 import { useNavigate } from 'react-router-dom';
-
-import Button from '../../Components/elements/Button';
-import './Order.css'
+import {formatCurency} from '../../tools/formatCurency'
+import Button from '../../Components/elements/Button/Button';
 import ListElement from '../../Components/elements/ListElement/ListElement';
+import './Order.css'
 
 const OrderPge = () => {
     const navigate = useNavigate()

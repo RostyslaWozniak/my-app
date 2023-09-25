@@ -1,7 +1,7 @@
+import Button from "../../Components/elements/Button/Button";
+import ListElement from "../../Components/elements/ListElement/ListElement";
 import { useContext } from "react";
 import { AppContext } from "../../Components/AppContext";
-import Button from "../../Components/elements/Button";
-import ListElement from "../../Components/elements/ListElement/ListElement";
 
 const EditMenu = () => {
     const { menuArray } = useContext(AppContext);    

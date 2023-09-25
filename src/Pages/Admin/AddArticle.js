@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
-
 import { AppContext } from '../../Components/AppContext';
-import Button from '../../Components/elements/Button';
+import Button from '../../Components/elements/Button/Button';
 import Input from '../../Components/elements/Input/Input';
 import './AdminPage.css'
 

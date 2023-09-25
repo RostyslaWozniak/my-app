@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom'
 import { LoginContext } from '../../Components/LoginContext';
 import Input from '../../Components/elements/Input/Input';
-import Button from '../../Components/elements/Button';
+import Button from '../../Components/elements/Button/Button';
 import './LogIn.css';
 
 const LogIn = () => {

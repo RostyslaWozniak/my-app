@@ -1,10 +1,8 @@
 import React, { useContext } from 'react';
-
+import Button from '../../Components/elements/Button/Button';
 import ListElement from '../../Components/elements/ListElement/ListElement';
 import { AppContext } from '../../Components/AppContext';
-
 import './MenuPage.css'
-import Button from '../../Components/elements/Button';
 
 const MenuPage = () => {
     const { menuArray } = useContext(AppContext);    

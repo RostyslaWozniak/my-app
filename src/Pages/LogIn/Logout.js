@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
-
 import { LoginContext } from '../../Components/LoginContext';
-import Button from '../../Components/elements/Button';
+import Button from '../../Components/elements/Button/Button';
 import './LogIn.css'
 const Logout = () => {
     const { handleUserLogout } = useContext(LoginContext);

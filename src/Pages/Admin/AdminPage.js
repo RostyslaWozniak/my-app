@@ -1,12 +1,9 @@
 import React, { useContext } from 'react';
-
-import Input from '../../Components/elements/Input/Input';
-import Button from '../../Components/elements/Button';
-import './AdminPage.css'
-import { AppContext } from '../../Components/AppContext';
-import { LoginContext } from '../../Components/LoginContext';
+import Button from '../../Components/elements/Button/Button';
 import ErrorPage from '../ErrorPage'
+import { LoginContext } from '../../Components/LoginContext';
 import { NavLink, Outlet } from 'react-router-dom';
+import './AdminPage.css'
 
 const AdminPage = () => {
     const { isAdminLogged, handleAdminLogout } = useContext(LoginContext);
