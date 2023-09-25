@@ -11,7 +11,7 @@ const MenuPage = () => {
     const drinksRef = useRef(null);
     const { menuArray } = useContext(AppContext);    
     const { getItemQuantity, increaseItemQuantity, decreaseItemQuantity} = useContext(AppContext);
-        const item = menuArray.map((el, indx) => {
+        const item = menuArray.map(el => {
             const quantity = getItemQuantity(el.id);
             const buttons = quantity === 0 ? 
         <div className="button">
@@ -39,7 +39,6 @@ const MenuPage = () => {
             return(
             <ListElement
             key={el.id}
-            indx={indx}
             name={el.name}
             price={el.price}
             ingredients={el.ingredients}

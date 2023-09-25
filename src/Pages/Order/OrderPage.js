@@ -9,7 +9,7 @@ import './Order.css'
 const OrderPge = () => {
     const navigate = useNavigate()
     const { orderArray, orderQuantity, handleOrederIsSend, menuArray, removeFromOrderArray } = useContext(AppContext);
-    const item = orderArray.map((el, indx) => {
+    const item = orderArray.map(el => {
         const item = menuArray.find(it => it.id === el.id);
         const button = <Button
             name="usuń"
@@ -18,7 +18,6 @@ const OrderPge = () => {
             />
         return(
         <ListElement
-        indx={indx}
         key={el.id}
         quantity={el.quantity}
         name={item.name}

@@ -45,8 +45,8 @@ export const LoginProvider = ({children}) => {
         if(nameInput === admin.name && passwordInput === admin.password) {
             setIsAdminLogged(!isAdminLogged);
             navigate('/admin');
-            console.log("jesteś zalogowany/a jako admin")
-            return;
+            console.log("jesteś zalogowany/a jako admin");
+            // return;
         }else if(arrOfRegistrateUsers.length > 0){
             if(arrOfRegistrateUsers.find(user => user.password === passwordInput 
                 && user.name === nameInput)){
@@ -108,7 +108,7 @@ export const LoginProvider = ({children}) => {
     }
     //wylogowanie admina
     const handleAdminLogout = () => {
-        setIsAdminLogged(!isAdminLogged)
+        setIsAdminLogged(!isAdminLogged);
         navigate('/login');
     }
     // wylogowanie użytkownika
