@@ -31,3 +31,22 @@
 .logout-container i {
     font-size: 1.5rem
 }
+
+  @media screen and (max-width: 450px){
+    
+    .admin-nav,
+    .order-container .result-container{
+      flex-direction: column;
+    }
+    .admin-container,
+    .registration-container,
+    .login-container{
+      width: 100%;
+      margin: 0;
+    }
+    .login-container div{
+      flex-direction: column;
+    }
+   
+  }
+  

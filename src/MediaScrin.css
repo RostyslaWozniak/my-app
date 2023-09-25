@@ -1,0 +1,72 @@
+@media screen and (min-width: 900px){
+/* BurgerNav  */
+    .navigation{
+        transform: translateX(0);
+      }
+}
+@media screen and (max-width: 900px){
+/* BurgerNav  */
+    .navigation{
+        position: absolute;
+        z-index: 1;
+    }
+    .burger-nav{
+        display: block;
+        opacity: 1;
+    }
+}
+
+
+@media screen and (max-width: 650px){
+/* Pages */
+    .page{
+        padding: 100px 20px;
+    }
+/* MenuPage */
+    .menu-container .menu-buttons{
+        width: 100%;
+        gap: 20px;
+    }
+    .menu-container i{
+        display: none;
+    }
+/* ListElement */
+    .page ul li{
+        display: flex;
+        flex-wrap: wrap;
+        padding: 15px auto;
+    }
+  
+}
+@media screen and (max-width: 450px){
+/* MenuPage */
+    .menu-container .menu-buttons{
+        display: flex;
+        flex-direction: column;
+    }
+    .menu-container .menu-buttons .Xlarge{
+        height: 150px;
+    }
+/* ListElement */
+    .page ul li{
+        justify-content: center;
+      }
+/* Input */
+    .label-input-element{
+        flex-direction: column;
+        align-items:center;
+      }
+    .label-input-element input{
+        width: 100%;
+        margin: 10px auto;
+    }
+    input{
+        width: 100%;
+        margin: 10px auto;
+    }
+/* Button */
+    button .medium,
+    button .large{
+      width: 100%;
+    }
+}
