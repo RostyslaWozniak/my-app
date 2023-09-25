@@ -15,13 +15,17 @@ export const AppProvider = ({children}) => {
     const [menuArray, setMenuArray] = useState([
         {id: 1, name: "barszcz", price: 12.99, ingredients: "buraki, ziemniaki, smietana", kategory: "obiady",},
         {id: 2, name: "pierogi", price: 18.99, ingredients: "ciasto, mięso z indyka, smietana", kategory: "obiady",},
-        {id: 3, name: "koleslaw", price: 11.99, ingredients: "kapusta, marchewka, jabko", kategory: "sałatki",},
+        {id: 3, name: "kolesław", price: 11.99, ingredients: "kapusta, marchewka, jabko", kategory: "sałatki",},
         {id: 4, name: "piwerko", price: 17.99, ingredients: "z syropem", kategory: "napoje",},
         {id: 5, name: "schabowy", price: 15.99, ingredients: "mięso wiepszowe", kategory: "obiady",},
         {id: 6, name: "tort", price: 25.99, ingredients: "cukier woda", kategory: "desery",},
         {id: 7, name: "mizeria", price: 12.99, ingredients: "ogórek, jogurt, koperek", kategory: "sałatki",},
         {id: 8, name: "sok", price: 9.99, ingredients: "pomaranczowy", kategory: "napoje",},
         {id: 9, name: "sangria", price: 32.99, ingredients: "z owocami", kategory: "napoje",},
+        {id: 10, name: "ciasto bananowe", price: 30.99, ingredients: "banany, smietana, cukier", kategory: "desery",},
+        {id: 11, name: "pierogi na słodko", price: 19.99, ingredients: "jagody, smietana, dżem", kategory: "desery",},
+        {id: 12, name: "woda", price: 0, ingredients: "woda nie gazowana lub gazowana", kategory: "napoje",},
+
     ]);
 //Stan Order
     const [orderArray, setOrderArray] = useState([])

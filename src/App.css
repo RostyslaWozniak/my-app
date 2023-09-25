@@ -10,18 +10,6 @@
   --accept-color: rgb(123, 187, 123);
   --reject-color: rgb(250, 123, 123);
 }
-/* :root{
-  --border-radius: 10px;
-  --border-px: 2px;
-  --border-button: 7px;
-  --primary-color: #ED7458;
-  --secondary-color: #FFDC9F;
-  --font-color: #000; 
-  --white-color: #fff;
-  --black-color: #8E7C68;
-  --accept-color: rgb(82, 136, 82);
-  --reject-color: rgb(215, 24, 24);
-} */
 * {
   box-sizing: border-box;
   margin: 0;
