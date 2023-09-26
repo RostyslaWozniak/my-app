@@ -9,7 +9,11 @@ const BurgerNav = () => {
     } 
     const activeNavClass = isBurgerNavActive && "burger-nav-active";
     return ( 
-        <div onClick={handleBurgerNav} className={`burger-nav  ${activeNavClass}`}></div>
+        <div onClick={handleBurgerNav} className={`burger-nav  ${activeNavClass}`}>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
         
      );
 }

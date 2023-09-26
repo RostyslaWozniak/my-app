@@ -1,22 +1,19 @@
-@media screen and (min-width: 900px){
-/* BurgerNav  */
-    .navigation{
-        transform: translateX(0);
-      }
-}
 @media screen and (max-width: 900px){
 /* BurgerNav  */
     .navigation{
-        position: absolute;
         z-index: 1;
+        transform: translateX(-100%);
+        position: fixed;
     }
     .burger-nav{
-        display: block;
-        opacity: 1;
+       opacity: 1;
+    }
+    .active-nav{
+        transform: translateX(0);
+        
+        
     }
 }
-
-
 @media screen and (max-width: 650px){
 /* Pages */
     .page{
@@ -30,8 +27,6 @@
 /* ListElement */
     .page ul li{
         display: flex;
-        
-        
     }
   
 }
@@ -65,5 +60,21 @@
     button .medium,
     button .large{
       width: 100%;
+    }
+/* BurgerNav  */
+    .navigation{
+        width: 100%;
+        text-align: center;
+        border: 0px ;
+    }
+    .navigation a{
+        transition: none;
+        transition: color .5s ease-in-out;
+        transition: padding .5s ease-in-out;
+        
+    }
+    .navigation a.active{
+        border: 0px ;
+        padding: 0;
     }
 }
