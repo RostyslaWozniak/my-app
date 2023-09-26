@@ -1,7 +1,7 @@
 import { formatCurency } from '../../../tools/formatCurency';
 import './ListElement.css';
 
-const ListElement = ({id, name, price, ingredients, button, quantity }) => {
+const ListElement = ({id, name, price, ingredients, button, quantity, category }) => {
     return ( 
         <li key={id} className="list-element">
                 <div className="name"><p>{name}</p></div>

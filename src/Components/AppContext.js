@@ -88,7 +88,7 @@ const removeFromOrderArray = (id) => {
 const orderQuantity = orderArray.reduce((quantity, item) => item.quantity + quantity, 0)
 //przujęcie zamówienia
 
-const handleOrederIsSend = () => {
+const handleOrderIsSend = () => {
     alert("Zamówienie wysłano");
    
     console.log(acceptedOrdersArray)
@@ -105,7 +105,7 @@ const handleOrederIsSend = () => {
             case "editName":
                 return setEditMenuElement(prevState => ({ ...prevState, name: e.target.value}));
             case "editPrice":
-                return setEditMenuElement(prevState => ({ ...prevState, price: e.target.value}));
+                return setEditMenuElement(prevState => ({ ...prevState, price: Number(e.target.value)}));
             case "editIngredients":
                 return setEditMenuElement(prevState => ({ ...prevState, ingredients: e.target.value}));
             default: return;
@@ -135,9 +135,12 @@ const handleOrederIsSend = () => {
         } else if (type === "edit"){
             const cloneArray = [...menuArray];
             const element = cloneArray.find(el => el.id === editMenuElement.id);
-            console.log(element.name)
+            element.name = editMenuElement.name;
+            element.price = editMenuElement.price;
+            element.ingredients = editMenuElement.ingredients;
+            element.category = editMenuElement.category;
+            navigate("/admin/menu")
         }
-        
     }
 // EDIT Menu Element Admin
     const handleAdminEditElementMenu = (id) => {
@@ -160,7 +163,6 @@ const handleOrederIsSend = () => {
         cloneArray.splice(index, 1);
         setMenuArray(cloneArray)
     }
-console.log(menuArray)
     return(
         <AppContext.Provider
          value={{
@@ -171,7 +173,7 @@ console.log(menuArray)
             orderArray,
             orderQuantity,
             handleInputValue,
-            handleOrederIsSend,
+            handleOrderIsSend,
             handleSubmit,
             handleAdminEditElementMenu,
             handleAdminDEleteElementMenu,
@@ -181,6 +183,7 @@ console.log(menuArray)
             removeFromOrderArray,
             setIsBurgerNavActive,
             setAddMenuElement,
+            setEditMenuElement,
         }}
         >
             {children}

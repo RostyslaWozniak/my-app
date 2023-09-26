@@ -4,28 +4,26 @@ import { useContext } from "react";
 import { AppContext } from "../../Components/AppContext";
 
 const EditMenu = () => {
-    const { menuArray } = useContext(AppContext);    
+    const { menuArray, handleAdminDEleteElementMenu, handleAdminEditElementMenu } = useContext(AppContext);    
     
-    const item = menuArray.map((el, indx) => {
-        const nr = `${indx + 1}.`
+    const item = menuArray.map(el => {
         const buttons = 
         <div className="edit-buttons">
             <Button
-            type="medium"
+            className="medium"
             name="edytuj"
-            handleClick={() => console.log('edit')}
+            onClick={() => handleAdminEditElementMenu(el.id)}
             />
             <Button
-            type="medium delete"
+            className="medium delete"
             name="usuń"
-            handleClick={() => console.log('delete')}
+            onClick={() => handleAdminDEleteElementMenu(el.id)}
             />
         </div>
         return(
         <ListElement
         key={el.id}
         name={el.name}
-        indx={indx}
         price={el.price}
         ingredients={el.ingredients}
         button={buttons}

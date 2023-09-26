@@ -31,8 +31,9 @@ const LogIn = () => {
                <div>
                     <Link to="/login/registration"><i>Zarejestruj się</i></Link>
                     <Button 
+                        type="submit"
                         name="Zaloguj się"
-                        type="large"
+                        className="large"
                     />
                 </div>
             </form>

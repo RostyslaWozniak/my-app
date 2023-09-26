@@ -10,8 +10,8 @@ const Logout = () => {
             <i>Czy napewno chcesz się wylogować?</i>
                 <Button
                 name="Tak"
-                type="large"
-                handleClick={handleUserLogout}
+                className="large"
+                onClick={handleUserLogout}
                 />
         </div>
      );

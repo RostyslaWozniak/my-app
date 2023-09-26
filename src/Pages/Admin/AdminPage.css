@@ -1,6 +1,5 @@
 .admin-container{
     width: 100%;
-    
 }
 .admin-container .admin-nav{
    display: flex;
@@ -10,4 +9,20 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+.admin-container .category-buttons{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px auto;
+    border-bottom: 1.5px dashed var(--font-color);
+    font-size: 1.5rem;
+    color: var(--font-color);
+}
+.admin-container .category-buttons p{
+    width: 50%;
+}
+.admin-container .category-buttons button{
+    margin: 15px auto;
 }

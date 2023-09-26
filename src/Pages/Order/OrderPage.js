@@ -13,8 +13,8 @@ const OrderPge = () => {
         const item = menuArray.find(it => it.id === el.id);
         const button = <Button
             name="usuń"
-            type="medium delete"
-            handleClick={() => removeFromOrderArray(el.id)}
+            className="medium delete"
+            onClick={() => removeFromOrderArray(el.id)}
             />
         return(
         <ListElement
@@ -48,17 +48,17 @@ const OrderPge = () => {
                 {orderQuantity === 0 
                 ?
                  <Button
-                 handleClick={() => navigate('/menu')}
                  name="MENU "
-                 type="large accept"
+                 className="large accept"
+                 onClick={() => navigate('/menu')}
                  />
                 :
                 <div className="result-container">
                     <h2>Do zapłaty: {totalPrice()}</h2>
                     <Button
-                    handleClick={handleOrederIsSend}
                     name="zamów "
-                    type="large accept"
+                    className="large accept"
+                    onClick={handleOrederIsSend}
                     />  
                 </div>
                 }

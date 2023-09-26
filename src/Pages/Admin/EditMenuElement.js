@@ -1,25 +1,23 @@
-import React, { useContext } from 'react';
-import { AppContext } from '../../Components/AppContext';
-import Button from '../../Components/elements/Button/Button';
-import Input from '../../Components/elements/Input/Input';
-import './AdminPage.css'
+import { useContext } from "react";
+import { AppContext } from "../../Components/AppContext";
+import Input from "../../Components/elements/Input/Input";
+import Button from "../../Components/elements/Button/Button";
 
-const AddArticle = () => {
-    const { 
-        addMenuElement,
-        setAddMenuElement,
-        
+const EditMenuElement = () => {
+    const {
         handleInputValue,
         handleSubmit,
+        editMenuElement,
+        setEditMenuElement,
     } = useContext(AppContext);
-    const { name, price, ingredients, category} = addMenuElement;
+    const { name, price, ingredients, category} = editMenuElement;
     const formInputsArray = [
-        {label: "Nazwa", name: "addName", type: "text", placeholder: "Wpisz nazwę...", onChange: handleInputValue, value: name},
-        {label: "Cena", name: "addPrice", type: "number", placeholder: "Wpisz cenę...", onChange: handleInputValue, value: price},
-        {label: "Składniki", name: "addIngredients", type: "text", placeholder: "Wpisz składniki...", onChange: handleInputValue, value: ingredients},
+        {label: "Nazwa", name: "editName", type: "text", placeholder: "Wpisz nazwę...", onChange: handleInputValue, value: name},
+        {label: "Cena", name: "editPrice", type: "number", placeholder: "Wpisz cenę...", onChange: handleInputValue, value: price},
+        {label: "Składniki", name: "editIngredients", type: "text", placeholder: "Wpisz składniki...", onChange: handleInputValue, value: ingredients},
     ];
     const showInputs = formInputsArray.map((input, id) => (
-        <Input 
+        <Input
             key={id}
             label={input.label}
             name={input.name}
@@ -30,30 +28,26 @@ const AddArticle = () => {
         />
     ))
     const chooseCategory = (value) => {
-        setAddMenuElement(prevState => ({ ...prevState, category: value}));
+        setEditMenuElement(prevState => ({ ...prevState, category: value}));
     }
     const categoryButtons = <div className="category-buttons">
         <p>Kategoria: </p>
         <Button
-            type="button"
             name="obiady"
             className="medium"
             onClick={() => chooseCategory("obiady")}
         />
         <Button
-            type="button"
             name="sałatki"
             className="medium"
             onClick={() => chooseCategory("sałatki")}
         />
         <Button
-            type="button"
             name="desery"
             className="medium"
             onClick={() => chooseCategory("desery")}
         />
         <Button
-            type="button"
             name="napoje"
             className="medium"
             onClick={() => chooseCategory("napoje")}
@@ -61,13 +55,13 @@ const AddArticle = () => {
     </div>
     return ( 
         <>
-            <h2>Dodaj Artykuł</h2>
-            <form onSubmit={(e) => handleSubmit(e, "add")}>
+            <h2>Edytój Artykuł</h2>
+            <form onSubmit={(e) => handleSubmit(e, "edit")}>
                 {showInputs}
                 {categoryButtons}
                 <Button 
                     type="submit"
-                    name="dodaj"
+                    name="zmień"
                     className="large accept"
                 />
             </form> 
@@ -75,4 +69,4 @@ const AddArticle = () => {
      );
 }
  
-export default AddArticle;
+export default EditMenuElement;

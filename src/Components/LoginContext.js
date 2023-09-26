@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-
 export const LoginContext = React.createContext();
 //dane admina
-const admin = {name: "admin", password: "123"}
-
+const admin = {name: "admin", password: "123"};
 
 export const LoginProvider = ({children}) => {
  //navigate hook

@@ -33,8 +33,9 @@ const Registration = () => {
             <form className="registration-container" onSubmit={handleRegisterSubmit} noValidate >
                 {showInputs}
                 <Button
+                    type="submit"
                     name="Zarejestruj się"
-                    type="large accept"
+                    className="large accept"
                 />
             </form>
         </>

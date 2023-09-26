@@ -7,8 +7,7 @@ import './AdminPage.css'
 
 const AdminPage = () => {
     const { isAdminLogged, handleAdminLogout } = useContext(LoginContext);
-    
-    // if(!isAdminLogged) return <ErrorPage/>;
+    if(!isAdminLogged) return <ErrorPage/>;
     return (
         <div className="admin-container">
             <h1>Admin</h1>
@@ -16,24 +15,23 @@ const AdminPage = () => {
                 <NavLink to={"/admin/add"}>
                     <Button 
                         name="Dodaj artykuł"
-                        type="large"
+                        className="large"
                     />
                 </NavLink>
                 <NavLink to={"/admin/menu"}>
                     <Button 
                         name="Edytuj menu"
-                        type="large"
+                        className="large"
                     />
                 </NavLink>
                 <Button 
                     name="wyloguj się"
-                    type="large delete"
-                    handleClick={handleAdminLogout}
+                    className="large delete"
+                    onClick={handleAdminLogout}
                 />
             </div>
             <Outlet/>
         </div>
-      
      );
 }
 export default AdminPage;

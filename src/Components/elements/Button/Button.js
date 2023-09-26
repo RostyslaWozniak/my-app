@@ -1,12 +1,13 @@
 import './Button.css'
 
-const Button = ({name, type, handleClick, isDisabled }) => {
+const Button = ({name, type = "button", className, onClick, isDisabled }) => {
     const word = 'word'
     return ( 
         <button 
+        type={type}
         disabled={isDisabled}
-        className={type}
-        onClick={handleClick}>
+        className={className}
+        onClick={onClick}>
             {name.toUpperCase()}
         </button>
      );

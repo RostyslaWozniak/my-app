@@ -16,24 +16,24 @@ const MenuPage = () => {
             const buttons = quantity === 0 ? 
         <div className="button">
             <Button
-            type="medium"
+            className="medium"
             name="dodaj"
-            handleClick={() => increaseItemQuantity(el.id)}
+            onClick={() => increaseItemQuantity(el.id)}
             />
         </div>
         : 
         <div className="buttons">
             <Button
-            type="small delete"
+            className="small delete"
             name="-"
-            handleClick={() => decreaseItemQuantity(el.id)}
+            onClick={() => decreaseItemQuantity(el.id)}
             />
             <p>{quantity}</p>
             <Button
             isDisabled={quantity >= 5 ? true : false}
-            type="small accept"
+            className="small accept"
             name="+"
-            handleClick={() => increaseItemQuantity(el.id)}
+            onClick={() => increaseItemQuantity(el.id)}
             />
         </div>
             return(
@@ -60,30 +60,30 @@ const MenuPage = () => {
             <div className="menu-buttons">
                 <Button 
                 name="Obiady"
-                type="Xlarge"
-                handleClick={() => handleScroll(lunchRef)}
+                className="Xlarge"
+                onClick={() => handleScroll(lunchRef)}
                 />  
                 <Button 
                 name="sałatki"
-                type="Xlarge"
-                handleClick={() => handleScroll(saladsRef)}
+                className="Xlarge"
+                onClick={() => handleScroll(saladsRef)}
                 />  
                 <Button 
                 name="desery"
-                type="Xlarge"
-                handleClick={() => handleScroll(dessertsRef)}
+                className="Xlarge"
+                onClick={() => handleScroll(dessertsRef)}
                 />  
                 <Button 
                 name="napoje"
-                type="Xlarge"
-                handleClick={() => handleScroll(drinksRef)}
+                className="Xlarge"
+                onClick={() => handleScroll(drinksRef)}
                 />  
             </div>
             
             <ul>
                 <h2 ref={lunchRef} >Obiady</h2>
                 {lunch}
-                <h2 ref={saladsRef}>Sałątki</h2>
+                <h2 ref={saladsRef}>Sałatki</h2>
                 {salads}
                 <h2 ref={dessertsRef}>Desery</h2>
                 {desserts}
