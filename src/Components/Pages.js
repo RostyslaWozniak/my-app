@@ -1,17 +1,16 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import HomePage from '../Pages/HomePage';
-import MenuPage from '../Pages/Menu/MenuPage';
-import OrderPage from '../Pages/Order/OrderPage';
+import AddOrEditArticle from '../Pages/Admin/AddOrEditArticle';
 import AdminPage from '../Pages/Admin/AdminPage';
+import BurgerNav from './elements/BurgerNav/BurgerNav';
+import EditMenu from '../Pages/Admin/EditMenu'; 
+import ErrorPage from '../Pages/ErrorPage';
+import HomePage from '../Pages/HomePage';
 import LogIn from '../Pages/LogIn/LogIn';
 import Logout from '../Pages/LogIn/Logout';
+import MenuPage from '../Pages/Menu/MenuPage';
+import OrderPage from '../Pages/Order/OrderPage';
 import Registration from '../Pages/LogIn/Registration'
-import ErrorPage from '../Pages/ErrorPage';
-import BurgerNav from './elements/BurgerNav/BurgerNav';
-import AddArticle from '../Pages/Admin/AddArticle';
-import EditMenu from '../Pages/Admin/EditMenu'; 
-import EditMenuElement from '../Pages/Admin/EditMenuElement';
 
 const Pages = () => {
     return ( 
@@ -23,9 +22,11 @@ const Pages = () => {
             <Route path="/order" element={<OrderPage/>}/>
 
             <Route path="/admin" element={<AdminPage/>}>
-                <Route path="add" element={<AddArticle/>}/>
+                <Route index element={'Admin Info'}/>
+                <Route path="add" element={<AddOrEditArticle type="add"/>}/>
                 <Route path="menu" element={<EditMenu/>}/>
-                <Route path="menu/edit" element={<EditMenuElement/>}/>
+                <Route path="menu/edit" element={<AddOrEditArticle type="edit"/>}/>
+                {/* <Route path="menu/edit" element={<EditMenuElement />}/> */}
             </Route>
 
             <Route path="/login">
