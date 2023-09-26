@@ -6,19 +6,17 @@ import './AdminPage.css'
 
 const AddArticle = () => {
     const { 
-        adminInputName,
-        adminInputPrice,
-        adminInputIngredients,
-        adminInputKategory,
+        addMenuElement,
+        setAddMenuElement,
+        
         handleInputValue,
         handleSubmit,
     } = useContext(AppContext);
-    
+    const { name, price, ingredients, category} = addMenuElement;
     const formInputsArray = [
-        {label: "Nazwa", name: "name", type: "text", placeholder: "Wpisz nazwę...", onChange: handleInputValue, value: adminInputName},
-        {label: "Cena", name: "price", type: "text", placeholder: "Wpisz cenę...", onChange: handleInputValue, value: adminInputPrice},
-        {label: "Składniki", name: "ingridients", type: "text", placeholder: "Wpisz składniki...", onChange: handleInputValue, value: adminInputIngredients},
-        {label: "Kategoria", name: "kategory", type: "text", placeholder: "Wpisz kategorie...", onChange: handleInputValue, value: adminInputKategory},
+        {label: "Nazwa", name: "addName", type: "text", placeholder: "Wpisz nazwę...", onChange: handleInputValue, value: name},
+        {label: "Cena", name: "addPrice", type: "number", placeholder: "Wpisz cenę...", onChange: handleInputValue, value: price},
+        {label: "Składniki", name: "addIngredients", type: "text", placeholder: "Wpisz składniki...", onChange: handleInputValue, value: ingredients},
     ];
     const showInputs = formInputsArray.map((input, id) => (
         <Input 
@@ -31,11 +29,39 @@ const AddArticle = () => {
             value={input.value}
         />
     ))
+    const chooseCategory = (value) => {
+        setAddMenuElement(prevState => ({ ...prevState, category: value}));
+        console.log(value)
+    }
+    const categoryButtons = <div className="category-buttons">
+        <p>Kategoria: </p>
+        <Button
+            name="obiady"
+            type="medium"
+            handleClick={() => chooseCategory("obiady")}
+        />
+        <Button
+            name="sałatki"
+            type="medium"
+            handleClick={() => chooseCategory("sałatki")}
+        />
+        <Button
+            name="desery"
+            type="medium"
+            handleClick={() => chooseCategory("desery")}
+        />
+        <Button
+            name="napoje"
+            type="medium"
+            handleClick={() => chooseCategory("napoje")}
+        />
+    </div>
     return ( 
         <>
             <h2>Dodaj Artykuł</h2>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={(e) => handleSubmit(e, "add")}>
                 {showInputs}
+                {categoryButtons}
                 <Button 
                     name="dodaj"
                     type="large accept"

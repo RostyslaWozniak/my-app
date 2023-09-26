@@ -42,14 +42,14 @@ const MenuPage = () => {
             name={el.name}
             price={el.price}
             ingredients={el.ingredients}
-            kategory={el.kategory}
+            category={el.category}
             button={buttons}
             />
         )})
-        const lunch = item.filter(el => el.props.kategory === "obiady");
-        const salads = item.filter(el => el.props.kategory === "sałatki");
-        const desserts = item.filter(el => el.props.kategory === "desery");
-        const drinks = item.filter(el => el.props.kategory === "napoje");
+        const lunch = item.filter(el => el.props.category === "obiady");
+        const salads = item.filter(el => el.props.category === "sałatki");
+        const desserts = item.filter(el => el.props.category === "desery");
+        const drinks = item.filter(el => el.props.category === "napoje");
         
         const handleScroll = (ref) => {
             ref.current?.scrollIntoView({behavior: 'smooth'})

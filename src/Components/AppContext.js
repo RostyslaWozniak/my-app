@@ -1,38 +1,47 @@
 import React, { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 
 export const AppContext = React.createContext();
 
 export const AppProvider = ({children}) => {
-
-//stan formularza Admina
-    const [adminInputName, setInputName] = useState("");
-    const [adminInputPrice, setInputPrice] = useState("");
-    const [adminInputIngredients, setInputIngridients] = useState("");
-    const [adminInputKategory, setInputKategory] = useState("");
-
-//Stan Menu 
+    const navigate = useNavigate();
+//Add Admin Element Menu STATE
+    const [addMenuElement, setAddMenuElement] = useState({
+        name: "",
+        price: "",
+        ingredients: "",
+        category: "",
+    })
+//Edit Admin Element Menu SATE
+    const [editMenuElement, setEditMenuElement] = useState({
+        name: "",
+        price: "",
+        ingredients: "",
+        category: "",
+    });
+//Menu STATE
     const [menuArray, setMenuArray] = useState([
-        {id: 1, name: "barszcz", price: 12.99, ingredients: "buraki, ziemniaki, smietana", kategory: "obiady",},
-        {id: 2, name: "pierogi", price: 18.99, ingredients: "ciasto, mięso z indyka, smietana", kategory: "obiady",},
-        {id: 3, name: "kolesław", price: 11.99, ingredients: "kapusta, marchewka, jabko", kategory: "sałatki",},
-        {id: 4, name: "piwerko", price: 17.99, ingredients: "z syropem", kategory: "napoje",},
-        {id: 5, name: "schabowy", price: 15.99, ingredients: "mięso wiepszowe", kategory: "obiady",},
-        {id: 6, name: "tort", price: 25.99, ingredients: "cukier woda", kategory: "desery",},
-        {id: 7, name: "mizeria", price: 12.99, ingredients: "ogórek, jogurt, koperek", kategory: "sałatki",},
-        {id: 8, name: "sok", price: 9.99, ingredients: "pomaranczowy", kategory: "napoje",},
-        {id: 9, name: "sangria", price: 32.99, ingredients: "z owocami", kategory: "napoje",},
-        {id: 10, name: "ciasto bananowe", price: 30.99, ingredients: "banany, smietana, cukier", kategory: "desery",},
-        {id: 11, name: "pierogi na słodko", price: 19.99, ingredients: "jagody, smietana, dżem", kategory: "desery",},
-        {id: 12, name: "woda", price: 0, ingredients: "woda nie gazowana lub gazowana", kategory: "napoje",},
+        {id: 1, name: "barszcz", price: 12.99, ingredients: "buraki, ziemniaki, smietana", category: "obiady",},
+        {id: 2, name: "pierogi", price: 18.99, ingredients: "ciasto, mięso z indyka, smietana", category: "obiady",},
+        {id: 3, name: "kolesław", price: 11.99, ingredients: "kapusta, marchewka, jabko", category: "sałatki",},
+        {id: 4, name: "piwerko", price: 17.99, ingredients: "z syropem", category: "napoje",},
+        {id: 5, name: "schabowy", price: 15.99, ingredients: "mięso wiepszowe", category: "obiady",},
+        {id: 6, name: "tort", price: 25.99, ingredients: "cukier woda", category: "desery",},
+        {id: 7, name: "mizeria", price: 12.99, ingredients: "ogórek, jogurt, koperek", category: "sałatki",},
+        {id: 8, name: "sok", price: 9.99, ingredients: "pomaranczowy", category: "napoje",},
+        {id: 9, name: "sangria", price: 32.99, ingredients: "z owocami", category: "napoje",},
+        {id: 10, name: "ciasto bananowe", price: 30.99, ingredients: "banany, smietana, cukier", category: "desery",},
+        {id: 11, name: "pierogi na słodko", price: 19.99, ingredients: "jagody, smietana, dżem", category: "desery",},
+        {id: 12, name: "woda", price: 0, ingredients: "woda nie gazowana lub gazowana", category: "napoje",},
 
     ]);
-//Stan Order
+//Order STATE
     const [orderArray, setOrderArray] = useState([])
 // stan złozónego zamówienia
     const [acceptedOrdersArray, setAcceptedOrdersArray] = useState([]);
 //stan BurgerNav
     const [isBurgerNavActive, setIsBurgerNavActive] = useState(false)
+
 ////////////////////////////////////////////////////////////
 //sprawdenie ilości artykułow
     const  getItemQuantity = (id) => {
@@ -87,45 +96,76 @@ const handleOrederIsSend = () => {
 //obsługa inputów Admina
     const handleInputValue = (e) => {
         switch(e.target.name){
-            case "name":
-                return setInputName(e.target.value);
-            case "price":
-                return setInputPrice(e.target.value);
-            case "ingridients": 
-                return setInputIngridients(e.target.value);
-            case "kategory": 
-                return setInputKategory(e.target.value);
+            case "addName":
+                return setAddMenuElement(prevState => ({ ...prevState, name: e.target.value}));
+            case "addPrice":
+                return setAddMenuElement(prevState => ({ ...prevState, price: Number(e.target.value)}));
+            case "addIngredients": 
+                return setAddMenuElement(prevState => ({ ...prevState, ingredients: e.target.value}));
+            case "editName":
+                return setEditMenuElement(prevState => ({ ...prevState, name: e.target.value}));
+            case "editPrice":
+                return setEditMenuElement(prevState => ({ ...prevState, price: e.target.value}));
+            case "editIngredients":
+                return setEditMenuElement(prevState => ({ ...prevState, ingredients: e.target.value}));
             default: return;
         }
     }
 
 //obsługa formularza Admina
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        const cloneArray = [...menuArray];
-        cloneArray.push(
-            {
+    const handleSubmit = (e, type) => {
+        e.preventDefault();
+        if(type === "add"){
+            const cloneArray = [...menuArray];
+            const { name, price, ingredients, category } = addMenuElement
+            cloneArray.push({
                 id: Math.floor(Math.random() * new Date()),
-                name: adminInputName,
-                price: Number(adminInputPrice),
-                ingredients: adminInputIngredients,
-                kategory: adminInputKategory,
-            }
-        );
-        setMenuArray(cloneArray);
-        setInputName("");
-        setInputPrice("");
-        setInputIngridients("");
-        setInputKategory("");
+                name,
+                price,
+                ingredients,
+                category,
+            });
+            setMenuArray(cloneArray);
+            setAddMenuElement({
+                name: "",
+                price: "",
+                ingredients: "",
+                category: "",
+            })
+        } else if (type === "edit"){
+            const cloneArray = [...menuArray];
+            const element = cloneArray.find(el => el.id === editMenuElement.id);
+            console.log(element.name)
+        }
+        
     }
-   
+// EDIT Menu Element Admin
+    const handleAdminEditElementMenu = (id) => {
+        const cloneArray = [...menuArray];
+        const element = cloneArray.find(el => el.id === id)
+        navigate("/admin/menu/edit")
+        const { name, price, ingredients, category } = element;
+        setEditMenuElement({
+            id: element.id,
+            name,
+            price,
+            ingredients,
+            category,
+        })
+    }
+// DELETE Menu Element Admin
+    const handleAdminDEleteElementMenu = (id) => {
+        const cloneArray = [...menuArray];
+        const index = cloneArray.findIndex(el => el.id === id);
+        cloneArray.splice(index, 1);
+        setMenuArray(cloneArray)
+    }
+console.log(menuArray)
     return(
         <AppContext.Provider
          value={{
-            adminInputName,
-            adminInputPrice,
-            adminInputIngredients,
-            adminInputKategory,
+            addMenuElement,
+            editMenuElement,
             isBurgerNavActive,
             menuArray,
             orderArray,
@@ -133,11 +173,14 @@ const handleOrederIsSend = () => {
             handleInputValue,
             handleOrederIsSend,
             handleSubmit,
+            handleAdminEditElementMenu,
+            handleAdminDEleteElementMenu,
             getItemQuantity,
             increaseItemQuantity,
             decreaseItemQuantity,
             removeFromOrderArray,
             setIsBurgerNavActive,
+            setAddMenuElement,
         }}
         >
             {children}

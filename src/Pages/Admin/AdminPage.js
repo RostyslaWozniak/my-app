@@ -8,7 +8,7 @@ import './AdminPage.css'
 const AdminPage = () => {
     const { isAdminLogged, handleAdminLogout } = useContext(LoginContext);
     
-    if(!isAdminLogged) return <ErrorPage/>;
+    // if(!isAdminLogged) return <ErrorPage/>;
     return (
         <div className="admin-container">
             <h1>Admin</h1>
@@ -19,7 +19,7 @@ const AdminPage = () => {
                         type="large"
                     />
                 </NavLink>
-                <NavLink to={"/admin/edit"}>
+                <NavLink to={"/admin/menu"}>
                     <Button 
                         name="Edytuj menu"
                         type="large"

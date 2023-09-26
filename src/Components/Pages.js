@@ -10,7 +10,8 @@ import Registration from '../Pages/LogIn/Registration'
 import ErrorPage from '../Pages/ErrorPage';
 import BurgerNav from './elements/BurgerNav/BurgerNav';
 import AddArticle from '../Pages/Admin/AddArticle';
-import EditMenu from '../Pages/Admin/EditMenu';
+import EditMenu from '../Pages/Admin/EditMenu'; 
+import EditMenuElement from '../Pages/Admin/EditMenuElement';
 
 const Pages = () => {
     return ( 
@@ -23,7 +24,8 @@ const Pages = () => {
 
             <Route path="/admin" element={<AdminPage/>}>
                 <Route path="add" element={<AddArticle/>}/>
-                <Route path="edit" element={<EditMenu/>}/>
+                <Route path="menu" element={<EditMenu/>}/>
+                <Route path="menu/edit" element={<EditMenuElement/>}/>
             </Route>
 
             <Route path="/login">
