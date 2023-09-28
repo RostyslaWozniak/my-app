@@ -20,22 +20,18 @@ const Pages = () => {
             <Route path="/" element={<HomePage/>}/>
             <Route path="/menu" element={<MenuPage/>}/>
             <Route path="/order" element={<OrderPage/>}/>
-
             <Route path="/admin" element={<AdminPage/>}>
                 <Route index element={'Admin Info'}/>
                 <Route path="add" element={<AddOrEditArticle type="add"/>}/>
                 <Route path="menu" element={<EditMenu/>}/>
                 <Route path="menu/edit" element={<AddOrEditArticle type="edit"/>}/>
-                {/* <Route path="menu/edit" element={<EditMenuElement />}/> */}
             </Route>
-
             <Route path="/login">
                 <Route index element={<LogIn/>}/>
                 <Route path="registration" element={<Registration/>}/>
             </Route>
             <Route path="/logout" element={<Logout/>}/>
-            
-            <Route path="*" element={<ErrorPage/>}/>
+            <Route path="*" element={<ErrorPage err="Niema takiej strony"/>}/>
         </Routes>
         </>
      );

@@ -1,8 +1,11 @@
 import React from 'react';
 
-const ErrorPage = () => {
+const ErrorPage = ({ err }) => {
     return ( 
-        <h1>Error</h1>
+        <div>
+            <h1>Error</h1>
+            <h2>{err}</h2>        
+        </div>
      );
 }
  
