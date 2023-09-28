@@ -6,21 +6,32 @@ import Button from '../../Components/elements/Button/Button';
 import './LogIn.css';
 
 const LogIn = () => {
-    const { nameInput, passwordInput, handleInputLoginValue, handleLoginSubmit } = useContext(LoginContext);
-        
+    const { loginInput, handleInputLogin, handleLoginSubmit, loginMessage } = useContext(LoginContext);
+    const { name, password } = loginInput;
         const formInputsArray = [
-            {label: "Imię", name: "loginName", type: "text", placeholder: "Wpisz imię", onChange: handleInputLoginValue, value: nameInput},
-            {label: "Hasło", name: "loginPassword", type: "password", placeholder: "Wpisz hasło", onChange: handleInputLoginValue, value: passwordInput},
+            {
+                label: "Imię", 
+                name: "loginName", 
+                type: "text", 
+                placeholder: "Wpisz imię", 
+                onChange: (e) => handleInputLogin(e, "login"), 
+                value: name,
+                message: loginMessage,
+            },
+            {
+                label: "Hasło", 
+                name: "loginPassword", 
+                type: "password", 
+                placeholder: "Wpisz hasło", 
+                onChange: (e) => handleInputLogin(e, "login"), 
+                value: password,
+                message: loginMessage,
+            },
         ];
         const showInputs = formInputsArray.map((input, id) => (
             <Input
                 key={id}
-                label={input.label}
-                name={input.name}
-                type={input.type}
-                placeholder={input.placeholder}
-                onChange={input.onChange}   
-                value={input.value}
+                {...input}
             />
         ))
     return(

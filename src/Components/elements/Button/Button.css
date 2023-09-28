@@ -18,10 +18,10 @@ button{
     height: 40px;
     width: 140px;
 }
-.accept{
+button.accept{
     background-color: var(--accept-color);
 }
-.delete{
+button.delete{
     background-color: var(--reject-color);
 }
 button:hover::before{

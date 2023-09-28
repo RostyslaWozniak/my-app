@@ -5,26 +5,47 @@ import Button from '../../Components/elements/Button/Button';
 import './LogIn.css';
 
 const Registration = () => {
-    const { handleInputLoginValue, 
+    const { 
+        handleInputLogin, 
         handleRegisterSubmit, 
-        registerNameInput,
-        registerPasswordInput,
-        registerPasswordInput2, } = useContext(LoginContext);
-    
+        registrationMessage,
+        registerInput,
+    } = useContext(LoginContext);
+        const { name, password, password2 } = registerInput;
+        const { nameMessage, passwordMessage, password2Message } = registrationMessage;
     const formInputsArray = [
-        {label: "Imię", name: "registerName", type: "text", placeholder: "Wpisz imię", onChange: handleInputLoginValue, value: registerNameInput},
-        {label: "Hasło", name: "registerPassword", type: "password", placeholder: "Wpisz hasło", onChange: handleInputLoginValue, value: registerPasswordInput},
-        {label: "Hasło", name: "registerPassword2", type: "password", placeholder: "Wpisz ponownie", onChange: handleInputLoginValue, value: registerPasswordInput2},
+        {
+            label: "Imię", 
+            name: "registerName", 
+            type: "text", 
+            placeholder: "Wpisz imię", 
+            onChange: (e) => handleInputLogin(e, "registration"), 
+            value: name, 
+            message: nameMessage,
+        },
+        {
+            label: "Hasło", 
+            name: "registerPassword", 
+            type: "password", 
+            placeholder: "Wpisz hasło", 
+            onChange: (e) => handleInputLogin(e, "registration"), 
+            value: password, 
+            message: passwordMessage,
+        },
+        {
+            label: "Hasło", 
+            name: "registerPassword2", 
+            type: "password", 
+            placeholder: "Hasło jeszcze raz", 
+            onChange: (e) => handleInputLogin(e, "registration"), 
+            value: password2, 
+            message: password2Message,
+        },
     ];
     const showInputs = formInputsArray.map((input, id) => (
         <Input
             key={id}
-            label={input.label}
-            name={input.name}
-            type={input.type}
-            placeholder={input.placeholder}
-            onChange={input.onChange}   
-            value={input.value}
+            {...input}
         />
     ))
     return(

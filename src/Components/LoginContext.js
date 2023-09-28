@@ -1,109 +1,139 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Error from '../Pages/ErrorPage'
 
 export const LoginContext = React.createContext();
 //dane admina
 const admin = {name: "admin", password: "123"};
 
 export const LoginProvider = ({children}) => {
- //navigate hook
+ //NAVIGATE HOOK
     const navigate = useNavigate();
- //stan logowania
+ //LOGIN STATE
     const [ isAdminLogged, setIsAdminLogged ] = useState(false);
-    const [ nameInput, setNameInput ] = useState("");
-    const [ passwordInput, setPasswordInput ] = useState("");
- //stan rejestracji
+    const [ loginInput, setLoginInput ] = useState({
+        loginName: "",
+        loginPassword: "",
+    })
+ //LOGIN MESSAGES
+    const [ loginMessage, setLoginMessage] = useState(null);
+ //REGISTER STATE
     const [ isUserLogged, setIsUserLogged ] = useState(false);
-    const [ registerNameInput, setRegisterNameInput ] = useState("");
-    const [ registerPasswordInput, setRegisterPasswordInput ] = useState("");
-    const [ registerPasswordInput2, setRegisterPasswordInput2 ] = useState("");
-    const [ arrOfRegistrateUsers, setArrOfRegistrateUsers ] = useState([
-        {name: "Rostik", password: "12345"},
-        {name: "Pusheen", password: "09876"}
-    ]);
- //obsługa inputów Logowania oraz rejestracji 
-    const handleInputLoginValue = (e) => {
-        switch (e.target.name) {
-            case 'loginName':
-                return setNameInput(e.target.value);
-            case 'loginPassword':
-                return setPasswordInput(e.target.value);
-            case 'registerName':
-                return setRegisterNameInput(e.target.value);
-            case'registerPassword':
-                return setRegisterPasswordInput(e.target.value);
-            case'registerPassword2':
-                return setRegisterPasswordInput2(e.target.value);
-            default: return console.log('err');
+    const [ registerInput, setRegisterInput ] = useState({
+        registerName: "",
+        registerPassword: "",
+        registerPassword2: "",
+    })
+ //REGISTER MESSAGES
+    const [ registrationMessage, setRegistrationMessage] = useState({
+        nameMessage: null,
+        passwordMessage: null,
+        password2Message: null,
+    });
+ //REGISTERED USERS STATE
+    const [ registeredUsersMap, setRegisteredUsersMap ] = useState(new Map([
+        ["Pusheen", "09876"],
+        ["Rostik", "12345"],
+    ]));
+//LOGIN AND REGISTRATION INPUT HANDLE
+    const handleInputLogin = (e, type) => {
+        switch(type){
+            case "login":
+                return setLoginInput(prevState => ({...prevState, [e.target.name]: e.target.value}));
+            case "registration":
+                return setRegisterInput(prevState => ({...prevState, [e.target.name]: e.target.value}));
+            default: return <Error err="handleInputLogin"/>
         }
     }
- //obsługa formularza Logowania
-    const handleLoginSubmit = (e) => {
-        e.preventDefault()
-        if(nameInput === admin.name && passwordInput === admin.password) {
-            setIsAdminLogged(!isAdminLogged);
-            navigate('/admin');
-            console.log("jesteś zalogowany/a jako admin");
-            // return;
-        }else if(arrOfRegistrateUsers.length > 0){
-            if(arrOfRegistrateUsers.find(user => user.password === passwordInput 
-                && user.name === nameInput)){
-                console.log(`${nameInput} jesteś zalogowany/a `)
-                setIsUserLogged(!isUserLogged);
-                navigate('/');
-            }else{
-                setPasswordInput("");
-                return console.log('Błedne dane logowania');
-            }
-        }else{
-            setPasswordInput("");
-            return console.log('Błedne dane logowania')
-        }
-         
-        setNameInput("");
-        setPasswordInput("");
-    }
- //obsługa formularza rejestracji 
+ //REGISTRATION HANDLE FORM 
     const handleRegisterSubmit = (e) => {
         e.preventDefault()
+        const { registerName, registerPassword, registerPassword2 } = registerInput;
         let isNameValid = false;
         let isPasswordValid = false;
         let isPassword2Valid = false;
-        if(registerNameInput.length < 3){
-            console.log('imię powinno mieć min 3 znaki')
+
+        function setMessage(type, value){
+            setRegistrationMessage(prevState => ({...prevState, [type]: [value]}));
+        }
+        setMessage("nameMessage", null);
+        setMessage("passwordMessage", null);
+        setMessage("password2Message", null);
+
+        // if(registerName === "") return console.log("err")
+        if(registerName === undefined || registerName.length < 3){
+            setMessage("nameMessage", "Imię powinno mieć min 3 znaki")
         }else{
-            if(arrOfRegistrateUsers.length > 0){
-                if(arrOfRegistrateUsers.find(user => user.name === registerNameInput)){
-                    console.log('Takie imię już istnieje');
+            if(registeredUsersMap.size > 0){
+                if(registeredUsersMap.has(registerName)){
+                    setMessage("nameMessage", "Takie imię już istnieje")
                 }else {
-                    isNameValid = true;
+                    isNameValid = true;        
                 }
-            }else{
-                isNameValid = true;
+            }else{ 
+                isNameValid = true;   
             }    
         }
-        if(registerPasswordInput.length < 5){
-            console.log('hasło powinno mieć min 5 znaków')
+        // if(registerPassword === "") return console.log("err")
+        if(registerPassword === undefined || registerPassword < 5){
+            setMessage("passwordMessage", "Hasło powinno mieć min 5 znaków")
         }else {
-            isPasswordValid = true;
+            isPasswordValid = true
         }
-        if(registerPasswordInput !== registerPasswordInput2){
-           console.log('hasła nie są identyczne')
+        if(registerPassword !== registerPassword2){
+            setMessage("password2Message", "Hasła nie są identyczne")
         }else {
-            isPassword2Valid = true;
+            isPassword2Valid = true  
         }
+
         if(isNameValid && isPasswordValid && isPassword2Valid){
-            setArrOfRegistrateUsers(prevState => {
-                return [...prevState, {name: registerNameInput, password: registerPasswordInput}]
-            } )
+            setRegisteredUsersMap(registeredUsersMap.set(registerName, registerPassword))
             setIsUserLogged(!isUserLogged);
             navigate('/');
-            setRegisterNameInput("");
-            setRegisterPasswordInput("");
-            setRegisterPasswordInput2("");
-            console.log(`${registerNameInput} jesteś zalogowany `)
+            setRegisterInput({
+                registerName: "",
+                registerPassword: "",
+                registerPassword2: "",
+            })
+            setRegistrationMessage({
+                nameMessage: null,
+                passwordMessage: null,
+                passwordMessage: null,
+            })
+            alert(`${registerName} jesteś zalogowany/a `)
         }
     }
+   
+// LOGIN HANDLE FORM 
+const handleLoginSubmit = (e) => {
+        e.preventDefault()
+        const { loginName, loginPassword } = loginInput;
+
+        setLoginMessage(null);
+
+        if(loginName === admin.name && loginPassword === admin.password) {
+            setIsAdminLogged(!isAdminLogged);
+            navigate('/admin');
+            alert("jesteś zalogowany/a jako admin");
+        }else if(registeredUsersMap.size > 0){
+            if(registeredUsersMap.get(loginName) === loginPassword){
+                alert(`${loginName} jesteś zalogowany/a `)
+                setIsUserLogged(!isUserLogged);
+                navigate('/');
+            }else{
+                setLoginInput(prevState => ({...prevState, loginPassword: ""}));
+                setLoginMessage("Błedne dane logowania");
+            }
+        }else{
+            setLoginInput(prevState => ({...prevState, loginPassword: ""}));
+            setLoginMessage("Błedne dane logowania");
+        }
+        setLoginInput({
+            loginName: "",
+            loginPassword: "",
+        })
+    }
+ 
     //wylogowanie admina
     const handleAdminLogout = () => {
         setIsAdminLogged(!isAdminLogged);
@@ -117,15 +147,14 @@ export const LoginProvider = ({children}) => {
         }
     return(
         <LoginContext.Provider value={{
-            isUserLogged,
             isAdminLogged,
-            nameInput,
-            passwordInput,
-            registerNameInput,
-            registerPasswordInput,
-            registerPasswordInput2,
+            registrationMessage,
+            isUserLogged,
+            loginInput,
+            loginMessage,
+            registerInput,
             handleAdminLogout,
-            handleInputLoginValue,
+            handleInputLogin,
             handleLoginSubmit,
             handleRegisterSubmit,
             handleUserLogout,

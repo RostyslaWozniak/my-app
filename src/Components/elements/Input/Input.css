@@ -8,6 +8,7 @@
     border-bottom: 1.5px dashed; 
     padding: 15px;
     margin: 15px auto;
+    position: relative;
 }
 .label-input-element input{
     background-color: var(--secondary-color);
@@ -25,4 +26,16 @@
     width: 50%;
     color: var(--font-color);
 }
-  
+.label-input-element span{
+    position: absolute;
+    top: -5px;
+    left: 45%;
+    font-size: .8rem;
+}  
+
+span.reject{
+    color: rgb(255, 65, 65);
+}
+.label-input-element input.reject{
+    border: 2px solid rgb(255, 65, 65);
+}
