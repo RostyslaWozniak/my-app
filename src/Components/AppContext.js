@@ -43,6 +43,7 @@ export const AppProvider = ({children}) => {
     const [isBurgerNavActive, setIsBurgerNavActive] = useState(false)
 
 ////////////////////////////////////////////////////////////
+  
 //sprawdenie ilości artykułow
     const  getItemQuantity = (id) => {
         return orderArray.find(item => item.id === id)?.quantity || 0;
