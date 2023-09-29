@@ -46,7 +46,7 @@ const LogIn = () => {
                     <Button 
                         type="submit"
                         name="Zaloguj się"
-                        className="large"
+                        className="large accept"
                     />
                 </div>
             </form>
