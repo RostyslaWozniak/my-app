@@ -4,9 +4,11 @@ import { LoginContext } from '../../Components/LoginContext';
 import Input from '../../Components/elements/Input/Input';
 import Button from '../../Components/elements/Button/Button';
 import './LogIn.css';
+import { AppContext } from '../../Components/AppContext';
 
 const LogIn = () => {
     const { loginInput, handleInputLogin, handleLoginSubmit, loginMessage } = useContext(LoginContext);
+    const { setOrderArray } = useContext(AppContext);
     const { name, password } = loginInput;
         const formInputsArray = [
             {
@@ -37,7 +39,7 @@ const LogIn = () => {
     return(
         <div className="login-container">
             <h1>Logowanie</h1>
-            <form onSubmit={handleLoginSubmit}>              
+            <form onSubmit={(e) => handleLoginSubmit(e, setOrderArray)}>              
                {showInputs}
                <div>
                     <Link to="/login/registration"><i>Zarejestruj się</i></Link>

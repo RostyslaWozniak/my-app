@@ -7,8 +7,15 @@ import "./Navigation.css"
 const Navigation = () => {
 
     const { orderQuantity, isBurgerNavActive } = useContext(AppContext);
-    const { isAdminLogged, isUserLogged } = useContext(LoginContext); 
-    const user = isUserLogged ? {name: "Logout", path: "/logout"} : {name: "Login", path: "/login"}
+    const { isAdminLogged, currentUser, registeredUsersMap } = useContext(LoginContext); 
+    
+    let userStatus = false
+    if(registeredUsersMap.has(currentUser)){
+        userStatus = registeredUsersMap.get(currentUser).isUserLogged
+    }
+    
+    const user = userStatus ? {name: "Logout", path: "/logout"} : {name: "Login", path: "/login"}
+
     const navNames = [
         {name: "Home", path: "/" },
         {name: "Menu", path: "/menu" },

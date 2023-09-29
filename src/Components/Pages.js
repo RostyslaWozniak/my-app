@@ -11,6 +11,7 @@ import Logout from '../Pages/LogIn/Logout';
 import MenuPage from '../Pages/Menu/MenuPage';
 import OrderPage from '../Pages/Order/OrderPage';
 import Registration from '../Pages/LogIn/Registration'
+import AdminInfo from '../Pages/Admin/AdminInfo';
 
 const Pages = () => {
     return ( 
@@ -21,7 +22,7 @@ const Pages = () => {
             <Route path="/menu" element={<MenuPage/>}/>
             <Route path="/order" element={<OrderPage/>}/>
             <Route path="/admin" element={<AdminPage/>}>
-                <Route index element={'Admin Info'}/>
+                <Route index element={<AdminInfo/>}/>
                 <Route path="add" element={<AddOrEditArticle type="add"/>}/>
                 <Route path="menu" element={<EditMenu/>}/>
                 <Route path="menu/edit" element={<AddOrEditArticle type="edit"/>}/>

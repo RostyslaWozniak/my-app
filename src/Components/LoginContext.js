@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Error from '../Pages/ErrorPage'
 
@@ -14,11 +14,11 @@ export const LoginProvider = ({children}) => {
     const [ loginInput, setLoginInput ] = useState({
         loginName: "",
         loginPassword: "",
-    })
+    });
+   
  //LOGIN MESSAGES
     const [ loginMessage, setLoginMessage] = useState(null);
  //REGISTER STATE
-    const [ isUserLogged, setIsUserLogged ] = useState(false);
     const [ registerInput, setRegisterInput ] = useState({
         registerName: "",
         registerPassword: "",
@@ -32,9 +32,26 @@ export const LoginProvider = ({children}) => {
     });
  //REGISTERED USERS STATE
     const [ registeredUsersMap, setRegisteredUsersMap ] = useState(new Map([
-        ["Pusheen", "09876"],
-        ["Rostik", "12345"],
+        ["User", {
+            isUserLogged: false,
+            orderArray: [],
+            isOrderSended: false,
+        }],
+        ["Rostik", {
+            password: "12345",
+            isUserLogged: false,
+            orderArray: [],
+            isOrderSended: false,
+        }],
+        ["admin", {
+            password: "123",
+            isUserLogged: false,
+            orderArray: [],
+            isOrderSended: false,
+        }],
     ]));
+ //user STATE
+ const [ currentUser, setCurrentUser ] = useState("User");
 //LOGIN AND REGISTRATION INPUT HANDLE
     const handleInputLogin = (e, type) => {
         switch(type){
@@ -60,7 +77,6 @@ export const LoginProvider = ({children}) => {
         setMessage("passwordMessage", null);
         setMessage("password2Message", null);
 
-        // if(registerName === "") return console.log("err")
         if(registerName === undefined || registerName.length < 3){
             setMessage("nameMessage", "Imię powinno mieć min 3 znaki")
         }else{
@@ -74,7 +90,6 @@ export const LoginProvider = ({children}) => {
                 isNameValid = true;   
             }    
         }
-        // if(registerPassword === "") return console.log("err")
         if(registerPassword === undefined || registerPassword < 5){
             setMessage("passwordMessage", "Hasło powinno mieć min 5 znaków")
         }else {
@@ -87,8 +102,14 @@ export const LoginProvider = ({children}) => {
         }
 
         if(isNameValid && isPasswordValid && isPassword2Valid){
-            setRegisteredUsersMap(registeredUsersMap.set(registerName, registerPassword))
-            setIsUserLogged(!isUserLogged);
+            setCurrentUser(registerName)
+            setRegisteredUsersMap(registeredUsersMap.set(
+                registerName, {
+                    password: registerPassword,
+                    isUserLogged: true,
+                    orderArray: [],
+                    isOrderSended: false,
+                }))
             navigate('/');
             setRegisterInput({
                 registerName: "",
@@ -101,39 +122,46 @@ export const LoginProvider = ({children}) => {
                 passwordMessage: null,
             })
             alert(`${registerName} jesteś zalogowany/a `)
+            console.log(registeredUsersMap);
         }
     }
    
 // LOGIN HANDLE FORM 
-const handleLoginSubmit = (e) => {
+const handleLoginSubmit = (e, callback) => {
         e.preventDefault()
         const { loginName, loginPassword } = loginInput;
-
+        
         setLoginMessage(null);
-
-        if(loginName === admin.name && loginPassword === admin.password) {
+        // if(loginName === admin.name && loginPassword === admin.password) {
+        if(registeredUsersMap.get(loginName).password === '123'){
             setIsAdminLogged(!isAdminLogged);
+            setCurrentUser(loginName);
             navigate('/admin');
             alert("jesteś zalogowany/a jako admin");
         }else if(registeredUsersMap.size > 0){
-            if(registeredUsersMap.get(loginName) === loginPassword){
+            if(registeredUsersMap.get(loginName).password === loginPassword){
                 alert(`${loginName} jesteś zalogowany/a `)
-                setIsUserLogged(!isUserLogged);
+                setCurrentUser(loginName);
                 navigate('/');
+                setRegisteredUsersMap(prevState => registeredUsersMap.set(loginName, {
+                    ...prevState.get(loginName),
+                    isUserLogged: true,
+                }));
             }else{
                 setLoginInput(prevState => ({...prevState, loginPassword: ""}));
                 setLoginMessage("Błedne dane logowania");
-            }
+            };
         }else{
             setLoginInput(prevState => ({...prevState, loginPassword: ""}));
             setLoginMessage("Błedne dane logowania");
-        }
+        };
+        callback([...registeredUsersMap.get(loginName).orderArray]);
         setLoginInput({
             loginName: "",
             loginPassword: "",
-        })
+        });
+        console.log(registeredUsersMap)
     }
- 
     //wylogowanie admina
     const handleAdminLogout = () => {
         setIsAdminLogged(!isAdminLogged);
@@ -141,15 +169,21 @@ const handleLoginSubmit = (e) => {
     }
     // wylogowanie użytkownika
         const handleUserLogout = () => {
-            setIsUserLogged(!isUserLogged);
-            console.log('jesteś wylogowany')
+            alert('jesteś wylogowany');
+            setRegisteredUsersMap(prevState => registeredUsersMap.set(currentUser, {
+                ...prevState.get(currentUser),
+                isUserLogged: false,
+            }))
+            setCurrentUser("User");
             navigate('/login');
+            console.log(registeredUsersMap)
         }
     return(
         <LoginContext.Provider value={{
+            currentUser,
             isAdminLogged,
             registrationMessage,
-            isUserLogged,
+            registeredUsersMap,
             loginInput,
             loginMessage,
             registerInput,
@@ -158,6 +192,7 @@ const handleLoginSubmit = (e) => {
             handleLoginSubmit,
             handleRegisterSubmit,
             handleUserLogout,
+            setRegisteredUsersMap,
         }}>
             {children}
         </LoginContext.Provider>

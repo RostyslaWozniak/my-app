@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export const AppContext = React.createContext();
@@ -37,64 +37,57 @@ export const AppProvider = ({children}) => {
     ]);
 //Order STATE
     const [orderArray, setOrderArray] = useState([])
-// stan złozónego zamówienia
-    const [acceptedOrdersArray, setAcceptedOrdersArray] = useState([]);
-//stan BurgerNav
+//SEND ORDER STATE
+    const [sendOrderArray, setSendOrderArray] = useState([]);
+//BurgerNav STATE
     const [isBurgerNavActive, setIsBurgerNavActive] = useState(false)
 
 ////////////////////////////////////////////////////////////
-  
-//sprawdenie ilości artykułow
-    const  getItemQuantity = (id) => {
-        return orderArray.find(item => item.id === id)?.quantity || 0;
-    }
-//zwiększenie ilości artykułów
-    const increaseItemQuantity = (id) => {
-        setOrderArray(currentItems => {
-            if(currentItems.find(item => item.id === id) == null){
-                return [...currentItems, { id, quantity: 1 }]
-            } else {
-                return currentItems.map(item => {
-                    if(item.id === id){
-                        return { ...item, quantity: item.quantity + 1}
-                    } else {
-                        return item
-                    }
-                })
-            }
-        })
-    }
-//zmniejszenie ilości artykułów
-const decreaseItemQuantity = (id) => {
+//CHECK QUANTITY OF ITEM
+const  getItemQuantity = (id) => {
+    return orderArray.find(item => item.id === id)?.quantity || 0;
+}
+//INCREASE QUANTITY OF ITEMS
+const increaseItemQuantity = (id) => {
     setOrderArray(currentItems => {
-        if(currentItems.find(item => item.id === id)?.quantity === 1){
-            return currentItems.filter(item => item.id !== id)
+        if(currentItems.find(item => item.id === id) == null){
+            return [...currentItems, { id, quantity: 1 }]
         } else {
             return currentItems.map(item => {
                 if(item.id === id){
-                    return { ...item, quantity: item.quantity - 1}
+                    return {...item, quantity: item.quantity + 1}
                 } else {
                     return item
                 }
             })
         }
     })
+    
 }
-//usuwanie elementu z zamówienia
-const removeFromOrderArray = (id) => {
-    setOrderArray(currentItems => {
+//DECREASE QUANTITY OF ITEMS
+const decreaseItemQuantity = (id) => {
+setOrderArray(currentItems => {
+    if(currentItems.find(item => item.id === id)?.quantity === 1){
         return currentItems.filter(item => item.id !== id)
-    })
+    } else {
+        return currentItems.map(item => {
+            if(item.id === id){
+                return { ...item, quantity: item.quantity - 1}
+            } else {
+                return item
+            }
+        })
+    }
+})
+}
+//REMOVE ITEM FROM ORDER ARR
+const removeFromOrderArray = (id) => {
+setOrderArray(currentItems => {
+    return currentItems.filter(item => item.id !== id)
+})
 }
 const orderQuantity = orderArray.reduce((quantity, item) => item.quantity + quantity, 0)
-//przujęcie zamówienia
-
-const handleOrderIsSend = () => {
-    alert("Zamówienie wysłano");
-   
-    console.log(acceptedOrdersArray)
-}
-//obsługa inputów Admina
+//ADMIN HANDLE ADD OR EDIT ITEM
     const handleInputValue = (e) => {
         switch(e.target.name){
             case "addName":
@@ -112,8 +105,7 @@ const handleOrderIsSend = () => {
             default: return;
         }
     }
-
-//obsługa formularza Admina
+//ADMIN HANDLE ADD ITEM FORM
     const handleSubmit = (e, type) => {
         e.preventDefault();
         if(type === "add"){
@@ -135,7 +127,7 @@ const handleOrderIsSend = () => {
             })
         } else if (type === "edit"){
             const cloneArray = [...menuArray];
-            const element = cloneArray.find(el => el.id === editMenuElement.id);
+            const element = cloneArray.find(el => el.id === editMenuElement.id);            
             element.name = editMenuElement.name;
             element.price = editMenuElement.price;
             element.ingredients = editMenuElement.ingredients;
@@ -143,7 +135,7 @@ const handleOrderIsSend = () => {
             navigate("/admin/menu")
         }
     }
-// EDIT Menu Element Admin
+// ADMIN HANDLE EDIT ITEM FORM
     const handleAdminEditElementMenu = (id) => {
         const cloneArray = [...menuArray];
         const element = cloneArray.find(el => el.id === id)
@@ -157,13 +149,21 @@ const handleOrderIsSend = () => {
             category,
         })
     }
-// DELETE Menu Element Admin
+// ADMIN HANDLE DELETE ITEM
     const handleAdminDEleteElementMenu = (id) => {
         const cloneArray = [...menuArray];
         const index = cloneArray.findIndex(el => el.id === id);
         cloneArray.splice(index, 1);
         setMenuArray(cloneArray)
     }
+
+//Send ORDER
+const handleOrderIsSend = (userName, totalPrice) => {
+    // alert(`${userName}, twoje zamówienie zostało przyjęte`);
+    const cloneArr = [...orderArray];
+    
+    setSendOrderArray(prevState => ( [...prevState, { userName, totalPrice, order: [...cloneArr] }]))
+}
     return(
         <AppContext.Provider
          value={{
@@ -173,21 +173,24 @@ const handleOrderIsSend = () => {
             menuArray,
             orderArray,
             orderQuantity,
+            sendOrderArray,
+            decreaseItemQuantity,
+            getItemQuantity,
+            handleAdminDEleteElementMenu,
+            handleAdminEditElementMenu,
             handleInputValue,
             handleOrderIsSend,
             handleSubmit,
-            handleAdminEditElementMenu,
-            handleAdminDEleteElementMenu,
-            getItemQuantity,
             increaseItemQuantity,
-            decreaseItemQuantity,
             removeFromOrderArray,
-            setIsBurgerNavActive,
             setAddMenuElement,
             setEditMenuElement,
+            setIsBurgerNavActive,
+            setOrderArray,
         }}
         >
             {children}
         </AppContext.Provider>
     )
 }
+
