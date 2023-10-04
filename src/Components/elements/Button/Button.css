@@ -1,7 +1,8 @@
 button{
     height: 30px;
     border-radius: var(--border-button);
-    background-color: var(--secondary-color);
+    /* background-color: var(--secondary-color); */
+    background-color: transparent;
     border: 2px solid var(--white-color);
     color: var(--font-color);
     font-size: 0.8rem;
@@ -14,7 +15,6 @@ button{
 }
 .medium{
     width: 80px;
-    background: linear-gradient(to top, var(--black-color), var(--secondary-color));
 }
 .large{
     height: 40px;
@@ -27,7 +27,7 @@ button.delete{
     background-color: var(--reject-color);
 }
 button:hover::before{
-    transform: translateX(2000%) rotate(30deg);
+    animation: .2s button-hover ease-in;
 }
 button::before{
     content: "";
@@ -40,4 +40,38 @@ button::before{
     top: -5px;
     left: -35px;
     transition: .2s ease-in-out;
+}
+@keyframes button-hover {
+    0%{
+        transform: rotate(30deg);
+    }
+    100%{
+        transform: translateX(1000%) rotate(30deg);
+    }
+}
+/* "+", "-" buttons  */
+.buttons{
+    min-width: 100px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center ;
+    line-height: 1rem;
+}
+/* big menu buttons */
+.Xlarge{
+    height: 200px;
+    width: 100%;
+    min-width: 200px;
+    background: linear-gradient(to bottom, var(--secondary-color), var(--black-color));
+    font-style: italic;
+    font-size: 1.5rem;
+    transition: .4s ease-in-out;
+    border: var(--border-px) solid; 
+}
+.Xlarge:hover{
+    background: linear-gradient(to top, var(--secondary-color), var(--black-color));
+    color: var(--black-color);
+}
+.Xlarge::before{
+    display: none;
 }

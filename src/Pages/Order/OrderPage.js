@@ -11,32 +11,50 @@ const OrderPage = () => {
     const navigate = useNavigate()
     const { currentUser, registeredUsersMap, setRegisteredUsersMap } = useContext(LoginContext);
     const { 
+        decreaseItemQuantity,
+        getItemQuantity,
+        getOrderItemsQuantity, 
         handleOrderIsSend,
+        increaseItemQuantity,
         menuArray, 
         orderArray, 
-        orderQuantity, 
-        removeFromOrderArray,
     } = useContext(AppContext);
+    
+ //check is user logged and get status of order
     let isOrderSended = false;
     if(registeredUsersMap.has(currentUser)){
         isOrderSended = registeredUsersMap.get(currentUser).isOrderSended;
         registeredUsersMap.get(currentUser).orderArray = [...orderArray];
     }
+ //get quantity of order items in cart
+    const orderQuantity = getOrderItemsQuantity();
+    
     const item = orderArray.map(el => {
+        const quantity = getItemQuantity(el.id);
         const item = menuArray.find(it => it.id === el.id);
-        const button = <Button
-            isDisabled={isOrderSended}
-            name="usuń"
-            className="medium delete"
-            onClick={() => removeFromOrderArray(el.id)}
-            />
+        const buttons = 
+        <div>
+            <div className="buttons">
+                <Button
+                className="small delete"
+                name="-"
+                onClick={() => decreaseItemQuantity(el.id)}
+                />
+                <p>{quantity}</p>
+                <Button
+                isDisabled={quantity >= 5 ? true : false}
+                className="small accept"
+                name="+"
+                onClick={() => increaseItemQuantity(el.id)}
+                />
+            </div>
+        </div>
+       
         return(
         <ListElement
         key={el.id}
-        quantity={el.quantity}
-        name={item.name}
-        price={item.price}
-        button={button}
+        button={!isOrderSended && buttons}
+        {...item}
         />
     )})  
     
@@ -61,7 +79,7 @@ const OrderPage = () => {
         :
             <div className="result-container">
                 <h2>Do zapłaty: {totalPrice()}</h2>
-                    {registeredUsersMap.get(currentUser).isOrderSended
+                    {isOrderSended
                     ?
                     <p>Twoje zamówienie jest przyęte</p>
                     :
@@ -69,12 +87,12 @@ const OrderPage = () => {
                     name="zamów "
                     className="large accept"
                     onClick={() => {
-                        if(registeredUsersMap.get(currentUser).isOrderSended)return console.log('returned', registeredUsersMap)
+                        if(isOrderSended)return console.log('returned', registeredUsersMap)
                         setRegisteredUsersMap(prevState => registeredUsersMap.set(currentUser, {
                             ...prevState.get(currentUser),
                             isOrderSended: true,
                         }))
-                        handleOrderIsSend(currentUser, totalPrice())
+                        handleOrderIsSend(currentUser, registeredUsersMap, totalPrice())
                     }}
                     />
                     }  

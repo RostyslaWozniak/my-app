@@ -7,8 +7,8 @@
   --font-color: #fff; 
   --white-color: #E5E5E5; 
   --black-color: #57648C;
-  --accept-color: rgb(123, 187, 123);
-  --reject-color: rgb(250, 123, 123);
+  --accept-color: rgb(66, 151, 66);
+  --reject-color: rgb(255, 65, 65);
 }
 * {
   box-sizing: border-box;
@@ -49,6 +49,12 @@ html{
   font-weight: 100;
   border: var(--border-px) solid var(--white-color);
   border-radius: var(--border-radius);
+  color: var(--secondary-color)
+}
+.page h3{
+  padding: 10px;
+  font-style: italic;
+  font-weight: 100;
   color: var(--secondary-color)
 }
 .footer{

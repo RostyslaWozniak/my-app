@@ -1,14 +1,6 @@
 .menu-container{
     width: 100%;
 }
-.menu-container .button,
-.menu-container .buttons{
-    min-width: 100px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    line-height: 1rem;
-}
 .menu-container .menu-buttons{
     width: 80%;
     display: grid;
@@ -16,30 +8,5 @@
     gap: 40px;
     margin: 50px auto;
 }
-.menu-container .menu-buttons .Xlarge{
-    height: 200px;
-    width: 100%;
-    min-width: 200px;
-    background: linear-gradient(to bottom, var(--secondary-color), var(--black-color));
-    font-style: italic;
-    font-size: 1.5rem;
-    transition: .4s ease-in-out;
-    border: var(--border-px) solid; 
-}
-.menu-container .menu-buttons .Xlarge:hover{
-    background: linear-gradient(to top, var(--secondary-color), var(--black-color));
-    color: var(--black-color);
-}
-.menu-container .menu-buttons .Xlarge::before{
-    display: none;
-}
-.menu-container .button{
-    display: flex;
-    justify-content: flex-end;
-}
-.menu-container i{
-    margin: 0 20px;
-    font-size: .8rem;
-    line-height: 1rem;
-}
+
   

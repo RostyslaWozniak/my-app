@@ -14,8 +14,7 @@ const BurgerNav = () => {
             <div></div>
             <div></div>
         </div>
-        
-     );
+    );
 }
  
 export default BurgerNav;

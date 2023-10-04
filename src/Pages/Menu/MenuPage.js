@@ -6,23 +6,33 @@ import { LoginContext } from '../../Components/LoginContext';
 import './MenuPage.css'
 
 const MenuPage = () => {
+    const { currentUser, registeredUsersMap } = useContext(LoginContext);
+    const { 
+        menuArray, 
+        orderArray, 
+        getItemQuantity, 
+        increaseItemQuantity, 
+        decreaseItemQuantity,
+    } = useContext(AppContext);
+ //handle scroll
     const lunchRef = useRef(null);
     const saladsRef = useRef(null);
     const dessertsRef = useRef(null);
     const drinksRef = useRef(null); 
-    const { currentUser, registeredUsersMap } = useContext(LoginContext);
-    const { menuArray, orderArray, getItemQuantity, increaseItemQuantity, decreaseItemQuantity} = useContext(AppContext);
+ //check is user logged and get status of order
     let isOrderSended = false;
     if(registeredUsersMap.has(currentUser)){
         isOrderSended = registeredUsersMap.get(currentUser).isOrderSended;
         registeredUsersMap.get(currentUser).orderArray = [...orderArray];
     }
-    
+
     const item = menuArray.map(el => {
+     //get quantity of order items in cart
         const quantity = getItemQuantity(el.id);
+     // show button add if quantity 0 or buttons "+" and "-"
         const buttons = quantity === 0 
             ? 
-            <div className="button">
+            <div className="buttons">
                 <Button
                 className="medium"
                 name="dodaj"
@@ -47,14 +57,12 @@ const MenuPage = () => {
         return(
             <ListElement
                 key={el.id}
-                name={el.name}
-                price={el.price}
-                ingredients={el.ingredients}
-                category={el.category}
                 button={!isOrderSended && buttons}
+                {...el}
             />
         )
     });
+ //handle scroll
     const lunch = item.filter(el => el.props.category === "obiady");
     const salads = item.filter(el => el.props.category === "sałatki");
     const desserts = item.filter(el => el.props.category === "desery");

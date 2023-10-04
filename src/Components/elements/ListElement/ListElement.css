@@ -4,23 +4,15 @@
     color: var(--font-color);
     display: flex;
     font-size: 1.5rem;
-    justify-content: space-between;
-    list-style: none;
-    padding: 15px 0;
+    padding: 15px;
     gap: 10px 20px;
+    text-align: start;
 }
 .list-element .name{
-    width: 25%;
+    min-width: 20%;
 }
-.list-element div i{
+.list-element .descriptions{
     font-size: .8rem;
-}
-.list-element .price {
-    text-align: left;
-    width: 10%;
-}
-
-.list-element .button {
-    width: 10%;
-    text-align: left;
+    flex-grow: 1;
+    font-style: italic;
 }

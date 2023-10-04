@@ -32,11 +32,6 @@ export const LoginProvider = ({children}) => {
     });
  //REGISTERED USERS STATE
     const [ registeredUsersMap, setRegisteredUsersMap ] = useState(new Map([
-        ["User", {
-            isUserLogged: false,
-            orderArray: [],
-            isOrderSended: false,
-        }],
         ["Rostik", {
             password: "12345",
             isUserLogged: false,
@@ -50,7 +45,7 @@ export const LoginProvider = ({children}) => {
             isOrderSended: false,
         }],
     ]));
- //user STATE
+ //user name STATE
  const [ currentUser, setCurrentUser ] = useState("User");
 //LOGIN AND REGISTRATION INPUT HANDLE
     const handleInputLogin = (e, type) => {
@@ -122,7 +117,6 @@ export const LoginProvider = ({children}) => {
                 passwordMessage: null,
             })
             alert(`${registerName} jesteś zalogowany/a `)
-            console.log(registeredUsersMap);
         }
     }
    
@@ -130,10 +124,11 @@ export const LoginProvider = ({children}) => {
 const handleLoginSubmit = (e, callback) => {
         e.preventDefault()
         const { loginName, loginPassword } = loginInput;
-        
         setLoginMessage(null);
-        // if(loginName === admin.name && loginPassword === admin.password) {
-        if(registeredUsersMap.get(loginName).password === '123'){
+        if(!loginName.length || !loginPassword.length)return setLoginMessage("Wypełnij wszystkie pola pola");
+        if(!registeredUsersMap.has(loginName))return setLoginMessage("Błedne dane logowania");
+
+        if(registeredUsersMap.get(loginName).password === "123" && registeredUsersMap.get(loginName).password === loginPassword){
             setIsAdminLogged(!isAdminLogged);
             setCurrentUser(loginName);
             navigate('/admin');
@@ -156,11 +151,10 @@ const handleLoginSubmit = (e, callback) => {
             setLoginMessage("Błedne dane logowania");
         };
         callback([...registeredUsersMap.get(loginName).orderArray]);
-        setLoginInput({
-            loginName: "",
+        setLoginInput(prevState => ({
+            ...prevState,
             loginPassword: "",
-        });
-        console.log(registeredUsersMap)
+        }));
     }
     //wylogowanie admina
     const handleAdminLogout = () => {
@@ -198,5 +192,3 @@ const handleLoginSubmit = (e, callback) => {
         </LoginContext.Provider>
     )
 }
-
-

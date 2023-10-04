@@ -1,6 +1,6 @@
 import React, {  useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import ErrorPage from '../Pages/ErrorPage';
 export const AppContext = React.createContext();
 
 export const AppProvider = ({children}) => {
@@ -80,13 +80,9 @@ setOrderArray(currentItems => {
     }
 })
 }
-//REMOVE ITEM FROM ORDER ARR
-const removeFromOrderArray = (id) => {
-setOrderArray(currentItems => {
-    return currentItems.filter(item => item.id !== id)
-})
+const getOrderItemsQuantity = () => {
+    return orderArray.reduce((quantity, item) => item.quantity + quantity, 0)
 }
-const orderQuantity = orderArray.reduce((quantity, item) => item.quantity + quantity, 0)
 //ADMIN HANDLE ADD OR EDIT ITEM
     const handleInputValue = (e) => {
         switch(e.target.name){
@@ -111,6 +107,7 @@ const orderQuantity = orderArray.reduce((quantity, item) => item.quantity + quan
         if(type === "add"){
             const cloneArray = [...menuArray];
             const { name, price, ingredients, category } = addMenuElement
+            if(!name.length || !price || !ingredients.length || !category)return alert("Wszystkie pola są wymagane");
             cloneArray.push({
                 id: Math.floor(Math.random() * new Date()),
                 name,
@@ -127,11 +124,13 @@ const orderQuantity = orderArray.reduce((quantity, item) => item.quantity + quan
             })
         } else if (type === "edit"){
             const cloneArray = [...menuArray];
-            const element = cloneArray.find(el => el.id === editMenuElement.id);            
-            element.name = editMenuElement.name;
-            element.price = editMenuElement.price;
-            element.ingredients = editMenuElement.ingredients;
-            element.category = editMenuElement.category;
+            const { name, price, ingredients, category, id } = editMenuElement
+            if(!name.length || !price || !ingredients.length || !category)return alert("Uzupełnij wszystkie pola");
+            const element = cloneArray.find(el => el.id === id);            
+            element.name = name;
+            element.price = price;
+            element.ingredients = ingredients;
+            element.category = category;
             navigate("/admin/menu")
         }
     }
@@ -158,11 +157,12 @@ const orderQuantity = orderArray.reduce((quantity, item) => item.quantity + quan
     }
 
 //Send ORDER
-const handleOrderIsSend = (userName, totalPrice) => {
-    // alert(`${userName}, twoje zamówienie zostało przyjęte`);
+const handleOrderIsSend = (userName, registeredUsersMap, totalPrice) => {
+    if(!registeredUsersMap.has(userName))return alert("musisz zalogować się");
+    alert(`${userName}, twoje zamówienie zostało przyjęte`);
     const cloneArr = [...orderArray];
-    
-    setSendOrderArray(prevState => ( [...prevState, { userName, totalPrice, order: [...cloneArr] }]))
+    const date = new Date().toLocaleTimeString();
+    setSendOrderArray(prevState => ( [...prevState, { userName, totalPrice, date, order: [...cloneArr] }]))
 }
     return(
         <AppContext.Provider
@@ -172,8 +172,8 @@ const handleOrderIsSend = (userName, totalPrice) => {
             isBurgerNavActive,
             menuArray,
             orderArray,
-            orderQuantity,
             sendOrderArray,
+            getOrderItemsQuantity,
             decreaseItemQuantity,
             getItemQuantity,
             handleAdminDEleteElementMenu,
@@ -182,7 +182,6 @@ const handleOrderIsSend = (userName, totalPrice) => {
             handleOrderIsSend,
             handleSubmit,
             increaseItemQuantity,
-            removeFromOrderArray,
             setAddMenuElement,
             setEditMenuElement,
             setIsBurgerNavActive,
@@ -193,4 +192,3 @@ const handleOrderIsSend = (userName, totalPrice) => {
         </AppContext.Provider>
     )
 }
-

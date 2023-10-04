@@ -7,7 +7,7 @@ import './AdminPage.css'
 const AddOrEditArticle = ({type}) => {
     const { 
         editMenuElement,
-        setEditMenuElement,
+        setEditMenuElement, 
         addMenuElement,
         setAddMenuElement,
         handleInputValue,
@@ -15,21 +15,44 @@ const AddOrEditArticle = ({type}) => {
     } = useContext(AppContext);
     
     const { name, price, ingredients } = type === "add" ? addMenuElement : editMenuElement;
-      
+    //categories
+    const lunch = "obiady"
+    const salads = "sałatki";
+    const desserts = "desery";
+    const drinks = "napoje"
     const formInputsArray = [
-        {label: "Nazwa", name: `${type}Name`, type: "text", placeholder: "Wpisz nazwę...", onChange: handleInputValue, value: name},
-        {label: "Cena", name: `${type}Price`, type: "number", placeholder: "Wpisz cenę...", onChange: handleInputValue, value: price},
-        {label: "Składniki", name: `${type}Ingredients`, type: "text", placeholder: "Wpisz składniki...", onChange: handleInputValue, value: ingredients},
+        {
+            label: "Nazwa", 
+            name: `${type}Name`, 
+            type: "text", 
+            placeholder: "Wpisz nazwę...", 
+            onChange: handleInputValue, 
+            value: name,
+            message: !name && "Pole jest wymagane",
+        },
+        {
+            label: "Cena", 
+            name: `${type}Price`, 
+            type: "number", 
+            placeholder: "Wpisz cenę...", 
+            onChange: handleInputValue, 
+            value: price,
+            message: !price && "Pole jest wymagane",
+        },
+        {
+            label: "Składniki", 
+            name: `${type}Ingredients`, 
+            type: "text", 
+            placeholder: "Wpisz składniki...", 
+            onChange: handleInputValue, 
+            value: ingredients,
+            message: !ingredients && "Pole jest wymagane",
+        },
     ];
     const showInputs = formInputsArray.map((input, id) => (
         <Input 
             key={id}
-            label={input.label}
-            name={input.name}
-            type={input.type}
-            placeholder={input.placeholder}
-            onChange={input.onChange}   
-            value={input.value}
+            {...input}
         />
     ))
     const chooseCategory = (value) => {
@@ -39,38 +62,39 @@ const AddOrEditArticle = ({type}) => {
             return setEditMenuElement(prevState => ({ ...prevState, category: value}));
         }
     }
+    //ACTIVE CATEGORY BUTTON
     const btnClass = (category) => {
         if(type === "add"){
             return addMenuElement.category === category ? "accept" : "";
         }else if(type === "edit"){
-            return editMenuElement.category === category ? "accept" : ""
+            return editMenuElement.category === category ? "accept" : "";
         }
     }
     const categoryButtons = <div className="category-buttons">
-        <p>Kategoria: </p>
+        <p>Kategoria</p>
         <Button
             type="button"
-            name="obiady"
-            className={`medium ${btnClass("obiady")}`}
-            onClick={() => chooseCategory("obiady")}
+            name={lunch}
+            className={`medium ${btnClass(lunch)}`}
+            onClick={() => chooseCategory(lunch)}
         />
         <Button
             type="button"
-            name="sałatki"
-            className={`medium ${btnClass("sałatki")}`}
-            onClick={() => chooseCategory("sałatki")}
+            name={salads}
+            className={`medium ${btnClass(salads)}`}
+            onClick={() => chooseCategory(salads)}
         />
         <Button
             type="button"
-            name="desery"
-            className={`medium ${btnClass("desery")}`}
-            onClick={() => chooseCategory("desery")}
+            name={desserts}
+            className={`medium ${btnClass(desserts)}`}
+            onClick={() => chooseCategory(desserts)}
         />
         <Button
             type="button"
-            name="napoje"
-            className={`medium ${btnClass("napoje")}`}
-            onClick={() => chooseCategory("napoje")}
+            name={drinks}
+            className={`medium ${btnClass(drinks)}`}
+            onClick={() => chooseCategory(drinks)}
         />
     </div>
     return ( 

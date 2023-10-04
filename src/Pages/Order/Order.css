@@ -7,12 +7,11 @@
 }
 .order-container .result-container {
    display: flex;
-   justify-content: space-between;
+   justify-content: space-around;
    align-items: center;
 }
 .order-container i{
     font-size: 1.5rem;
 }
-.order-container .list-element div{
-    width: 25%;
-}
+
+

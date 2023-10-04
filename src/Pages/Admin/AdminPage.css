@@ -1,5 +1,5 @@
 .admin-container{
-    width: 100%;
+    width: 80%;
 }
 .admin-container .admin-nav{
    display: flex;
@@ -15,14 +15,33 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 15px;
     margin: 30px auto;
     border-bottom: 1.5px dashed var(--font-color);
     font-size: 1.5rem;
     color: var(--font-color);
 }
 .admin-container .category-buttons p{
-    width: 50%;
+    min-width: 150px;
+    text-align: start;
 }
 .admin-container .category-buttons button{
     margin: 15px auto;
+    flex-basis: 1;
+}
+.admin-container .admin-nav .active{
+    color: var(--accept-color);
+    border-color: var(--accept-color);
+}
+.admin-info-container .summary-container{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 20px;
+    color: var(--font-color)
+}
+
+.admin-info-container .summary-container label{
+    cursor: pointer;
+    line-height: 100%;
 }

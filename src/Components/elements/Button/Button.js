@@ -1,9 +1,9 @@
 import './Button.css'
 
-const Button = ({name, type = "button", className, onClick, isDisabled }) => {
-    const word = 'word'
+const Button = ({id, name, type = "button", className, onClick, isDisabled }) => {
     return ( 
         <button 
+        id={id}
         type={type}
         disabled={isDisabled}
         className={className}
@@ -12,5 +12,4 @@ const Button = ({name, type = "button", className, onClick, isDisabled }) => {
         </button>
      );
 }
- 
 export default Button;

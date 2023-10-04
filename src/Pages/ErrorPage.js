@@ -1,6 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const ErrorPage = ({ err }) => {
+    const navigate = useNavigate()
+    setTimeout(() => navigate("/login"), 1000);
     return ( 
         <div>
             <h1>Error</h1>

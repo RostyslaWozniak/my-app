@@ -1,19 +1,26 @@
 import './Input.css'
 
-const Input = ({ label, name, type, placeholder, onChange, value, className, message }) => {
-
-    
+const Input = ({ 
+    className, 
+    label, 
+    message, 
+    name, 
+    onChange, 
+    placeholder, 
+    type, 
+    value, 
+}) => {
     return (
         <label className="label-input-element">
             <p>{label}</p>
             <span className="reject">{message}</span>
             <input
-                name={name}
-                type={type} 
-                placeholder={placeholder}
-                onChange={onChange}
-                value={value}
                 className={className}
+                name={name}
+                onChange={onChange}
+                placeholder={placeholder}
+                type={type} 
+                value={value}
             />
         </label>
     )

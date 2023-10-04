@@ -9,7 +9,7 @@ import { AppContext } from '../../Components/AppContext';
 const LogIn = () => {
     const { loginInput, handleInputLogin, handleLoginSubmit, loginMessage } = useContext(LoginContext);
     const { setOrderArray } = useContext(AppContext);
-    const { name, password } = loginInput;
+    const { loginName, loginPassword } = loginInput;
         const formInputsArray = [
             {
                 label: "Imię", 
@@ -17,7 +17,7 @@ const LogIn = () => {
                 type: "text", 
                 placeholder: "Wpisz imię", 
                 onChange: (e) => handleInputLogin(e, "login"), 
-                value: name,
+                value: loginName,
                 message: loginMessage,
             },
             {
@@ -26,7 +26,7 @@ const LogIn = () => {
                 type: "password", 
                 placeholder: "Wpisz hasło", 
                 onChange: (e) => handleInputLogin(e, "login"), 
-                value: password,
+                value: loginPassword,
                 message: loginMessage,
             },
         ];

@@ -17,13 +17,14 @@
     font-size: 1rem;
     height: 40px;
     padding: 0 15px; 
-    width: 70%;
+    flex-basis: 100%;
 }
 .label-input-element input::placeholder{
     color: var(--font-color)
 }
 .label-input-element p{
-    width: 50%;
+    text-align: start;
+    min-width: 150px;
     color: var(--font-color);
 }
 .label-input-element span{
@@ -32,10 +33,6 @@
     left: 45%;
     font-size: .8rem;
 }  
-
 span.reject{
-    color: rgb(255, 65, 65);
-}
-.label-input-element input.reject{
-    border: 2px solid rgb(255, 65, 65);
+    color: var(--reject-color);
 }
