@@ -170,7 +170,6 @@ const handleLoginSubmit = (e, callback) => {
             }))
             setCurrentUser("User");
             navigate('/login');
-            console.log(registeredUsersMap)
         }
     return(
         <LoginContext.Provider value={{

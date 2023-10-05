@@ -33,6 +33,9 @@
     color: var(--accept-color);
     border-color: var(--accept-color);
 }
+.admin-info-container {
+    margin: 30px auto;
+}
 .admin-info-container .summary-container{
     display: flex;
     justify-content: space-evenly;
@@ -40,8 +43,9 @@
     padding: 20px;
     color: var(--font-color)
 }
-
 .admin-info-container .summary-container label{
-    cursor: pointer;
-    line-height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;   
 }

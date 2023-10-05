@@ -8,7 +8,7 @@ import './AdminPage.css'
 const AdminPage = () => {
     const { isAdminLogged, handleAdminLogout } = useContext(LoginContext);
     console.log()
-    if(!isAdminLogged) return <ErrorPage err="Nie masz dostępu do Admin"/>;
+    // if(!isAdminLogged) return <ErrorPage err="Nie masz dostępu do Admin"/>;
     return (
         <div className="admin-container">
             <h1>Admin</h1>

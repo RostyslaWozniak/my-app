@@ -1,6 +1,5 @@
 import React, {  useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ErrorPage from '../Pages/ErrorPage';
 export const AppContext = React.createContext();
 
 export const AppProvider = ({children}) => {
@@ -62,7 +61,6 @@ const increaseItemQuantity = (id) => {
             })
         }
     })
-    
 }
 //DECREASE QUANTITY OF ITEMS
 const decreaseItemQuantity = (id) => {
@@ -160,9 +158,10 @@ const getOrderItemsQuantity = () => {
 const handleOrderIsSend = (userName, registeredUsersMap, totalPrice) => {
     if(!registeredUsersMap.has(userName))return alert("musisz zalogować się");
     alert(`${userName}, twoje zamówienie zostało przyjęte`);
+    const id = new Date();
     const cloneArr = [...orderArray];
     const date = new Date().toLocaleTimeString();
-    setSendOrderArray(prevState => ( [...prevState, { userName, totalPrice, date, order: [...cloneArr] }]))
+    setSendOrderArray(prevState => ( [...prevState, { id, isOrderCompleted: false, userName, totalPrice, date, order: [...cloneArr] }]))
 }
     return(
         <AppContext.Provider
@@ -186,6 +185,7 @@ const handleOrderIsSend = (userName, registeredUsersMap, totalPrice) => {
             setEditMenuElement,
             setIsBurgerNavActive,
             setOrderArray,
+            setSendOrderArray,
         }}
         >
             {children}
