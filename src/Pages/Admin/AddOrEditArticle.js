@@ -3,6 +3,7 @@ import { AppContext } from '../../Components/AppContext';
 import Button from '../../Components/elements/Button/Button';
 import Input from '../../Components/elements/Input/Input';
 import './AdminPage.css'
+import { LoginContext } from '../../Components/LoginContext';
 
 const AddOrEditArticle = ({type}) => {
     const { 
@@ -13,9 +14,9 @@ const AddOrEditArticle = ({type}) => {
         handleInputValue,
         handleSubmit,
     } = useContext(AppContext);
-    
+    const { setModal } = useContext(LoginContext);
     const { name, price, ingredients } = type === "add" ? addMenuElement : editMenuElement;
-    //categories
+ //categories
     const lunch = "obiady"
     const salads = "sałatki";
     const desserts = "desery";
@@ -28,7 +29,6 @@ const AddOrEditArticle = ({type}) => {
             placeholder: "Wpisz nazwę...", 
             onChange: handleInputValue, 
             value: name,
-            message: !name && "Pole jest wymagane",
         },
         {
             label: "Cena", 
@@ -37,7 +37,6 @@ const AddOrEditArticle = ({type}) => {
             placeholder: "Wpisz cenę...", 
             onChange: handleInputValue, 
             value: price,
-            message: !price && "Pole jest wymagane",
         },
         {
             label: "Składniki", 
@@ -46,7 +45,6 @@ const AddOrEditArticle = ({type}) => {
             placeholder: "Wpisz składniki...", 
             onChange: handleInputValue, 
             value: ingredients,
-            message: !ingredients && "Pole jest wymagane",
         },
     ];
     const showInputs = formInputsArray.map((input, id) => (
@@ -100,7 +98,7 @@ const AddOrEditArticle = ({type}) => {
     return ( 
         <>
             <h2>{type === "add" ? "Dodaj Artykuł" : "Edytuj Artykuł"}</h2>
-            <form onSubmit={(e) => handleSubmit(e, type)}>
+            <form onSubmit={(e) => handleSubmit(e, type, setModal)}>
                 {showInputs}
                 {categoryButtons}
                 <Button 

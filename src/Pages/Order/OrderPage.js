@@ -9,7 +9,7 @@ import './Order.css'
 
 const OrderPage = () => {
     const navigate = useNavigate()
-    const { currentUser, registeredUsersMap, setRegisteredUsersMap } = useContext(LoginContext);
+    const { currentUser, registeredUsersMap, setRegisteredUsersMap, setModal } = useContext(LoginContext);
     const { 
         decreaseItemQuantity,
         getItemQuantity,
@@ -88,11 +88,7 @@ const OrderPage = () => {
                     className="large accept"
                     onClick={() => {
                         if(isOrderSended)return console.log('returned', registeredUsersMap)
-                        setRegisteredUsersMap(prevState => registeredUsersMap.set(currentUser, {
-                            ...prevState.get(currentUser),
-                            isOrderSended: true,
-                        }))
-                        handleOrderIsSend(currentUser, registeredUsersMap, totalPrice())
+                        handleOrderIsSend(currentUser, registeredUsersMap, totalPrice(), setModal, setRegisteredUsersMap)
                     }}
                     />
                     }  

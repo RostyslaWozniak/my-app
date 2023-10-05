@@ -7,6 +7,7 @@ import Pages from "./Pages";
 import Footer from "./Footer/Footer";
 import '../App.css'
 import '../MediaScrin.css'
+import Modal from "./elements/Modal/Modal";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <div className="page">
               <Pages/>
             </div>
+            <Modal/>
           </div>
           <Footer/>
         </LoginProvider>

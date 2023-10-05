@@ -2,9 +2,10 @@ import Button from "../../Components/elements/Button/Button";
 import ListElement from "../../Components/elements/ListElement/ListElement";
 import { useContext } from "react";
 import { AppContext } from "../../Components/AppContext";
+import { LoginContext } from "../../Components/LoginContext";
 
 const EditMenu = () => {
-    const { menuArray, handleAdminDEleteElementMenu, handleAdminEditElementMenu, handleSubmit } = useContext(AppContext);    
+    const { menuArray, handleAdminDEleteElementMenu, handleAdminEditElementMenu } = useContext(AppContext);      
     
     const item = menuArray.map(el => {
         const buttons = 

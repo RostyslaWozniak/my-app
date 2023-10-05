@@ -1,4 +1,5 @@
-import React, { useContext } from 'react'
+import React, { useContext } from 'react';
+import Modal from '../Components/elements/Modal/Modal'
 import { LoginContext } from '../Components/LoginContext';
 
 const HomePage = () => {

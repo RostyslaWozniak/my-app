@@ -100,12 +100,19 @@ const getOrderItemsQuantity = () => {
         }
     }
 //ADMIN HANDLE ADD ITEM FORM
-    const handleSubmit = (e, type) => {
+    const handleSubmit = (e, type, setModal ) => {
         e.preventDefault();
         if(type === "add"){
             const cloneArray = [...menuArray];
             const { name, price, ingredients, category } = addMenuElement
-            if(!name.length || !price || !ingredients.length || !category)return alert("Wszystkie pola są wymagane");
+            if(!name.length || !price || !ingredients.length || !category) {
+                return (
+                    setModal(({
+                        isVisible: true,
+                        value: "Wszystkie pola są wymagane",
+                        buttons: false,
+                    }))
+            )}
             cloneArray.push({
                 id: Math.floor(Math.random() * new Date()),
                 name,
@@ -114,6 +121,11 @@ const getOrderItemsQuantity = () => {
                 category,
             });
             setMenuArray(cloneArray);
+            setModal(({
+                isVisible: true,
+                value: "Artykuł został dodany do menu",
+                buttons: false,
+            }))
             setAddMenuElement({
                 name: "",
                 price: "",
@@ -123,12 +135,24 @@ const getOrderItemsQuantity = () => {
         } else if (type === "edit"){
             const cloneArray = [...menuArray];
             const { name, price, ingredients, category, id } = editMenuElement
-            if(!name.length || !price || !ingredients.length || !category)return alert("Uzupełnij wszystkie pola");
+            if(!name.length || !price || !ingredients.length || !category){
+                return (
+                setModal(({
+                    isVisible: true,
+                    value: "Uzupełnij wszystkie pola",
+                    buttons: false,
+                }))
+            )}
             const element = cloneArray.find(el => el.id === id);            
             element.name = name;
             element.price = price;
             element.ingredients = ingredients;
             element.category = category;
+            setModal(({
+                isVisible: true,
+                value: "Artykuł został zmieniony",
+                buttons: false,
+            }))
             navigate("/admin/menu")
         }
     }
@@ -155,13 +179,28 @@ const getOrderItemsQuantity = () => {
     }
 
 //Send ORDER
-const handleOrderIsSend = (userName, registeredUsersMap, totalPrice) => {
-    if(!registeredUsersMap.has(userName))return alert("musisz zalogować się");
-    alert(`${userName}, twoje zamówienie zostało przyjęte`);
-    const id = new Date();
-    const cloneArr = [...orderArray];
-    const date = new Date().toLocaleTimeString();
-    setSendOrderArray(prevState => ( [...prevState, { id, isOrderCompleted: false, userName, totalPrice, date, order: [...cloneArr] }]))
+const handleOrderIsSend = (userName, registeredUsersMap, totalPrice, setModal, setRegisteredUsersMap) => {
+    if(!registeredUsersMap.has(userName)) {
+        return (setModal({
+            isVisible: true,
+            value: "Musisz zalogować się",
+            buttons: false,
+        }))
+        
+    } 
+    setRegisteredUsersMap(prevState => registeredUsersMap.set(userName, {
+        ...prevState.get(userName),
+        isOrderSended: true,
+    }))
+        setModal(({
+            isVisible: true,
+            value: `${userName}, twoje zamówienie zostało przyjęte`,
+            buttons: false,
+        }))
+        const id = new Date().toString();
+        const cloneArr = [...orderArray];
+        const date = new Date().toLocaleTimeString();
+        setSendOrderArray(prevState => ( [...prevState, { id, isOrderCompleted: false, userName, totalPrice, date, order: [...cloneArr] }]));
 }
     return(
         <AppContext.Provider

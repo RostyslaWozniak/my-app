@@ -47,6 +47,12 @@ export const LoginProvider = ({children}) => {
     ]));
  //user name STATE
  const [ currentUser, setCurrentUser ] = useState("User");
+ //MODAL STATE
+ const [modal, setModal] = useState({
+    isVisible: false,
+    value: "",
+    buttons: false, 
+});
 //LOGIN AND REGISTRATION INPUT HANDLE
     const handleInputLogin = (e, type) => {
         switch(type){
@@ -54,7 +60,7 @@ export const LoginProvider = ({children}) => {
                 return setLoginInput(prevState => ({...prevState, [e.target.name]: e.target.value}));
             case "registration":
                 return setRegisterInput(prevState => ({...prevState, [e.target.name]: e.target.value}));
-            default: return <Error err="handleInputLogin"/>
+            default: return;
         }
     }
  //REGISTRATION HANDLE FORM 
@@ -117,6 +123,11 @@ export const LoginProvider = ({children}) => {
                 passwordMessage: null,
             })
             alert(`${registerName} jesteś zalogowany/a `)
+            setModal(({
+                isVisible: true,
+                value: `Ceść ${registerName}, rejestracja udana, jesteś zalogowany/a `,
+                buttons: false,
+            }))
         }
     }
    
@@ -132,10 +143,19 @@ const handleLoginSubmit = (e, callback) => {
             setIsAdminLogged(!isAdminLogged);
             setCurrentUser(loginName);
             navigate('/admin');
-            alert("jesteś zalogowany/a jako admin");
+            setModal(({
+                isVisible: true,
+                value: "Jesteś zalogowany/a jako admin",
+                buttons: false,
+            }))
         }else if(registeredUsersMap.size > 0){
             if(registeredUsersMap.get(loginName).password === loginPassword){
-                alert(`${loginName} jesteś zalogowany/a `)
+                
+                setModal(({
+                    isVisible: true,
+                    value: `Cześć ${loginName}, jesteś zalogowany/a `,
+                    buttons: false,
+                }))
                 setCurrentUser(loginName);
                 navigate('/');
                 setRegisteredUsersMap(prevState => registeredUsersMap.set(loginName, {
@@ -160,10 +180,19 @@ const handleLoginSubmit = (e, callback) => {
     const handleAdminLogout = () => {
         setIsAdminLogged(!isAdminLogged);
         navigate('/login');
+        setModal(({
+            isVisible: true,
+            value: 'Jesteś wylogowany/a',
+            buttons: false,
+        }))
     }
     // wylogowanie użytkownika
         const handleUserLogout = () => {
-            alert('jesteś wylogowany');
+            setModal(({
+                isVisible: true,
+                value: 'Jesteś wylogowany/a',
+                buttons: false,
+            }))
             setRegisteredUsersMap(prevState => registeredUsersMap.set(currentUser, {
                 ...prevState.get(currentUser),
                 isUserLogged: false,
@@ -179,12 +208,14 @@ const handleLoginSubmit = (e, callback) => {
             registeredUsersMap,
             loginInput,
             loginMessage,
+            modal,
             registerInput,
             handleAdminLogout,
             handleInputLogin,
             handleLoginSubmit,
             handleRegisterSubmit,
             handleUserLogout,
+            setModal,
             setRegisteredUsersMap,
         }}>
             {children}
