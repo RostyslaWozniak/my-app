@@ -26,10 +26,29 @@
     text-align: center;
     color: var(--font-color);
     font-size: 1.3rem;
+    animation: appear .5s ease-in-out;
+
 }
+
 .modal-container .close-button{
     position: absolute;
     top: 0;
     right: 0;
     border: none;
+}
+@keyframes appear {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+@keyframes disappear {
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
 }

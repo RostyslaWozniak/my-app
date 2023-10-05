@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Button from '../Button/Button'
 import { LoginContext } from '../../LoginContext';
 import './Modal.css'
 
 const Modal = () => {
-    const { modal, setModal } = useContext(LoginContext)
+    const { modal, setModal } = useContext(LoginContext);
     const handleCloseModal = () => {
         setModal(prev => ({
             ...prev,
