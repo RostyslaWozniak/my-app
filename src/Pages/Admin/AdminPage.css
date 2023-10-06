@@ -49,3 +49,7 @@
     gap: 5px;
     cursor: pointer;   
 }
+.admin-container .active-button{
+    /* color: var(--accept-color); */
+    background-color: var(--accept-color);
+}

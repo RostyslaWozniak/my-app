@@ -1,7 +1,6 @@
 button{
     height: 30px;
     border-radius: var(--border-button);
-    /* background-color: var(--secondary-color); */
     background-color: transparent;
     border: 2px solid var(--white-color);
     color: var(--font-color);

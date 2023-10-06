@@ -5,12 +5,6 @@ import { AppContext } from "../../Components/AppContext";
 import ArrowBack from "../../Components/elements/GoBack/GoBack";
 
 const EditMenu = () => {
-    useEffect(() => {
-        window.scrollTo({
-            top: 150,
-            behavior: "smooth",
-        })
-    }, []);
     const { menuArray, handleAdminDEleteElementMenu, handleAdminEditElementMenu } = useContext(AppContext);      
     
     const item = menuArray.map(el => {

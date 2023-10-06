@@ -7,12 +7,6 @@ import { LoginContext } from '../../Components/LoginContext';
 import ArrowBack from '../../Components/elements/GoBack/GoBack';
 
 const AddOrEditArticle = ({type}) => {
-    useEffect(() => {
-        window.scrollTo({
-            top: 150,
-            behavior: "smooth",
-        })
-    }, []);
     const { 
         editMenuElement,
         setEditMenuElement, 
