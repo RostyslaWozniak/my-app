@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import { LoginContext } from '../../Components/LoginContext';
 import Input from '../../Components/elements/Input/Input';
@@ -7,6 +7,11 @@ import './LogIn.css';
 import { AppContext } from '../../Components/AppContext';
 
 const LogIn = () => {
+    useEffect(() => {
+        window.scrollTo({
+            top: 150,
+        })
+    }, []);
     const { loginInput, handleInputLogin, handleLoginSubmit, loginMessage } = useContext(LoginContext);
     const { setOrderArray } = useContext(AppContext);
     const { loginName, loginPassword } = loginInput;

@@ -1,9 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { AppContext } from "../../Components/AppContext";
 import { LoginContext } from '../../Components/LoginContext';
 import Button from '../../Components/elements/Button/Button';
 import './LogIn.css'
 const Logout = () => {
+    useEffect(() => {
+        window.scrollTo({
+            top: 150,
+        })
+    }, []);
     const { handleUserLogout } = useContext(LoginContext);
     const { setOrderArray } = useContext(AppContext);
     

@@ -1,10 +1,15 @@
-import React, { useContext} from 'react';
+import React, { useContext, useEffect} from 'react';
 import { LoginContext } from '../../Components/LoginContext';
 import Input from '../../Components/elements/Input/Input'
 import Button from '../../Components/elements/Button/Button';
 import './LogIn.css';
 
 const Registration = () => {
+    useEffect(() => {
+        window.scrollTo({
+            top: 150,
+        })
+    }, []);
     const { 
         handleInputLogin, 
         handleRegisterSubmit, 

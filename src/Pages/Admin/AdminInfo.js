@@ -1,12 +1,17 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect } from "react";
 import { AppContext } from "../../Components/AppContext";
 import ListElement from "../../Components/elements/ListElement/ListElement";
 import Button from "../../Components/elements/Button/Button";
 import { LoginContext } from "../../Components/LoginContext";
 
 const AdminInfo = () => {
+    useEffect(() => {
+        window.scrollTo({
+            top: 150,
+        })
+    }, []);
     const { menuArray, sendOrderArray, setSendOrderArray, setOrderArray } = useContext(AppContext);
-   const { registeredUsersMap, setRegisteredUsersMap } = useContext(LoginContext);
+    const { registeredUsersMap, setRegisteredUsersMap } = useContext(LoginContext);
     const setButtonCompletedOrder = (id, currentUser) => {
         setSendOrderArray(prevState => {
             return prevState.map(el => {

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { AppContext } from '../../Components/AppContext';
 import { LoginContext } from '../../Components/LoginContext';
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +8,11 @@ import ListElement from '../../Components/elements/ListElement/ListElement';
 import './Order.css'
 
 const OrderPage = () => {
+    useEffect(() => {
+        window.scrollTo({
+            top: 150,
+        })
+    }, []);
     const navigate = useNavigate()
     const { currentUser, registeredUsersMap, setRegisteredUsersMap, setModal } = useContext(LoginContext);
     const { 
@@ -19,7 +24,6 @@ const OrderPage = () => {
         menuArray, 
         orderArray, 
     } = useContext(AppContext);
-    
  //check is user logged and get status of order
     let isOrderSended = false;
     if(registeredUsersMap.has(currentUser)){

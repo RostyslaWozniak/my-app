@@ -1,10 +1,14 @@
 import Button from "../../Components/elements/Button/Button";
 import ListElement from "../../Components/elements/ListElement/ListElement";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AppContext } from "../../Components/AppContext";
-import { LoginContext } from "../../Components/LoginContext";
 
 const EditMenu = () => {
+    useEffect(() => {
+        window.scrollTo({
+            top: 150,
+        })
+    }, []);
     const { menuArray, handleAdminDEleteElementMenu, handleAdminEditElementMenu } = useContext(AppContext);      
     
     const item = menuArray.map(el => {

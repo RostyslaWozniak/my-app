@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { AppContext } from '../../Components/AppContext';
 import Button from '../../Components/elements/Button/Button';
 import Input from '../../Components/elements/Input/Input';
@@ -6,6 +6,11 @@ import './AdminPage.css'
 import { LoginContext } from '../../Components/LoginContext';
 
 const AddOrEditArticle = ({type}) => {
+    useEffect(() => {
+        window.scrollTo({
+            top: 150,
+        })
+    }, []);
     const { 
         editMenuElement,
         setEditMenuElement, 

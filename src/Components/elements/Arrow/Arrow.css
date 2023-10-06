@@ -1,0 +1,41 @@
+.arrow-container{
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    top: 10dvh;
+    left: 18dvw;
+    cursor: pointer;
+}
+.arrow{
+    height: 50px;
+    width: 4px;
+    background-color: var(--font-color);
+    border-radius: 10px;
+    position: absolute;
+    left: 30%; 
+}
+.arrow::before,
+.arrow::after{
+    content: "";
+    display: block;
+    width: 4px;
+    height: 20px;
+    background-color: var(--font-color);
+    border-radius: 10px;
+    position: absolute;
+}
+.arrow::before{
+    right: 6px;
+    transform: rotate(35deg)
+}
+.arrow::after{
+    left: 6px;
+    transform: rotate(-35deg)
+}
+.arrow-container p {
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    color: var(--font-color);
+    font-size: 1.5rem;
+}

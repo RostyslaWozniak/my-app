@@ -12,10 +12,12 @@ import MenuPage from '../Pages/Menu/MenuPage';
 import OrderPage from '../Pages/Order/OrderPage';
 import Registration from '../Pages/LogIn/Registration'
 import AdminInfo from '../Pages/Admin/AdminInfo';
+import Arrow from './elements/Arrow/Arrow';
 
 const Pages = () => {
     return ( 
         <>
+        <Arrow/>
         <BurgerNav/>
         <Routes>
             <Route path="/" element={<HomePage/>}/>

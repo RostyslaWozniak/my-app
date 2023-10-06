@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Button from '../../Components/elements/Button/Button';
 import ErrorPage from '../ErrorPage'
 import { LoginContext } from '../../Components/LoginContext';
@@ -6,9 +6,13 @@ import { Link, Outlet } from 'react-router-dom';
 import './AdminPage.css'
 
 const AdminPage = () => {
+    useEffect(() => {
+        window.scrollTo({
+            top: 150,
+        })
+    }, []);
     const { isAdminLogged, handleAdminLogout } = useContext(LoginContext);
-    console.log()
-    // if(!isAdminLogged) return <ErrorPage err="Nie masz dostępu do Admin"/>;
+    if(!isAdminLogged) return <ErrorPage err="Nie masz dostępu do Admin"/>;
     return (
         <div className="admin-container">
             <h1>Admin</h1>

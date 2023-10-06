@@ -1,8 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Modal from '../Components/elements/Modal/Modal'
 import { LoginContext } from '../Components/LoginContext';
 
 const HomePage = () => {
+    useEffect(() => {
+        window.scrollTo({
+            top: 150,
+        })
+    }, []);
     const { isAdminLogged, currentUser, registeredUsersMap } = useContext(LoginContext); 
     let user = registeredUsersMap.get(currentUser);
     const panell = registeredUsersMap.has(currentUser) 
