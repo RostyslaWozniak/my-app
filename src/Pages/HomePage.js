@@ -5,7 +5,8 @@ import { LoginContext } from '../Components/LoginContext';
 const HomePage = () => {
     useEffect(() => {
         window.scrollTo({
-            top: 150,
+            top: 0,
+            behavior: "smooth",
         })
     }, []);
     const { isAdminLogged, currentUser, registeredUsersMap } = useContext(LoginContext); 

@@ -10,6 +10,7 @@ const LogIn = () => {
     useEffect(() => {
         window.scrollTo({
             top: 150,
+            behavior: "smooth",
         })
     }, []);
     const { loginInput, handleInputLogin, handleLoginSubmit, loginMessage } = useContext(LoginContext);

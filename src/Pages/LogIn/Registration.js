@@ -3,11 +3,13 @@ import { LoginContext } from '../../Components/LoginContext';
 import Input from '../../Components/elements/Input/Input'
 import Button from '../../Components/elements/Button/Button';
 import './LogIn.css';
+import ArrowBack from '../../Components/elements/GoBack/GoBack';
 
 const Registration = () => {
     useEffect(() => {
         window.scrollTo({
             top: 150,
+            behavior: "smooth",
         })
     }, []);
     const { 
@@ -64,6 +66,7 @@ const Registration = () => {
                     className="large accept"
                 />
             </form>
+            <ArrowBack/>
         </>
     )
 }

@@ -5,6 +5,7 @@
     top: 10dvh;
     left: 18dvw;
     cursor: pointer;
+    opacity: .5;
 }
 .arrow{
     height: 50px;
@@ -12,7 +13,7 @@
     background-color: var(--font-color);
     border-radius: 10px;
     position: absolute;
-    left: 30%; 
+    left: 30%;    
 }
 .arrow::before,
 .arrow::after{

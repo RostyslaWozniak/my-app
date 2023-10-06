@@ -1,0 +1,44 @@
+.arrow-back-container{
+    width: 70px;
+    height: 50px;
+    position: absolute;
+    top: 50px;
+    left: 100px;
+    cursor: pointer;
+    opacity: .5; 
+}
+.arrow-back-container .arrow-back{
+    height: 4px;
+    width: 70px;
+    background-color: var(--font-color);
+    border-radius: 10px;
+    position: absolute;
+    top: 60%;
+}
+.arrow-back-container .arrow-back::before,
+.arrow-back-container .arrow-back::after{
+    content: "";
+    display: block;
+    width: 4px;
+    height: 20px;
+    background-color: var(--font-color);
+    border-radius: 10px;
+    position: absolute;
+}
+.arrow-back-container .arrow-back::before{
+    top: -3px;
+    left: 6px;
+    transform: rotate(-55deg)
+}
+.arrow-back-container  .arrow-back::after{
+    top: -13px;
+    left: 6px;
+    transform: rotate(55deg);
+}
+.arrow-back-container p{
+    top: 0;
+    right: 0;
+    position: absolute;
+    color: var(--font-color);
+    font-size: 1.5rem;
+}

@@ -9,6 +9,7 @@ const AdminPage = () => {
     useEffect(() => {
         window.scrollTo({
             top: 150,
+            behavior: "smooth",
         })
     }, []);
     const { isAdminLogged, handleAdminLogout } = useContext(LoginContext);

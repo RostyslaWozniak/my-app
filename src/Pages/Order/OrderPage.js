@@ -11,6 +11,7 @@ const OrderPage = () => {
     useEffect(() => {
         window.scrollTo({
             top: 150,
+            behavior: "smooth",
         })
     }, []);
     const navigate = useNavigate()

@@ -4,11 +4,13 @@ import Button from '../../Components/elements/Button/Button';
 import Input from '../../Components/elements/Input/Input';
 import './AdminPage.css'
 import { LoginContext } from '../../Components/LoginContext';
+import ArrowBack from '../../Components/elements/GoBack/GoBack';
 
 const AddOrEditArticle = ({type}) => {
     useEffect(() => {
         window.scrollTo({
             top: 150,
+            behavior: "smooth",
         })
     }, []);
     const { 
@@ -112,6 +114,7 @@ const AddOrEditArticle = ({type}) => {
                     className="large accept"
                 />
             </form> 
+            <ArrowBack/>
         </>
      );
 }

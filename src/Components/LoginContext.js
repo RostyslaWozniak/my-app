@@ -179,6 +179,7 @@ const handleLoginSubmit = (e, callback) => {
     //wylogowanie admina
     const handleAdminLogout = () => {
         setIsAdminLogged(!isAdminLogged);
+        setCurrentUser("User");
         navigate('/login');
         setModal(({
             isVisible: true,

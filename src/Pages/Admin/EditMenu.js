@@ -2,11 +2,13 @@ import Button from "../../Components/elements/Button/Button";
 import ListElement from "../../Components/elements/ListElement/ListElement";
 import { useContext, useEffect } from "react";
 import { AppContext } from "../../Components/AppContext";
+import ArrowBack from "../../Components/elements/GoBack/GoBack";
 
 const EditMenu = () => {
     useEffect(() => {
         window.scrollTo({
             top: 150,
+            behavior: "smooth",
         })
     }, []);
     const { menuArray, handleAdminDEleteElementMenu, handleAdminEditElementMenu } = useContext(AppContext);      
@@ -38,6 +40,7 @@ const EditMenu = () => {
         <>
             <h2>Edytuj menu</h2>
             {item}
+            <ArrowBack/>
         </>
     );
 }

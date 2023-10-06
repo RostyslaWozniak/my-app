@@ -8,6 +8,7 @@ const AdminInfo = () => {
     useEffect(() => {
         window.scrollTo({
             top: 150,
+            behavior: "smooth",
         })
     }, []);
     const { menuArray, sendOrderArray, setSendOrderArray, setOrderArray } = useContext(AppContext);

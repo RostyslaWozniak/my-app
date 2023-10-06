@@ -1,7 +1,9 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import AddOrEditArticle from '../Pages/Admin/AddOrEditArticle';
+import AdminInfo from '../Pages/Admin/AdminInfo';
 import AdminPage from '../Pages/Admin/AdminPage';
+import ScrollUp from './elements/ScrollUp/ScrollUp';
 import BurgerNav from './elements/BurgerNav/BurgerNav';
 import EditMenu from '../Pages/Admin/EditMenu'; 
 import ErrorPage from '../Pages/ErrorPage';
@@ -11,13 +13,11 @@ import Logout from '../Pages/LogIn/Logout';
 import MenuPage from '../Pages/Menu/MenuPage';
 import OrderPage from '../Pages/Order/OrderPage';
 import Registration from '../Pages/LogIn/Registration'
-import AdminInfo from '../Pages/Admin/AdminInfo';
-import Arrow from './elements/Arrow/Arrow';
 
 const Pages = () => {
     return ( 
         <>
-        <Arrow/>
+        <ScrollUp/>
         <BurgerNav/>
         <Routes>
             <Route path="/" element={<HomePage/>}/>

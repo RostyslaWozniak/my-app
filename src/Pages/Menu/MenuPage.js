@@ -9,6 +9,7 @@ const MenuPage = () => {
     useEffect(() => {
         window.scrollTo({
             top: 150,
+            behavior: "smooth",
         })
     }, []);
     const { currentUser, registeredUsersMap } = useContext(LoginContext);
