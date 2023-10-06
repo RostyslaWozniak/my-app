@@ -5,12 +5,18 @@ import './Modal.css'
 
 const Modal = () => {
     const { modal, setModal } = useContext(LoginContext);
-    const handleCloseModal = () => {
+    const [addClass, setAddClass] = useState(false);
+    const showAnimationAndCloseModal = () => { 
         setModal(prev => ({
             ...prev,
             isVisible: false,
             value: "",
         }))
+        setAddClass(false)
+    }
+    const handleCloseModal = () => {
+        setAddClass(true);
+        setTimeout(showAnimationAndCloseModal, 500)
     }
     const handleAcceptModal = () => {
         console.log('accept')
@@ -21,11 +27,12 @@ const Modal = () => {
     return ( 
         modal.isVisible ? (
         <div className="modal-container">
-            <div className="modal-content">
+            <div className={`modal-content ${addClass ? "add" : ""}`}>
                 <Button
                         name="x"
                         className="close-button small"
                         onClick={handleCloseModal}
+
                     />
                     <p>{modal.value}</p>
                 {

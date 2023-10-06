@@ -36,6 +36,9 @@
     right: 0;
     border: none;
 }
+.add{
+    animation: disappear .6s ease-in-out;
+}
 @keyframes appear {
     0%{
         opacity: 0;

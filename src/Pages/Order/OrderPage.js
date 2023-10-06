@@ -84,19 +84,19 @@ const OrderPage = () => {
         :
             <div className="result-container">
                 <h2>Do zapłaty: {totalPrice()}</h2>
-                    {isOrderSended
-                    ?
-                    <p>Twoje zamówienie jest przyęte</p>
-                    :
-                    <Button
-                    name="zamów "
-                    className="large accept"
-                    onClick={() => {
-                        if(isOrderSended)return console.log('returned', registeredUsersMap)
-                        handleOrderIsSend(currentUser, registeredUsersMap, totalPrice(), setModal, setRegisteredUsersMap)
-                    }}
-                    />
-                    }  
+                {isOrderSended
+                ?   
+                <h2>Twoje zamówienie zostało przyęte</h2>
+                :
+                <Button
+                name="zamów "
+                className="large accept"
+                onClick={() => {
+                    if(isOrderSended)return console.log('returned', registeredUsersMap)
+                    handleOrderIsSend(currentUser, registeredUsersMap, totalPrice(), setModal, setRegisteredUsersMap)
+                }}
+                />
+                }  
             </div>
         }
     </div>

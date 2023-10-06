@@ -22,7 +22,7 @@
     border-left: 8px solid var(--secondary-color);
     color: var(--font-color);
     text-decoration: none;
-    padding: 20px 30px;
+    padding: 20px;
     transition: .4s ease-in-out;
 }
 .navigation a:hover{
@@ -31,7 +31,7 @@
 .navigation a.active{
     border-left:8px solid var(--primary-color);
     color: var(--primary-color);
-    padding: 20px 30px;
+    padding: 20px;
 }
 .active-nav{
     transform: translateX(200px);
