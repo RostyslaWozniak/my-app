@@ -102,10 +102,12 @@ const OrderPage = () => {
     </div>
     return ( 
         <div className="order-container">
-            <h1>Twoje zamówienie {orderQuantity === 0 ? "" : `(${orderQuantity})`}</h1>
-            <ul>
-                {!orderQuantity ? <i>Brak zamówionych dań :(</i> : item}           
-            </ul>            
+            <div>
+                <h1>Twoje zamówienie {orderQuantity === 0 ? "" : `(${orderQuantity})`}</h1>
+                <ul>
+                    {!orderQuantity ? <i>Brak zamówionych dań :(</i> : item}           
+                </ul> 
+            </div>           
             {showResultOrMenuBtn}
         </div>
     );

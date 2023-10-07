@@ -116,13 +116,12 @@ export const LoginProvider = ({children}) => {
                 registerName: "",
                 registerPassword: "",
                 registerPassword2: "",
-            })
+            });
             setRegistrationMessage({
                 nameMessage: null,
                 passwordMessage: null,
                 passwordMessage: null,
-            })
-            alert(`${registerName} jesteś zalogowany/a `)
+            });
             setModal(({
                 isVisible: true,
                 value: `Ceść ${registerName}, rejestracja udana, jesteś zalogowany/a `,

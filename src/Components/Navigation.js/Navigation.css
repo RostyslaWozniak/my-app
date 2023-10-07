@@ -22,7 +22,7 @@
     border-left: 8px solid var(--secondary-color);
     color: var(--font-color);
     text-decoration: none;
-    padding: 20px;
+    padding: 5px 20px;
     transition: .4s ease-in-out;
 }
 .navigation a:hover{
