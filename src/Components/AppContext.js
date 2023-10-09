@@ -1,8 +1,11 @@
-import React, {  useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+
 export const AppContext = React.createContext();
 
 export const AppProvider = ({children}) => {
+    
     const navigate = useNavigate();
 //Add Admin Element Menu STATE
     const [addMenuElement, setAddMenuElement] = useState({
@@ -19,21 +22,7 @@ export const AppProvider = ({children}) => {
         category: "",
     });
 //Menu STATE
-    const [menuArray, setMenuArray] = useState([
-        {id: 1, name: "barszcz", price: 12.99, ingredients: "buraki, ziemniaki, smietana", category: "obiady",},
-        {id: 2, name: "pierogi", price: 18.99, ingredients: "ciasto, mięso z indyka, smietana", category: "obiady",},
-        {id: 3, name: "kolesław", price: 11.99, ingredients: "kapusta, marchewka, jabko", category: "sałatki",},
-        {id: 4, name: "piwerko", price: 17.99, ingredients: "z syropem", category: "napoje",},
-        {id: 5, name: "schabowy", price: 15.99, ingredients: "mięso wiepszowe", category: "obiady",},
-        {id: 6, name: "tort", price: 25.99, ingredients: "cukier woda", category: "desery",},
-        {id: 7, name: "mizeria", price: 12.99, ingredients: "ogórek, jogurt, koperek", category: "sałatki",},
-        {id: 8, name: "sok", price: 9.99, ingredients: "pomaranczowy", category: "napoje",},
-        {id: 9, name: "sangria", price: 32.99, ingredients: "z owocami", category: "napoje",},
-        {id: 10, name: "ciasto bananowe", price: 30.99, ingredients: "banany, smietana, cukier", category: "desery",},
-        {id: 11, name: "pierogi na słodko", price: 19.99, ingredients: "jagody, smietana, dżem", category: "desery",},
-        {id: 12, name: "woda", price: 0, ingredients: "woda nie gazowana lub gazowana", category: "napoje",},
-
-    ]);
+    const [menuArray, setMenuArray] = useState([]);
 //Order STATE
     const [orderArray, setOrderArray] = useState([])
 //SEND ORDER STATE
@@ -42,6 +31,24 @@ export const AppProvider = ({children}) => {
     const [isBurgerNavActive, setIsBurgerNavActive] = useState(false)
 
 ////////////////////////////////////////////////////////////
+const getMenuData = async () => {
+    const res = await axios.get("http://localhost:3001/api/menu_items");
+    const menu = res.data.map(el => {
+        const { _id, name, price, ingredients, category } = el;
+        return ({
+            id: _id,
+            name,
+            price,
+            ingredients,
+            category,
+        })
+    });
+    setMenuArray(menu)
+}
+
+useEffect(() => {
+    getMenuData();
+}, []);
 //CHECK QUANTITY OF ITEM
 const  getItemQuantity = (id) => {
     return orderArray.find(item => item.id === id)?.quantity || 0;
@@ -100,11 +107,13 @@ const getOrderItemsQuantity = () => {
         }
     }
 //ADMIN HANDLE ADD ITEM FORM
-    const handleSubmit = (e, type, setModal ) => {
+    const handleSubmit = async (e, type, setModal, postMenuItem ) => {
         e.preventDefault();
         if(type === "add"){
             const cloneArray = [...menuArray];
+            //destruction
             const { name, price, ingredients, category } = addMenuElement
+            //validation
             if(!name.length || !price || !ingredients.length || !category) {
                 return (
                     setModal(({
@@ -113,12 +122,16 @@ const getOrderItemsQuantity = () => {
                         buttons: false,
                     }))
             )}
+            //post to backend
+            const res = await axios.post("http://localhost:3001/api/menu_items", {name, price, ingredients, category});
+            const item = res.data
+            //post to front
             cloneArray.push({
-                id: Math.floor(Math.random() * new Date()),
-                name,
-                price,
-                ingredients,
-                category,
+                id: item._id,
+                name: item.name,
+                price: item.price,
+                ingredients: item.ingredients,
+                category: item.category,
             });
             setMenuArray(cloneArray);
             setModal(({
@@ -143,11 +156,14 @@ const getOrderItemsQuantity = () => {
                     buttons: false,
                 }))
             )}
-            const element = cloneArray.find(el => el.id === id);            
-            element.name = name;
-            element.price = price;
-            element.ingredients = ingredients;
-            element.category = category;
+            //send update to backend
+            const res = await axios.put(`http://localhost:3001/api/menu_items/${id}`, {name, price, ingredients, category});  
+            //update on frontend
+            const element = cloneArray.find(el => el.id === id);    
+            element.name = res.data.name;
+            element.price = res.data.price;
+            element.ingredients = res.data.ingredients;
+            element.category = res.data.category;
             setModal(({
                 isVisible: true,
                 value: "Artykuł został zmieniony",
@@ -171,8 +187,9 @@ const getOrderItemsQuantity = () => {
         })
     }
 // ADMIN HANDLE DELETE ITEM
-    const handleAdminDEleteElementMenu = (id) => {
+    const handleAdminDEleteElementMenu = async (id) => {
         const cloneArray = [...menuArray];
+        await axios.delete(`http://localhost:3001/api/menu_items/${id}`);
         const index = cloneArray.findIndex(el => el.id === id);
         cloneArray.splice(index, 1);
         setMenuArray(cloneArray)
@@ -225,6 +242,7 @@ const handleOrderIsSend = (userName, registeredUsersMap, totalPrice, setModal, s
             setIsBurgerNavActive,
             setOrderArray,
             setSendOrderArray,
+            setMenuArray,
         }}
         >
             {children}

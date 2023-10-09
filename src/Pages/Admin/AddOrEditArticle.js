@@ -5,6 +5,7 @@ import Input from '../../Components/elements/Input/Input';
 import './AdminPage.css'
 import { LoginContext } from '../../Components/LoginContext';
 import ArrowBack from '../../Components/elements/GoBack/GoBack';
+import { GetDataContext } from '../../Context/GetDataContext';
 
 const AddOrEditArticle = ({type}) => {
     const { 

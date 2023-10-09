@@ -13,7 +13,6 @@ const AdminPage = () => {
         })
     }, []);
     const location = useLocation();
-    console.log(location.pathname)
     const { isAdminLogged, handleAdminLogout } = useContext(LoginContext);
     if(!isAdminLogged) return <ErrorPage err="Nie masz dostępu do Admin"/>;
     const setClassAddBtn = location.pathname === "/admin/add" ? "accept" : null;
