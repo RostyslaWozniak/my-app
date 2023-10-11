@@ -1,11 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { AppContext } from '../../Components/AppContext';
 import Button from '../../Components/elements/Button/Button';
 import Input from '../../Components/elements/Input/Input';
 import './AdminPage.css'
 import { LoginContext } from '../../Components/LoginContext';
 import ArrowBack from '../../Components/elements/GoBack/GoBack';
-import { GetDataContext } from '../../Context/GetDataContext';
 
 const AddOrEditArticle = ({type}) => {
     const { 

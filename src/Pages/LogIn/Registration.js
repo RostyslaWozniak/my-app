@@ -10,13 +10,19 @@ const Registration = () => {
         window.scrollTo({
             top: 150,
             behavior: "smooth",
-        })
+        });
+        setRegistrationMessage({
+            nameMessage: null,
+            passwordMessage: null,
+            password2Message: null,
+        });
     }, []);
     const { 
         handleInputLogin, 
         handleRegisterSubmit, 
         registrationMessage,
         registerInput,
+        setRegistrationMessage,
     } = useContext(LoginContext);
         const { name, password, password2 } = registerInput;
         const { nameMessage, passwordMessage, password2Message } = registrationMessage;
@@ -49,6 +55,7 @@ const Registration = () => {
             message: password2Message,
         },
     ];
+    
     const showInputs = formInputsArray.map((input, id) => (
         <Input
             key={id}

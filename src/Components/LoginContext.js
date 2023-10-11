@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Error from '../Pages/ErrorPage'
+import axios from 'axios';
 
 export const LoginContext = React.createContext();
 //dane admina
@@ -31,28 +31,35 @@ export const LoginProvider = ({children}) => {
         password2Message: null,
     });
  //REGISTERED USERS STATE
-    const [ registeredUsersMap, setRegisteredUsersMap ] = useState(new Map([
-        ["Rostik", {
-            password: "12345",
-            isUserLogged: false,
-            orderArray: [],
-            isOrderSended: false,
-        }],
-        ["admin", {
-            password: "123",
-            isUserLogged: false,
-            orderArray: [],
-            isOrderSended: false,
-        }],
-    ]));
+    const [ registeredUsersMap, setRegisteredUsersMap ] = useState(new Map());
  //user name STATE
  const [ currentUser, setCurrentUser ] = useState("User");
  //MODAL STATE
  const [modal, setModal] = useState({
     isVisible: false,
-    value: "",
+    value: null,
     buttons: false, 
 });
+//Get regirtrate users
+    const getUsersData = async () => {
+        const res = await axios.get('http://localhost:3001/api/user')
+        const users = [...res.data]
+        users.forEach(user => {
+            setRegisteredUsersMap(registeredUsersMap.set(
+                      user.name, {
+                        id: user._id,
+                        password: user.password,
+                        isUserLogged: user.isUserLogged,
+                        orderArray: user.orderArray,
+                        isOrderSended: user.isOrderSended,
+                      }  
+                )) 
+        });
+        console.log(registeredUsersMap)
+    }
+    useEffect(() => {
+        getUsersData();
+    }, [])
 //LOGIN AND REGISTRATION INPUT HANDLE
     const handleInputLogin = (e, type) => {
         switch(type){
@@ -64,7 +71,7 @@ export const LoginProvider = ({children}) => {
         }
     }
  //REGISTRATION HANDLE FORM 
-    const handleRegisterSubmit = (e) => {
+    const handleRegisterSubmit = async (e) => {
         e.preventDefault()
         const { registerName, registerPassword, registerPassword2 } = registerInput;
         let isNameValid = false;
@@ -77,13 +84,13 @@ export const LoginProvider = ({children}) => {
         setMessage("nameMessage", null);
         setMessage("passwordMessage", null);
         setMessage("password2Message", null);
-
-        if(registerName === undefined || registerName.length < 3){
+        if(!registerName.length || registerName.length < 3){
             setMessage("nameMessage", "Imię powinno mieć min 3 znaki")
         }else{
             if(registeredUsersMap.size > 0){
                 if(registeredUsersMap.has(registerName)){
-                    setMessage("nameMessage", "Takie imię już istnieje")
+                    setMessage("nameMessage", "Takie imię już istnieje");
+                    isNameValid = false;
                 }else {
                     isNameValid = true;        
                 }
@@ -91,36 +98,45 @@ export const LoginProvider = ({children}) => {
                 isNameValid = true;   
             }    
         }
-        if(registerPassword === undefined || registerPassword < 5){
-            setMessage("passwordMessage", "Hasło powinno mieć min 5 znaków")
+        if(!registerPassword.length || registerPassword.length < 5 ){ 
+            setMessage("passwordMessage", "Hasło powinno mieć min 5 znaków");
+            isPasswordValid = false;
         }else {
-            isPasswordValid = true
+            isPasswordValid = true;
+            console.log(registerPassword)
         }
         if(registerPassword !== registerPassword2){
-            setMessage("password2Message", "Hasła nie są identyczne")
+            setMessage("password2Message", "Hasła nie są identyczne");
+            isPassword2Valid = false;
         }else {
-            isPassword2Valid = true  
+            isPassword2Valid = true; 
         }
 
         if(isNameValid && isPasswordValid && isPassword2Valid){
-            setCurrentUser(registerName)
+            setCurrentUser(registerName);
+            //add registration data to backend
+            const res = await axios.post('http://localhost:3001/api/user', {
+                name: registerName,
+                password: registerPassword,
+                isUserLogged: true,
+                orderArray: [],
+                isOrderSended: false, 
+            });
+            //update registration data on frontend
+            const { name, _id, password, isUserLogged, orderArray, isOrderSended} = res.data
             setRegisteredUsersMap(registeredUsersMap.set(
-                registerName, {
-                    password: registerPassword,
-                    isUserLogged: true,
-                    orderArray: [],
-                    isOrderSended: false,
+                name, {
+                    id: _id,
+                    password,
+                    isUserLogged,
+                    orderArray,
+                    isOrderSended,
                 }))
             navigate('/');
             setRegisterInput({
                 registerName: "",
                 registerPassword: "",
                 registerPassword2: "",
-            });
-            setRegistrationMessage({
-                nameMessage: null,
-                passwordMessage: null,
-                passwordMessage: null,
             });
             setModal(({
                 isVisible: true,
@@ -187,18 +203,28 @@ const handleLoginSubmit = (e, callback) => {
         }))
     }
     // wylogowanie użytkownika
-        const handleUserLogout = () => {
+        const handleUserLogout = async () => {
+            const id = registeredUsersMap.get(currentUser).id;
+            // update descriptions on backand
+            const res = await axios.patch(`http://localhost:3001/api/user/${id}`, {
+                isUserLogged: false,
+            });
+            const { name, _id, isUserLogged, orderArray, isOrderSended} = res.data
+            setRegisteredUsersMap(registeredUsersMap.set(
+                name, {
+                    id: _id,
+                    isUserLogged,
+                    orderArray, 
+                    isOrderSended,
+                }));
             setModal(({
                 isVisible: true,
                 value: 'Jesteś wylogowany/a',
                 buttons: false,
             }))
-            setRegisteredUsersMap(prevState => registeredUsersMap.set(currentUser, {
-                ...prevState.get(currentUser),
-                isUserLogged: false,
-            }))
             setCurrentUser("User");
             navigate('/login');
+            console.log(registeredUsersMap);
         }
     return(
         <LoginContext.Provider value={{
@@ -217,6 +243,7 @@ const handleLoginSubmit = (e, callback) => {
             handleUserLogout,
             setModal,
             setRegisteredUsersMap,
+            setRegistrationMessage,
         }}>
             {children}
         </LoginContext.Provider>

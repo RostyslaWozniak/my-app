@@ -194,31 +194,6 @@ const getOrderItemsQuantity = () => {
         cloneArray.splice(index, 1);
         setMenuArray(cloneArray)
     }
-
-//Send ORDER
-const handleOrderIsSend = (userName, registeredUsersMap, totalPrice, setModal, setRegisteredUsersMap) => {
-    if(!registeredUsersMap.has(userName)) {
-        return (setModal({
-            isVisible: true,
-            value: "Musisz zalogować się",
-            buttons: false,
-        }))
-        
-    } 
-    setRegisteredUsersMap(prevState => registeredUsersMap.set(userName, {
-        ...prevState.get(userName),
-        isOrderSended: true,
-    }))
-        setModal(({
-            isVisible: true,
-            value: `${userName}, twoje zamówienie zostało przyjęte`,
-            buttons: false,
-        }))
-        const id = new Date().toString();
-        const cloneArr = [...orderArray];
-        const date = new Date().toLocaleTimeString();
-        setSendOrderArray(prevState => ( [...prevState, { id, isOrderCompleted: false, userName, totalPrice, date, order: [...cloneArr] }]));
-}
     return(
         <AppContext.Provider
          value={{
@@ -234,7 +209,6 @@ const handleOrderIsSend = (userName, registeredUsersMap, totalPrice, setModal, s
             handleAdminDEleteElementMenu,
             handleAdminEditElementMenu,
             handleInputValue,
-            handleOrderIsSend,
             handleSubmit,
             increaseItemQuantity,
             setAddMenuElement,

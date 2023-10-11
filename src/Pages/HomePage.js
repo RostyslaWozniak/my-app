@@ -1,7 +1,5 @@
 import React, { useContext, useEffect } from 'react';
 import { LoginContext } from '../Components/LoginContext';
-import { GetDataContext } from '../Context/GetDataContext';
-import { AppContext } from '../Components/AppContext';
 
 const HomePage = () => {
     useEffect(() => {

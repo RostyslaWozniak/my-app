@@ -1,7 +1,6 @@
 import { BrowserRouter as Router } from "react-router-dom";
 import { AppProvider } from "./AppContext";
 import { LoginProvider } from "./LoginContext";
-import { DataProvider } from "../Context/GetDataContext";
 import Header from "./Header/Header";
 import Navigation from "./Navigation.js/Navigation";
 import Pages from "./Pages";
@@ -15,7 +14,6 @@ function App() {
     <Router>
       <AppProvider>
         <LoginProvider>
-          <DataProvider>
             <Header/>
             <div className="body">
               <Navigation/>
@@ -25,7 +23,6 @@ function App() {
               <Modal/>
             </div>
             <Footer/>
-          </DataProvider>
         </LoginProvider>
       </AppProvider>
     </Router>
