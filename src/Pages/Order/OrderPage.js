@@ -25,13 +25,10 @@ const OrderPage = () => {
         increaseItemQuantity,
         menuArray, 
         orderArray, 
+        setOrderArray,
     } = useContext(AppContext);
  //check is user logged and get status of order
-    const isOrderSended = registeredUsersMap.get(currentUser)?.isOrderSended || false;
-    // registeredUsersMap.get(currentUser).orderArray = [...orderArray];
-  
-       
-
+    const isOrderSended = registeredUsersMap.get(currentUser)?.isOrderSended || false; 
  //get quantity of order items in cart
     const orderQuantity = getOrderItemsQuantity();
     
@@ -107,26 +104,21 @@ const OrderPage = () => {
                 isVisible: true,
                 value: "Musisz zalogować się",
                 buttons: false,
-            }))
-            
+            }));
         } 
         //Send order to backend
         const id = registeredUsersMap.get(currentUser).id;
             // update descriptions on backand
-            const res = await axios.put(`http://localhost:3001/api/user/${id}`, {
-                descriptions: {
+            const res = await axios.patch(`http://localhost:3001/api/user/${id}`, {
                     orderArray,
                     isOrderSended: true,
-                }
             });
-            const { name, descriptions, _id} = res.data
+            const { name, _id, isOrderSended, orderArray} = res.data
             setRegisteredUsersMap(registeredUsersMap.set(
                 name, {
                     id: _id,
-                    password: descriptions.password,
-                    isUserLogged: descriptions.isUserLogged,
-                    orderArray: descriptions.orderArray,
-                    isOrderSended: descriptions.isOrderSended,
+                    orderArray,
+                    isOrderSended,
                 }));
                 console.log(registeredUsersMap)
 ///////////////////////////////////////

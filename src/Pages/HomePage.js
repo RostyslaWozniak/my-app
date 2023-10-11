@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { LoginContext } from '../Components/LoginContext';
+import { AppContext } from '../Components/AppContext';
 
 const HomePage = () => {
     useEffect(() => {
@@ -10,8 +11,10 @@ const HomePage = () => {
         })
     }, []);
     const { isAdminLogged, currentUser, registeredUsersMap } = useContext(LoginContext); 
+    const { orderArray, setOrderArray } = useContext(AppContext);
     
     let user = registeredUsersMap.get(currentUser);
+   
     const panell = registeredUsersMap.has(currentUser) 
     ?
     <div>

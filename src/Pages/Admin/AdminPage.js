@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import Button from '../../Components/elements/Button/Button';
 import ErrorPage from '../ErrorPage'
 import { LoginContext } from '../../Components/LoginContext';
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import './AdminPage.css'
 
 const AdminPage = () => {
@@ -12,11 +12,23 @@ const AdminPage = () => {
             behavior: "smooth",
         })
     }, []);
+    const navigate = useNavigate();
     const location = useLocation();
-    const { isAdminLogged, handleAdminLogout } = useContext(LoginContext);
+    const { isAdminLogged, setIsAdminLogged, setModal } = useContext(LoginContext);
     if(!isAdminLogged) return <ErrorPage err="Nie masz dostępu do Admin"/>;
     const setClassAddBtn = location.pathname === "/admin/add" ? "accept" : null;
     const setClassEditBtn = location.pathname === "/admin/menu" ? "accept" : null;
+
+    //wylogowanie admina
+    const handleAdminLogout = () => {
+        setIsAdminLogged(!isAdminLogged);
+        navigate('/login');
+        setModal(({
+            isVisible: true,
+            value: 'Jesteś wylogowany/a',
+            buttons: false,
+        }))
+    }
     return (
         <div className="admin-container">
             <h1>Admin</h1>

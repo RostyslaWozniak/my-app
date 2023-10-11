@@ -8,11 +8,9 @@ const Navigation = () => {
 
     const { getOrderItemsQuantity, isBurgerNavActive } = useContext(AppContext);
     const { isAdminLogged, currentUser, registeredUsersMap } = useContext(LoginContext); 
- // check is user logged and get status of order
-    let userStatus = false;
-    if(registeredUsersMap.has(currentUser)){
-        userStatus = registeredUsersMap.get(currentUser).isUserLogged
-    }
+ 
+    const userStatus = registeredUsersMap.get(currentUser)?.isUserLogged
+    
  //get quantity of order items in cart   
     const orderQuantity = getOrderItemsQuantity();
     const user = userStatus ? {name: "Logout", path: "/logout"} : {name: "Login", path: "/login"}
