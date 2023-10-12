@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import Button from '../../Components/elements/Button/Button';
 import ErrorPage from '../ErrorPage'
-import { LoginContext } from '../../Components/LoginContext';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import './AdminPage.css'
+import { AppContext } from '../../Context/AppContext';
 
 const AdminPage = () => {
     useEffect(() => {
@@ -14,7 +14,7 @@ const AdminPage = () => {
     }, []);
     const navigate = useNavigate();
     const location = useLocation();
-    const { isAdminLogged, setIsAdminLogged, setModal } = useContext(LoginContext);
+    const { isAdminLogged, setIsAdminLogged, setModal } = useContext(AppContext);
     if(!isAdminLogged) return <ErrorPage err="Nie masz dostępu do Admin"/>;
     const setClassAddBtn = location.pathname === "/admin/add" ? "accept" : null;
     const setClassEditBtn = location.pathname === "/admin/menu" ? "accept" : null;

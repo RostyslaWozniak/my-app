@@ -1,12 +1,36 @@
 import Button from "../../Components/elements/Button/Button";
 import ListElement from "../../Components/elements/ListElement/ListElement";
 import { useContext, useEffect } from "react";
-import { AppContext } from "../../Components/AppContext";
+import { AppContext } from "../../Context/AppContext";
 import ArrowBack from "../../Components/elements/GoBack/GoBack";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const EditMenu = () => {
-    const { menuArray, handleAdminDEleteElementMenu, handleAdminEditElementMenu } = useContext(AppContext);      
-    
+    const { menuArray, setMenuArray, setEditMenuElement } = useContext(AppContext);  
+    const navigate = useNavigate(); 
+    // ADMIN HANDLE EDIT ITEM FORM
+    const handleAdminEditElementMenu = (id) => {
+        const cloneArray = [...menuArray];
+        const element = cloneArray.find(el => el.id === id)
+        navigate("/admin/menu/edit")
+        const { name, price, ingredients, category } = element;
+        setEditMenuElement({
+            id: element.id,
+            name,
+            price,
+            ingredients,
+            category,
+        })
+    }   
+    // ADMIN HANDLE DELETE ITEM
+    const handleAdminDEleteElementMenu = async (id) => {
+        const cloneArray = [...menuArray];
+        await axios.delete(`http://localhost:3001/api/menu_items/${id}`);
+        const index = cloneArray.findIndex(el => el.id === id);
+        cloneArray.splice(index, 1);
+        setMenuArray(cloneArray)
+    }
     const item = menuArray.map(el => {
         const buttons = 
         <div className="edit-buttons">

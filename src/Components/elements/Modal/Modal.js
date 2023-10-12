@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
 import Button from '../Button/Button'
-import { LoginContext } from '../../LoginContext';
 import './Modal.css'
+import { AppContext } from '../../../Context/AppContext';
 
 const Modal = () => {
-    const { modal, setModal } = useContext(LoginContext);
+    const { modal, setModal } = useContext(AppContext);
     const [addClass, setAddClass] = useState(false);
     const showAnimationAndCloseModal = () => { 
         setModal(prev => ({

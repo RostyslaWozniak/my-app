@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { AppContext } from "../../Components/AppContext";
-import { LoginContext } from '../../Components/LoginContext';
+import { AppContext } from "../../Context/AppContext";
 import Button from '../../Components/elements/Button/Button';
 import './LogIn.css'
 import { useNavigate } from "react-router-dom";
@@ -21,8 +20,8 @@ const Logout = () => {
         setCurrentUser,
         setRegisteredUsersMap,
         registeredUsersMap,
-        } = useContext(LoginContext);
-    const { setOrderArray } = useContext(AppContext);
+        setOrderArray,
+        } = useContext(AppContext);
     const navigate = useNavigate();
 // wylogowanie użytkownika
         const handleUserLogout = async () => {

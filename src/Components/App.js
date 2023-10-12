@@ -1,6 +1,5 @@
 import { BrowserRouter as Router } from "react-router-dom";
-import { AppProvider } from "./AppContext";
-import { LoginProvider } from "./LoginContext";
+import { AppProvider } from "../Context/AppContext";
 import Header from "./Header/Header";
 import Navigation from "./Navigation.js/Navigation";
 import Pages from "./Pages";
@@ -13,17 +12,15 @@ function App() {
   return (
     <Router>
       <AppProvider>
-        <LoginProvider>
-            <Header/>
-            <div className="body">
-              <Navigation/>
-              <div className="page">
-                <Pages/>
-              </div>
-              <Modal/>
-            </div>
-            <Footer/>
-        </LoginProvider>
+        <Header/>
+        <div className="body">
+          <Navigation/>
+          <div className="page">
+            <Pages/>
+          </div>
+          <Modal/>
+        </div>
+        <Footer/>
       </AppProvider>
     </Router>
   );

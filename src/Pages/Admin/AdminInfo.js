@@ -1,8 +1,7 @@
 import { useContext, useEffect } from "react";
-import { AppContext } from "../../Components/AppContext";
+import { AppContext } from "../../Context/AppContext";
 import ListElement from "../../Components/elements/ListElement/ListElement";
 import Button from "../../Components/elements/Button/Button";
-import { LoginContext } from "../../Components/LoginContext";
 
 const AdminInfo = () => {
     useEffect(() => {
@@ -11,8 +10,14 @@ const AdminInfo = () => {
             behavior: "smooth",
         })
     }, []);
-    const { menuArray, sendOrderArray, setSendOrderArray, setOrderArray } = useContext(AppContext);
-    const { registeredUsersMap, setRegisteredUsersMap } = useContext(LoginContext);
+    const { 
+        menuArray, 
+        registeredUsersMap,
+        sendOrderArray, 
+        setSendOrderArray, 
+        setOrderArray,
+        setRegisteredUsersMap
+    } = useContext(AppContext);
     const setButtonCompletedOrder = (id, currentUser) => {
         setSendOrderArray(prevState => {
             return prevState.map(el => {

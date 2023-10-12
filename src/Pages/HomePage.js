@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { LoginContext } from '../Components/LoginContext';
-import { AppContext } from '../Components/AppContext';
+import { AppContext } from '../Context/AppContext';
 
 const HomePage = () => {
     useEffect(() => {
@@ -10,8 +9,7 @@ const HomePage = () => {
             behavior: "smooth",
         })
     }, []);
-    const { isAdminLogged, currentUser, registeredUsersMap } = useContext(LoginContext); 
-    const { orderArray, setOrderArray } = useContext(AppContext);
+    const { isAdminLogged, currentUser, registeredUsersMap } = useContext(AppContext); 
     
     let user = registeredUsersMap.get(currentUser);
    

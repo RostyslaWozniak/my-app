@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import Button from '../../Components/elements/Button/Button';
 import ListElement from '../../Components/elements/ListElement/ListElement';
-import { AppContext } from '../../Components/AppContext';
-import { LoginContext } from '../../Components/LoginContext';
+import { AppContext } from '../../Context/AppContext';
 import './MenuPage.css'
 
 const MenuPage = () => {
@@ -12,13 +11,14 @@ const MenuPage = () => {
             behavior: "smooth",
         })
     }, []);
-    const { currentUser, registeredUsersMap } = useContext(LoginContext);
     const { 
+        currentUser, 
         menuArray, 
         orderArray, 
         getItemQuantity, 
         increaseItemQuantity, 
         decreaseItemQuantity,
+        registeredUsersMap,
     } = useContext(AppContext);
  //handle scroll
     const lunchRef = useRef(null);

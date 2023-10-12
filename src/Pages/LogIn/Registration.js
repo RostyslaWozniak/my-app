@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState} from 'react';
-import { LoginContext } from '../../Components/LoginContext';
+import { AppContext } from '../../Context/AppContext';
 import Input from '../../Components/elements/Input/Input'
 import Button from '../../Components/elements/Button/Button';
 import './LogIn.css';
@@ -36,7 +36,7 @@ const Registration = () => {
         setCurrentUser,
         setModal,
         setRegisteredUsersMap,
-    } = useContext(LoginContext);
+    } = useContext(AppContext);
         const { name, password, password2 } = registerInput;
         const { nameMessage, passwordMessage, password2Message } = registrationMessage;
         const handleInputLogin = e => {

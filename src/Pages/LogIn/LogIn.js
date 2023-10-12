@@ -1,12 +1,10 @@
 import React, { useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
-import { LoginContext } from '../../Components/LoginContext';
 import axios from 'axios';
 import Input from '../../Components/elements/Input/Input';
 import Button from '../../Components/elements/Button/Button';
 import './LogIn.css';
-import { AppContext } from '../../Components/AppContext';
-import Modal from '../../Components/elements/Modal/Modal';
+import { AppContext } from '../../Context/AppContext';
 
 const LogIn = () => {
     useEffect(() => {
@@ -25,9 +23,9 @@ const LogIn = () => {
         setLoginInput,
         setLoginMessage, 
         setModal,
+        setOrderArray,
         setRegisteredUsersMap,
-     } = useContext(LoginContext);
-    const { setOrderArray } = useContext(AppContext);
+     } = useContext(AppContext);
     const navigate = useNavigate();
     const { loginName, loginPassword } = loginInput;
 //LOGIN INPUT HANDLE

@@ -1,13 +1,18 @@
 import React, { useContext } from 'react';
-import { AppContext } from '../AppContext';
-import { LoginContext } from '../LoginContext';
+import { AppContext } from '../../Context/AppContext';
 import { NavLink } from 'react-router-dom';
 import "./Navigation.css"
 
 const Navigation = () => {
 
-    const { getOrderItemsQuantity, isBurgerNavActive } = useContext(AppContext);
-    const { isAdminLogged, currentUser, registeredUsersMap } = useContext(LoginContext); 
+    const { 
+        currentUser, 
+        getOrderItemsQuantity, 
+        isAdminLogged, 
+        isBurgerNavActive, 
+        registeredUsersMap 
+    } = useContext(AppContext);
+
  
     const userStatus = registeredUsersMap.get(currentUser)?.isUserLogged
     

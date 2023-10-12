@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { AppContext } from '../../Components/AppContext';
-import { LoginContext } from '../../Components/LoginContext';
+import { AppContext } from '../../Context/AppContext';
 import { useNavigate } from 'react-router-dom';
 import {formatCurency} from '../../tools/formatCurency'
 import Button from '../../Components/elements/Button/Button';
@@ -16,8 +15,8 @@ const OrderPage = () => {
         })
     }, []);
     const navigate = useNavigate()
-    const { currentUser, registeredUsersMap, setRegisteredUsersMap, setModal } = useContext(LoginContext);
     const { 
+        currentUser, registeredUsersMap, setRegisteredUsersMap, setModal,
         decreaseItemQuantity,
         getItemQuantity,
         getOrderItemsQuantity, 
@@ -121,7 +120,6 @@ const OrderPage = () => {
                     isOrderSended,
                 }));
                 console.log(registeredUsersMap)
-///////////////////////////////////////
        
             setModal(({
                 isVisible: true,
