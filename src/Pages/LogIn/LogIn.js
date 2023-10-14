@@ -70,7 +70,6 @@ const LogIn = () => {
         //Admin login
         if(registeredUsersMap.get(admin.name).password === loginPassword){
             const id = registeredUsersMap.get(admin.name).id;
-            console.log(id)
             const res = await axios.patch(`http://localhost:3001/api/user/${id}`, {
                 isUserLogged: true, 
             });

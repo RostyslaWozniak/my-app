@@ -36,7 +36,7 @@ const AdminInfo = () => {
                 });
             });
         }catch(err){
-            console.log(err)
+            console.log(err.message)
         }
         // send current users data to backend
         
@@ -85,14 +85,18 @@ const AdminInfo = () => {
     )});
     const handleDeleteCompletedOrder = async () => { 
         const elementToDelete = sendedOrderToAdmin.filter(order => order.isOrderCompleted);
-        try{
-            const res = await axios.delete(`http://localhost:3001/api/order/${elementToDelete.id}`)  
-
-        }catch(err){
-            console.log(err.message)
-        }
-        const cloneArray = [...sendedOrderToAdmin];       
-        setSendedOrderToAdmin(cloneArray.filter(el => !el.isOrderCompleted));
+        const id = elementToDelete.map(async el =>{
+            try{
+                await axios.delete(`http://localhost:3001/api/order/${el.id}`)  
+                let cloneArray = [...sendedOrderToAdmin];  
+                cloneArray = cloneArray.filter(order => order.id !== el.id);   
+            setSendedOrderToAdmin(cloneArray);
+            }catch(err){
+                console.log(err.message)
+            }
+        });
+        
+        
     }
     return (    
         sendedOrderToAdmin.length === 0

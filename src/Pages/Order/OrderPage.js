@@ -112,8 +112,7 @@ const OrderPage = () => {
         setCurrentUser(prev => ({
             ...prev,
             isOrderSended: res.data.isOrderSended,
-        }))
-        console.log(currentUser);
+        }));
     }
     return ( 
         <div className="order-container">
