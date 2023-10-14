@@ -4,6 +4,7 @@ import ErrorPage from '../ErrorPage'
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import './AdminPage.css'
 import { AppContext } from '../../Context/AppContext';
+import axios from 'axios';
 
 const AdminPage = () => {
     useEffect(() => {
@@ -14,14 +15,20 @@ const AdminPage = () => {
     }, []);
     const navigate = useNavigate();
     const location = useLocation();
-    const { isAdminLogged, setIsAdminLogged, setModal } = useContext(AppContext);
-    if(!isAdminLogged) return <ErrorPage err="Nie masz dostępu do Admin"/>;
+    const { isAdminLogged, setIsAdminLogged, setModal, currentUser, setCurrentUser } = useContext(AppContext);
+    if( !localStorage.getItem("admin") ) return navigate('/login');
     const setClassAddBtn = location.pathname === "/admin/add" ? "accept" : null;
     const setClassEditBtn = location.pathname === "/admin/menu" ? "accept" : null;
 
     //wylogowanie admina
-    const handleAdminLogout = () => {
+    const handleAdminLogout = async () => {
+        const id = currentUser.id
+        const res = await axios.patch(`http://localhost:3001/api/user/${id}`, {
+                isUserLogged: false,
+            });
         setIsAdminLogged(!isAdminLogged);
+        setCurrentUser(null)
+        localStorage.clear();
         navigate('/login');
         setModal(({
             isVisible: true,

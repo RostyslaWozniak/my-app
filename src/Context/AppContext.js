@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+import {formatCurency} from '../tools/formatCurency';
 export const AppContext = React.createContext();
 
 export const AppProvider = ({children}) => {
@@ -11,23 +13,22 @@ export const AppProvider = ({children}) => {
  const [ loginMessage, setLoginMessage] = useState(null);
  //REGISTERED USERS STATE
 const [ registeredUsersMap, setRegisteredUsersMap ] = useState(new Map());
- //user name STATE
- const [ currentUser, setCurrentUser ] = useState("User");
+ //user STATE
+ const [ currentUser, setCurrentUser ] = useState(null);
  //MODAL STATE
  const [modal, setModal] = useState({
     isVisible: false,
     value: null,
     buttons: false, 
-});  
-    
-//Add Admin Element Menu STATE
+});     
+//Add INPUT Admin Element Menu STATE
     const [addMenuElement, setAddMenuElement] = useState({
         name: "",
         price: "",
         ingredients: "",
         category: "",
     })
-//Edit Admin Element Menu SATE
+//Edit INPUT Admin Element Menu SATE
     const [editMenuElement, setEditMenuElement] = useState({
         name: "",
         price: "",
@@ -39,12 +40,49 @@ const [ registeredUsersMap, setRegisteredUsersMap ] = useState(new Map());
 //Order STATE
     const [orderArray, setOrderArray] = useState([])
 //SEND ORDER STATE
-    const [sendOrderArray, setSendOrderArray] = useState([]);
+    const [sendedOrderToAdmin, setSendedOrderToAdmin] = useState([]);
 //BurgerNav STATE
-    const [isBurgerNavActive, setIsBurgerNavActive] = useState(false)
+    const [isBurgerNavActive, setIsBurgerNavActive] = useState(false);
 
+    const navigate = useNavigate();
+    const admin = {name: "admin", password: "123"};
+    
 ////////////////////////////////////////////////////////////
-
+const getCurrentUserData = async () => {
+    if(localStorage.getItem("admin")){
+        const id = localStorage?.getItem("admin");
+        const res = await axios.get(`http://localhost:3001/api/user/${id}`);
+        const { _id, name, isUserLogged, order, isOrderSended} = res.data;
+        //current user
+        setIsAdminLogged(true);
+        setCurrentUser({
+            id: _id,
+            name,
+            isUserLogged,
+            order,
+            isOrderSended,
+        });
+    }
+    if(!localStorage.getItem("user"))return;
+    const id = localStorage?.getItem("user");
+    try{
+        const res = await axios.get(`http://localhost:3001/api/user/${id}`);
+        const { _id, name, isUserLogged, order, isOrderSended} = res.data;
+        //current user
+        setCurrentUser({
+            id: _id,
+            name,
+            isUserLogged,
+            order,
+            isOrderSended,
+        });
+        //items in users order
+        setOrderArray(order);
+    } catch(err){
+        navigate("/login")
+        localStorage.clear();
+    }    
+}
 //Get registrate users
     const getUsersData = async () => {
         const res = await axios.get('http://localhost:3001/api/user')
@@ -54,9 +92,6 @@ const [ registeredUsersMap, setRegisteredUsersMap ] = useState(new Map());
                       user.name, {
                         id: user._id,
                         password: user.password,
-                        isUserLogged: user.isUserLogged,
-                        orderArray: user.orderArray,
-                        isOrderSended: user.isOrderSended,
                       }  
                 )) 
         });
@@ -73,15 +108,43 @@ const [ registeredUsersMap, setRegisteredUsersMap ] = useState(new Map());
                 category,
             });
         });
-        setMenuArray(menu)
+        setMenuArray(menu);
     }
     useEffect(() => {
         getUsersData();
         getMenuData();
-
+        getCurrentUserData();
+    }, []);
+/////////////////////////////
+    const updateUsersOrderArray = async () => {
+        if(!localStorage.getItem("user"))return;
+        const id = localStorage.getItem("user")
+        await axios.patch(`http://localhost:3001/api/user/${id}`, {
+            order: orderArray,
+        });           
+    }
+    useEffect(() => {
+        updateUsersOrderArray();
+    }, [orderArray]);
+ //get sended to admin orders from data
+    const getOrdersData = async () => {
+        const res = await axios.get("http://localhost:3001/api/order"); 
+        const orders = res.data;
+        orders.map(orderItem => {
+            const { _id, userName, order, date, isOrderCompleted, totalPrice } = orderItem;
+                setSendedOrderToAdmin(prev => [...prev, {
+                id: _id, 
+                userName, 
+                order, 
+                date, 
+                isOrderCompleted,
+                totalPrice, 
+            }])
+        })
+    }   
+    useEffect(() => {
+        getOrdersData();
     }, [])
-
-
 
 //CHECK QUANTITY OF ITEM
 const  getItemQuantity = (id) => {
@@ -122,10 +185,19 @@ setOrderArray(currentItems => {
 const getOrderItemsQuantity = () => {
     return orderArray.reduce((quantity, item) => item.quantity + quantity, 0)
 }
-
+function getTotalPrice(){
+    if(!orderArray.length)return;
+    let totalPrice = orderArray.map(el => {           
+        const item = menuArray.find(item => item.id === el.id)
+        return item.price * el.quantity  
+    })
+    totalPrice = totalPrice.reduce((acc, price) => acc += price).toFixed(2)
+    return formatCurency(totalPrice);
+}
     return(
         <AppContext.Provider
          value={{
+            admin,
             addMenuElement,
             currentUser,
             editMenuElement,
@@ -137,16 +209,19 @@ const getOrderItemsQuantity = () => {
             menuArray,
             orderArray,
             registeredUsersMap,
-            sendOrderArray,
+            sendedOrderToAdmin,
+            getOrdersData,
+            getCurrentUserData,
             getOrderItemsQuantity,
             decreaseItemQuantity,
             getItemQuantity,
+            getTotalPrice,
             increaseItemQuantity,
             setAddMenuElement,
             setEditMenuElement,
             setIsBurgerNavActive,
             setOrderArray,
-            setSendOrderArray,
+            setSendedOrderToAdmin,
             setMenuArray,
             setLoginMessage,
             setLoginInput,

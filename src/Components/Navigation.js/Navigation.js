@@ -14,7 +14,7 @@ const Navigation = () => {
     } = useContext(AppContext);
 
  
-    const userStatus = registeredUsersMap.get(currentUser)?.isUserLogged
+    const userStatus = currentUser?.isUserLogged
     
  //get quantity of order items in cart   
     const orderQuantity = getOrderItemsQuantity();

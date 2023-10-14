@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import { AppContext } from "../../Context/AppContext";
 import ListElement from "../../Components/elements/ListElement/ListElement";
 import Button from "../../Components/elements/Button/Button";
+import axios from "axios";
 
 const AdminInfo = () => {
     useEffect(() => {
@@ -12,36 +13,52 @@ const AdminInfo = () => {
     }, []);
     const { 
         menuArray, 
+        sendedOrderToAdmin, 
+        setSendedOrderToAdmin, 
         registeredUsersMap,
-        sendOrderArray, 
-        setSendOrderArray, 
-        setOrderArray,
-        setRegisteredUsersMap
+        setCurrentUser,
+        currentUser,
     } = useContext(AppContext);
-    const setButtonCompletedOrder = (id, currentUser) => {
-        setSendOrderArray(prevState => {
-            return prevState.map(el => {
-                if(el.id === id){
-                    return {...el, isOrderCompleted: !el.isOrderCompleted}
-                }else {
-                    return el
-                }
+    const setButtonCompletedOrder = async (id) => {
+        //send order data to backend
+        try{
+            const res = await axios.patch(`http://localhost:3001/api/order/${id}`, {
+                isOrderCompleted: true,
+            })
+         //set data on frontend
+            setSendedOrderToAdmin(prevState => {
+                return prevState.map(el => {
+                    if(el.id === id){
+                        return {...el, isOrderCompleted: res.data.isOrderCompleted}
+                    }else {
+                        return el
+                    }
+                });
             });
-        });
-        setRegisteredUsersMap(prevState => (
-            registeredUsersMap.set(currentUser, {
-            ...prevState.get(currentUser),
+        }catch(err){
+            console.log(err)
+        }
+        // send current users data to backend
+        
+        try{
+                const userName = sendedOrderToAdmin.find(order => order.id === id).userName
+                const iserId = registeredUsersMap.get(userName).id;
+            const res = await axios.patch(`http://localhost:3001/api/user/${iserId}`, {
             isOrderSended: false,
-            orderArray: [],
-        })))
-        setOrderArray([]);
+            order: [],
+        });
+        const { isOrderSended, order } = res.data;
+        setCurrentUser(prev => (
+            {...prev, isOrderSended, order,}
+        ))
+        }catch(err){
+            console.log(err);
+        }
     }
-    const handleDeleteCompletedOrder = () => {   
-        const cloneArray = [...sendOrderArray];       
-        setSendOrderArray(cloneArray.filter(el => !el.isOrderCompleted));
-    }
-    const info = sendOrderArray.map(orderInfo => {
+    
+    const info = sendedOrderToAdmin.map(orderInfo => {
         const { id, userName, order, date, totalPrice, isOrderCompleted } = orderInfo
+
         return (
         <div className="admin-info-container" key={id}>
             <h3>{userName}</h3>
@@ -60,14 +77,25 @@ const AdminInfo = () => {
                         id={id}
                         name={isOrderCompleted ? "X" : ""}
                         className={`small ${isOrderCompleted && "accept"}`}
-                        onClick={() => setButtonCompletedOrder(id, userName)}
+                        onClick={() => setButtonCompletedOrder(id)}
                     />
                 </label>
             </div>
         </div>
     )});
+    const handleDeleteCompletedOrder = async () => { 
+        const elementToDelete = sendedOrderToAdmin.filter(order => order.isOrderCompleted);
+        try{
+            const res = await axios.delete(`http://localhost:3001/api/order/${elementToDelete.id}`)  
+
+        }catch(err){
+            console.log(err.message)
+        }
+        const cloneArray = [...sendedOrderToAdmin];       
+        setSendedOrderToAdmin(cloneArray.filter(el => !el.isOrderCompleted));
+    }
     return (    
-        sendOrderArray.length === 0
+        sendedOrderToAdmin.length === 0
         ? 
             <h2>Brak Zamówień</h2>
         :
@@ -77,7 +105,7 @@ const AdminInfo = () => {
             <Button
              name="usuń zrealizowane"
              className="large delete"
-             onClick={() => handleDeleteCompletedOrder()}
+             onClick={handleDeleteCompletedOrder}
             />
         </>   
     );

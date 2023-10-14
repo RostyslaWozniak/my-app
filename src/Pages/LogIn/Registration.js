@@ -35,7 +35,6 @@ const Registration = () => {
         registeredUsersMap,
         setCurrentUser,
         setModal,
-        setRegisteredUsersMap,
     } = useContext(AppContext);
         const { name, password, password2 } = registerInput;
         const { nameMessage, passwordMessage, password2Message } = registrationMessage;
@@ -71,17 +70,13 @@ const Registration = () => {
             message: password2Message,
         },
     ];
-     
     const navigate = useNavigate();
-
     const showInputs = formInputsArray.map((input, id) => (
         <Input
             key={id}
             {...input}
         />
-    ))
-    
-    
+    ));
     //REGISTRATION HANDLE FORM 
     const handleRegisterSubmit = async (e) => {
         e.preventDefault()
@@ -115,7 +110,6 @@ const Registration = () => {
             isPasswordValid = false;
         }else {
             isPasswordValid = true;
-            console.log(registerPassword)
         }
         if(registerPassword !== registerPassword2){
             setMessage("password2Message", "Hasła nie są identyczne");
@@ -125,25 +119,23 @@ const Registration = () => {
         }
 
         if(isNameValid && isPasswordValid && isPassword2Valid){
-            setCurrentUser(registerName);
+            
             //add registration data to backend
             const res = await axios.post('http://localhost:3001/api/user', {
                 name: registerName,
                 password: registerPassword,
                 isUserLogged: true,
-                orderArray: [],
-                isOrderSended: false, 
             });
-            //update registration data on frontend
-            const { name, _id, password, isUserLogged, orderArray, isOrderSended} = res.data
-            setRegisteredUsersMap(registeredUsersMap.set(
-                name, {
-                    id: _id,
-                    password,
-                    isUserLogged,
-                    orderArray,
-                    isOrderSended,
-                }))
+            //update current user on frontend
+            const { name, _id, isUserLogged, order, isOrderSended} = res.data
+            localStorage.setItem("user", _id);
+            setCurrentUser({
+                id: _id,
+                name,
+                isUserLogged,
+                order,
+                isOrderSended,
+            });
             navigate('/');
             setRegisterInput({
                 registerName: "",

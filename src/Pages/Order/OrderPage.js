@@ -1,36 +1,37 @@
 import React, { useContext, useEffect } from 'react';
 import { AppContext } from '../../Context/AppContext';
 import { useNavigate } from 'react-router-dom';
-import {formatCurency} from '../../tools/formatCurency'
 import Button from '../../Components/elements/Button/Button';
 import ListElement from '../../Components/elements/ListElement/ListElement';
 import './Order.css'
 import axios from 'axios';
-
+const maxQuantityOrderedItems = 5;
 const OrderPage = () => {
+    const { 
+        currentUser,  
+        setModal,
+        decreaseItemQuantity,
+        getItemQuantity,
+        getOrderItemsQuantity, 
+        getTotalPrice,
+        increaseItemQuantity,
+        menuArray, 
+        orderArray,
+        setCurrentUser, 
+    } = useContext(AppContext);
     useEffect(() => {
         window.scrollTo({
             top: 150,
             behavior: "smooth",
         })
+        
     }, []);
     const navigate = useNavigate()
-    const { 
-        currentUser, registeredUsersMap, setRegisteredUsersMap, setModal,
-        decreaseItemQuantity,
-        getItemQuantity,
-        getOrderItemsQuantity, 
-        setSendOrderArray,
-        increaseItemQuantity,
-        menuArray, 
-        orderArray, 
-        setOrderArray,
-    } = useContext(AppContext);
  //check is user logged and get status of order
-    const isOrderSended = registeredUsersMap.get(currentUser)?.isOrderSended || false; 
+    const isOrderSended = currentUser?.isOrderSended || false; 
  //get quantity of order items in cart
     const orderQuantity = getOrderItemsQuantity();
-    
+    const totalPrice = getTotalPrice();
     const item = orderArray.map(el => {
         const quantity = getItemQuantity(el.id);
         const item = menuArray.find(it => it.id === el.id);
@@ -44,7 +45,7 @@ const OrderPage = () => {
                 />
                 <p>{quantity}</p>
                 <Button
-                isDisabled={quantity >= 5 ? true : false}
+                isDisabled={quantity >= maxQuantityOrderedItems ? true : false}
                 className="small accept"
                 name="+"
                 onClick={() => increaseItemQuantity(el.id)}
@@ -59,17 +60,7 @@ const OrderPage = () => {
         {...item}
         />
     )})  
-    
-    function totalPrice(){
-        if(orderQuantity === 0) return;
-        const priceOrderArray = orderArray.map(el => {           
-            const item = menuArray.find(item => item.id === el.id)
-            return item.price
-        })
-        const totalPrice = priceOrderArray.reduce((acc, price) => acc += price).toFixed(2)
-        return formatCurency(totalPrice)
-    }
-    
+
     const showResultOrMenuBtn = <div className="order-sum">
         {orderQuantity === 0 
         ?
@@ -80,7 +71,7 @@ const OrderPage = () => {
             />
         :
             <div className="result-container">
-                <h2>Do zapłaty: {totalPrice()}</h2>
+                <h2>Do zapłaty: {totalPrice}</h2>
                 {isOrderSended
                 ?   
                 <h2>Twoje zamówienie zostało przyęte</h2>
@@ -89,47 +80,40 @@ const OrderPage = () => {
                 name="zamów "
                 className="large accept"
                 onClick={() => {
-                    handleOrderIsSend()
+                    handleSendOrder()
                 }}
                 />
                 }  
             </div>
         }
     </div>
-    // SEND ORDER
-    const handleOrderIsSend = async () => {
-        if(!registeredUsersMap.has(currentUser)) {
-            return (setModal({
+// SEND ORDER
+    const handleSendOrder = async () => {
+        if(currentUser == null){
+            return setModal({
                 isVisible: true,
                 value: "Musisz zalogować się",
                 buttons: false,
-            }));
-        } 
-        //Send order to backend
-        const id = registeredUsersMap.get(currentUser).id;
-            // update descriptions on backand
-            const res = await axios.patch(`http://localhost:3001/api/user/${id}`, {
-                    orderArray,
-                    isOrderSended: true,
             });
-            const { name, _id, isOrderSended, orderArray} = res.data
-            setRegisteredUsersMap(registeredUsersMap.set(
-                name, {
-                    id: _id,
-                    orderArray,
-                    isOrderSended,
-                }));
-                console.log(registeredUsersMap)
-       
-            setModal(({
-                isVisible: true,
-                value: `${currentUser}, twoje zamówienie zostało przyjęte`,
-                buttons: false,
-            }))
-            // const id = new Date().toString();
-            const cloneArr = [...orderArray];
-            const date = new Date().toLocaleTimeString();
-            setSendOrderArray(prevState => ( [...prevState, { id, isOrderCompleted: false, currentUser, totalPrice, date, order: [...cloneArr] }]));
+        };
+        //send order to backend
+        await axios.post("http://localhost:3001/api/order", {
+            userName: currentUser.name,
+            order: orderArray, 
+            date: new Date().toLocaleTimeString(), 
+            isOrderCompleted: false, 
+            totalPrice,
+        });
+        // patch user data on backend
+        const id = currentUser.id;
+        const res = await axios.patch(`http://localhost:3001/api/user/${id}`, {
+            isOrderSended: true,
+        });
+        setCurrentUser(prev => ({
+            ...prev,
+            isOrderSended: res.data.isOrderSended,
+        }))
+        console.log(currentUser);
     }
     return ( 
         <div className="order-container">

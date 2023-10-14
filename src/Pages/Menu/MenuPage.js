@@ -13,12 +13,10 @@ const MenuPage = () => {
     }, []);
     const { 
         currentUser, 
-        menuArray, 
-        orderArray, 
+        menuArray,  
         getItemQuantity, 
         increaseItemQuantity, 
         decreaseItemQuantity,
-        registeredUsersMap,
     } = useContext(AppContext);
  //handle scroll
     const lunchRef = useRef(null);
@@ -26,11 +24,7 @@ const MenuPage = () => {
     const dessertsRef = useRef(null);
     const drinksRef = useRef(null); 
  //check is user logged and get status of order
-    let isOrderSended = false;
-    if(registeredUsersMap.has(currentUser)){
-        isOrderSended = registeredUsersMap.get(currentUser).isOrderSended;
-        registeredUsersMap.get(currentUser).orderArray = [...orderArray];
-    }
+    const isOrderSended = currentUser?.isOrderSended || false;
 
     const item = menuArray.map(el => {
      //get quantity of order items in cart

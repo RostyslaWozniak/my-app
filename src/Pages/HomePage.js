@@ -11,9 +11,9 @@ const HomePage = () => {
     }, []);
     const { isAdminLogged, currentUser, registeredUsersMap } = useContext(AppContext); 
     
-    let user = registeredUsersMap.get(currentUser);
+
    
-    const panell = registeredUsersMap.has(currentUser) 
+    const panell = registeredUsersMap.has(currentUser?.name) 
     ?
     <div>
         <h3>Jesteś zalogowany</h3>
@@ -21,8 +21,8 @@ const HomePage = () => {
             !isAdminLogged
             &&
             <>
-                <h3>{user.orderArray.length === 0 && "Złóż zamówienie"}</h3>
-                <h3>{user.isOrderSended && "Oczekujesz na zamówienie"}</h3>
+                <h3>{currentUser.order.length === 0 && "Złóż zamówienie"}</h3>
+                <h3>{currentUser.isOrderSended && "Oczekujesz na zamówienie"}</h3>
             </>
         }
         
@@ -32,7 +32,7 @@ const HomePage = () => {
     return ( 
         <div>
             <h1>Home</h1>
-            <h2>{isAdminLogged ? (`Siema ${currentUser}`) : (`Cześć ${currentUser}`)}</h2>
+            <h2>{isAdminLogged ? (`Siema ${currentUser?.name}`) : (`Cześć ${currentUser?.name || "User"}`)}</h2>
             {panell}
         </div>
      );

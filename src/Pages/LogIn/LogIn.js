@@ -6,6 +6,8 @@ import Button from '../../Components/elements/Button/Button';
 import './LogIn.css';
 import { AppContext } from '../../Context/AppContext';
 
+
+
 const LogIn = () => {
     useEffect(() => {
         window.scrollTo({
@@ -13,7 +15,8 @@ const LogIn = () => {
             behavior: "smooth",
         })
     }, []);
-    const { 
+    const {
+        admin,
         isAdminLogged,
         loginInput, 
         loginMessage,
@@ -24,7 +27,6 @@ const LogIn = () => {
         setLoginMessage, 
         setModal,
         setOrderArray,
-        setRegisteredUsersMap,
      } = useContext(AppContext);
     const navigate = useNavigate();
     const { loginName, loginPassword } = loginInput;
@@ -59,43 +61,67 @@ const LogIn = () => {
             />
         ))
  //Handle login form
-    const handleLoginSubmit = async (e, setOrderArray) => {
+    const handleLoginSubmit = async (e) => {
         e.preventDefault()
         const { loginName, loginPassword } = loginInput;
         setLoginMessage(null);
         if(!loginName.length || !loginPassword.length)return setLoginMessage("Wypełnij wszystkie pola pola");
         if(!registeredUsersMap.has(loginName))return setLoginMessage("Błedne dane logowania");
- //Admin login
-        if(registeredUsersMap.get(loginName).password === "123" && registeredUsersMap.get(loginName).password === loginPassword){
+        //Admin login
+        if(registeredUsersMap.get(admin.name).password === loginPassword){
+            const id = registeredUsersMap.get(admin.name).id;
+            console.log(id)
+            const res = await axios.patch(`http://localhost:3001/api/user/${id}`, {
+                isUserLogged: true, 
+            });
+            const { _id, name, isUserLogged, order, isOrderSended } = res.data;
+            setCurrentUser({
+                id: _id,
+                name,
+                isUserLogged,
+                order,
+                isOrderSended,      
+            });
+            localStorage.setItem("admin", id);
             setIsAdminLogged(!isAdminLogged);
-            setCurrentUser(loginName);
             navigate('/admin');
             setModal(({
                 isVisible: true,
                 value: "Jesteś zalogowany/a jako admin",
                 buttons: false,
             }))
-//user login
-        }else if(registeredUsersMap.size > 0){
+        //user login
+        }else if(registeredUsersMap.size){
             if(registeredUsersMap.get(loginName).password === loginPassword){
-//set user status on backend
+                
+        //set user status on backend
                 const id = registeredUsersMap.get(loginName).id
                 const res = await axios.patch(`http://localhost:3001/api/user/${id}`, {
                 isUserLogged: true,
             });
-//show modal            
+         //set current user
+         const { _id, name, isUserLogged, order, isOrderSended } = res.data;
+            setCurrentUser({
+                id: _id,
+                name,
+                isUserLogged,
+                order,
+                isOrderSended,      
+            });
+         //users order 
+            setOrderArray(order);
+            localStorage.setItem("user", id);
+        //show modal            
                 setModal(({
                     isVisible: true,
                     value: `Cześć ${loginName}, jesteś zalogowany/a `,
                     buttons: false,
                 }));
-//set current user
-                setCurrentUser(loginName);
-                navigate('/');
-                setRegisteredUsersMap(prevState => registeredUsersMap.set(loginName, {
-                    ...prevState.get(loginName),
-                    isUserLogged: res.data.isUserLogged,
+                setLoginInput(prevState => ({
+                    ...prevState,
+                    loginPassword: "",
                 }));
+                navigate('/');
             }else{
                 setLoginInput(prevState => ({...prevState, loginPassword: ""}));
                 setLoginMessage("Błedne dane logowania");
@@ -104,13 +130,7 @@ const LogIn = () => {
             setLoginInput(prevState => ({...prevState, loginPassword: ""}));
             setLoginMessage("Błedne dane logowania");
         };
-        setOrderArray([...registeredUsersMap.get(loginName).orderArray]);
-        setLoginInput(prevState => ({
-            ...prevState,
-            loginPassword: "",
-        }));
-        console.log("Logowanie: ", registeredUsersMap);
-    }
+    };
     return(
         <div className="login-container">
             <h1>Logowanie</h1>

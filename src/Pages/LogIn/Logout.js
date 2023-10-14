@@ -13,37 +13,29 @@ const Logout = () => {
         })
     }, []);
     const { 
-        setIsAdminLogged,
-        isAdminLogged,
         setModal,
         currentUser,
         setCurrentUser,
-        setRegisteredUsersMap,
-        registeredUsersMap,
         setOrderArray,
         } = useContext(AppContext);
     const navigate = useNavigate();
 // wylogowanie użytkownika
         const handleUserLogout = async () => {
-            const id = registeredUsersMap.get(currentUser).id;
+            const id = currentUser.id;
             // update descriptions on backand
             const res = await axios.patch(`http://localhost:3001/api/user/${id}`, {
                 isUserLogged: false,
             });
-            const { name, isUserLogged,} = res.data
-            setCurrentUser("User");
-    //update frontend
-            setRegisteredUsersMap(prevState => registeredUsersMap.set(name, {
-                ...prevState.get(name),
-                isUserLogged: isUserLogged,
-            }));
+            //update frontend
+            localStorage.removeItem("user");
+            setCurrentUser(null);
             setModal(({
                 isVisible: true,
                 value: 'Jesteś wylogowany/a',
                 buttons: false,
-            }))
+            }));
+            setOrderArray([]);
             navigate('/login');
-            console.log("Wylogowanie: ", registeredUsersMap);
         }
     return ( 
         <div className="logout-container">
@@ -52,7 +44,7 @@ const Logout = () => {
                 <Button
                 name="Tak"
                 className="large"
-                onClick={() => {handleUserLogout(); setOrderArray([])} }
+                onClick={handleUserLogout}
                 />
         </div>
      );
