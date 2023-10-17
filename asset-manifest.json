@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/my-app-server/static/css/main.2ce30734.css",
-    "main.js": "/my-app-server/static/js/main.1cfc8880.js",
-    "static/media/food3.jpg": "/my-app-server/static/media/food3.e2e8ca14c4c8b2dc81c2.jpg",
-    "static/media/food4.jpg": "/my-app-server/static/media/food4.2f806f4ffd55590b5cff.jpg",
-    "static/media/food1.jpg": "/my-app-server/static/media/food1.c5c24a40eab09a2b610e.jpg",
-    "index.html": "/my-app-server/index.html",
-    "main.2ce30734.css.map": "/my-app-server/static/css/main.2ce30734.css.map",
-    "main.1cfc8880.js.map": "/my-app-server/static/js/main.1cfc8880.js.map"
+    "main.css": "/my-app/static/css/main.2ce30734.css",
+    "main.js": "/my-app/static/js/main.38fbd875.js",
+    "static/media/food3.jpg": "/my-app/static/media/food3.e2e8ca14c4c8b2dc81c2.jpg",
+    "static/media/food4.jpg": "/my-app/static/media/food4.2f806f4ffd55590b5cff.jpg",
+    "static/media/food1.jpg": "/my-app/static/media/food1.c5c24a40eab09a2b610e.jpg",
+    "index.html": "/my-app/index.html",
+    "main.2ce30734.css.map": "/my-app/static/css/main.2ce30734.css.map",
+    "main.38fbd875.js.map": "/my-app/static/js/main.38fbd875.js.map"
   },
   "entrypoints": [
     "static/css/main.2ce30734.css",
-    "static/js/main.1cfc8880.js"
+    "static/js/main.38fbd875.js"
   ]
 }
