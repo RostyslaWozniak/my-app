@@ -1,4 +1,4 @@
-import { BrowserRouter as Router } from "react-router-dom";
+import { HashRouter as Router } from "react-router-dom";
 import { AppProvider } from "../Context/AppContext";
 import Header from "./Header/Header";
 import Navigation from "./Navigation.js/Navigation";
