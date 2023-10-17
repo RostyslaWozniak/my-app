@@ -4,7 +4,7 @@ import Button from '../../Components/elements/Button/Button';
 import Input from '../../Components/elements/Input/Input';
 import './AdminPage.css'
 import ArrowBack from '../../Components/elements/GoBack/GoBack';
-import axios from 'axios';
+import axios from '../../tools/axiosTool';
 import { useNavigate } from 'react-router-dom';
 
 const AddOrEditArticle = ({type}) => {
@@ -54,7 +54,7 @@ const AddOrEditArticle = ({type}) => {
                     }))
             )}
             //post to backend
-            const res = await axios.post("http://localhost:3001/api/menu_items", {name, price, ingredients, category});
+            const res = await axios.post("/menu_items", {name, price, ingredients, category});
             const item = res.data
             //post to front
             cloneArray.push({
@@ -88,7 +88,7 @@ const AddOrEditArticle = ({type}) => {
                 }))
             )}
             //send update to backend
-            const res = await axios.put(`http://localhost:3001/api/menu_items/${id}`, {name, price, ingredients, category});  
+            const res = await axios.put(`/menu_items/${id}`, {name, price, ingredients, category});  
             //update on frontend
             const element = cloneArray.find(el => el.id === id);    
             element.name = res.data.name;
@@ -182,8 +182,6 @@ const AddOrEditArticle = ({type}) => {
             onClick={() => chooseCategory(drinks)}
         />
     </div>
-
-    
     return ( 
         <>
             <h2>{type === "add" ? "Dodaj Artykuł" : "Edytuj Artykuł"}</h2>

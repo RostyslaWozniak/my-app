@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from "axios";
+import axios from '../tools/axiosTool';
 import { useNavigate } from 'react-router-dom';
 import {formatCurency} from '../tools/formatCurency';
 export const AppContext = React.createContext();
@@ -51,7 +51,7 @@ const [ registeredUsersMap, setRegisteredUsersMap ] = useState(new Map());
 const getCurrentUserData = async () => {
     if(localStorage.getItem("admin")){
         const id = localStorage?.getItem("admin");
-        const res = await axios.get(`http://localhost:3001/api/user/${id}`);
+        const res = await axios.get(`/user/${id}`);
         const { _id, name, isUserLogged, order, isOrderSended} = res.data;
         //current user
         setIsAdminLogged(true);
@@ -66,7 +66,7 @@ const getCurrentUserData = async () => {
     if(!localStorage.getItem("user"))return;
     const id = localStorage?.getItem("user");
     try{
-        const res = await axios.get(`http://localhost:3001/api/user/${id}`);
+        const res = await axios.get(`/user/${id}`);
         const { _id, name, isUserLogged, order, isOrderSended} = res.data;
         //current user
         setCurrentUser({
@@ -85,9 +85,8 @@ const getCurrentUserData = async () => {
 }
 //Get registrate users
     const getUsersData = async () => {
-        const res = await axios.get('http://localhost:3001/api/user')
-        const users = [...res.data]
-        users.forEach(user => {
+        const { data, status } = await axios.get('/user');
+        data.forEach(user => {
             setRegisteredUsersMap(registeredUsersMap.set(
                       user.name, {
                         id: user._id,
@@ -97,7 +96,7 @@ const getCurrentUserData = async () => {
         });
     }
     const getMenuData = async () => {
-        const res = await axios.get("http://localhost:3001/api/menu_items");
+        const res = await axios.get("/menu_items");
         const menu = res.data.map(el => {
             const { _id, name, price, ingredients, category } = el;
             return ({
@@ -119,7 +118,7 @@ const getCurrentUserData = async () => {
     const updateUsersOrderArray = async () => {
         if(!localStorage.getItem("user"))return;
         const id = localStorage.getItem("user")
-        await axios.patch(`http://localhost:3001/api/user/${id}`, {
+        await axios.patch(`/user/${id}`, {
             order: orderArray,
         });           
     }
@@ -128,7 +127,7 @@ const getCurrentUserData = async () => {
     }, [orderArray]);
  //get sended to admin orders from data
     const getOrdersData = async () => {
-        const res = await axios.get("http://localhost:3001/api/order"); 
+        const res = await axios.get("/order"); 
         const orders = res.data;
         orders.map(orderItem => {
             const { _id, userName, order, date, isOrderCompleted, totalPrice } = orderItem;

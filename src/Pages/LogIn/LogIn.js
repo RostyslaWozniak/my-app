@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios';
+import axios from '../../tools/axiosTool';
 import Input from '../../Components/elements/Input/Input';
 import Button from '../../Components/elements/Button/Button';
-import './LogIn.css';
 import { AppContext } from '../../Context/AppContext';
+import './LogIn.css';
 
 
 
@@ -70,7 +70,7 @@ const LogIn = () => {
         //Admin login
         if(registeredUsersMap.get(admin.name).password === loginPassword){
             const id = registeredUsersMap.get(admin.name).id;
-            const res = await axios.patch(`http://localhost:3001/api/user/${id}`, {
+            const res = await axios.patch(`/user/${id}`, {
                 isUserLogged: true, 
             });
             const { _id, name, isUserLogged, order, isOrderSended } = res.data;
@@ -95,7 +95,7 @@ const LogIn = () => {
                 
         //set user status on backend
                 const id = registeredUsersMap.get(loginName).id
-                const res = await axios.patch(`http://localhost:3001/api/user/${id}`, {
+                const res = await axios.patch(`/user/${id}`, {
                 isUserLogged: true,
             });
          //set current user

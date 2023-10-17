@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../../Components/elements/Button/Button';
 import ListElement from '../../Components/elements/ListElement/ListElement';
 import './Order.css'
-import axios from 'axios';
+import axios from '../../tools/axiosTool';
 const maxQuantityOrderedItems = 5;
 const OrderPage = () => {
     const { 
@@ -97,7 +97,7 @@ const OrderPage = () => {
             });
         };
         //send order to backend
-        await axios.post("http://localhost:3001/api/order", {
+        await axios.post("/order", {
             userName: currentUser.name,
             order: orderArray, 
             date: new Date().toLocaleTimeString(), 
@@ -106,7 +106,7 @@ const OrderPage = () => {
         });
         // patch user data on backend
         const id = currentUser.id;
-        const res = await axios.patch(`http://localhost:3001/api/user/${id}`, {
+        const res = await axios.patch(`/user/${id}`, {
             isOrderSended: true,
         });
         setCurrentUser(prev => ({
@@ -120,7 +120,7 @@ const OrderPage = () => {
                 <h1>Twoje zamówienie {orderQuantity === 0 ? "" : `(${orderQuantity})`}</h1>
                 <ul>
                     {!orderQuantity ? <i>Brak zamówionych dań :(</i> : item}           
-                </ul> 
+                </ul>              
             </div>           
             {showResultOrMenuBtn}
         </div>

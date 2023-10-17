@@ -3,7 +3,7 @@ import ListElement from "../../Components/elements/ListElement/ListElement";
 import { useContext, useEffect } from "react";
 import { AppContext } from "../../Context/AppContext";
 import ArrowBack from "../../Components/elements/GoBack/GoBack";
-import axios from "axios";
+import axios from "../../tools/axiosTool";
 import { useNavigate } from "react-router-dom";
 
 const EditMenu = () => {
@@ -26,7 +26,7 @@ const EditMenu = () => {
     // ADMIN HANDLE DELETE ITEM
     const handleAdminDEleteElementMenu = async (id) => {
         const cloneArray = [...menuArray];
-        await axios.delete(`http://localhost:3001/api/menu_items/${id}`);
+        await axios.delete(`/menu_items/${id}`);
         const index = cloneArray.findIndex(el => el.id === id);
         cloneArray.splice(index, 1);
         setMenuArray(cloneArray)

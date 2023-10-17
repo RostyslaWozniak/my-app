@@ -4,7 +4,7 @@ import Input from '../../Components/elements/Input/Input'
 import Button from '../../Components/elements/Button/Button';
 import './LogIn.css';
 import ArrowBack from '../../Components/elements/GoBack/GoBack';
-import axios from 'axios';
+import axios from '../../tools/axiosTool';
 import { useNavigate } from 'react-router-dom';
 
 const Registration = () => {
@@ -25,19 +25,15 @@ const Registration = () => {
             top: 150,
             behavior: "smooth",
         });
-        setRegistrationMessage({
-            nameMessage: null,
-            passwordMessage: null,
-            password2Message: null,
-        });
     }, []);
     const { 
         registeredUsersMap,
         setCurrentUser,
         setModal,
     } = useContext(AppContext);
-        const { name, password, password2 } = registerInput;
+        const { registerName, registerPassword, registerPassword2 } = registerInput;
         const { nameMessage, passwordMessage, password2Message } = registrationMessage;
+
         const handleInputLogin = e => {
             return setRegisterInput(prevState => ({...prevState, [e.target.name]: e.target.value}));
         }
@@ -48,7 +44,7 @@ const Registration = () => {
             type: "text", 
             placeholder: "Wpisz imię", 
             onChange: handleInputLogin, 
-            value: name, 
+            value: registerName, 
             message: nameMessage,
         },
         {
@@ -57,7 +53,7 @@ const Registration = () => {
             type: "password", 
             placeholder: "Wpisz hasło", 
             onChange: handleInputLogin, 
-            value: password, 
+            value: registerPassword, 
             message: passwordMessage,
         },
         {
@@ -66,7 +62,7 @@ const Registration = () => {
             type: "password", 
             placeholder: "Hasło jeszcze raz", 
             onChange: handleInputLogin, 
-            value: password2, 
+            value: registerPassword2, 
             message: password2Message,
         },
     ];
@@ -80,7 +76,6 @@ const Registration = () => {
     //REGISTRATION HANDLE FORM 
     const handleRegisterSubmit = async (e) => {
         e.preventDefault()
-        const { registerName, registerPassword, registerPassword2 } = registerInput;
         let isNameValid = false;
         let isPasswordValid = false;
         let isPassword2Valid = false;
@@ -121,13 +116,13 @@ const Registration = () => {
         if(isNameValid && isPasswordValid && isPassword2Valid){
             
             //add registration data to backend
-            const res = await axios.post('http://localhost:3001/api/user', {
+            const { data, status } = await axios.post('/user', {
                 name: registerName,
                 password: registerPassword,
                 isUserLogged: true,
             });
             //update current user on frontend
-            const { name, _id, isUserLogged, order, isOrderSended} = res.data
+            const { name, _id, isUserLogged, order, isOrderSended} = data;
             localStorage.setItem("user", _id);
             setCurrentUser({
                 id: _id,

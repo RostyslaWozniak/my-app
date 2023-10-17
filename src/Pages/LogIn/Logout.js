@@ -3,7 +3,7 @@ import { AppContext } from "../../Context/AppContext";
 import Button from '../../Components/elements/Button/Button';
 import './LogIn.css'
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../../tools/axiosTool";
 
 const Logout = () => {
     useEffect(() => {
@@ -23,7 +23,7 @@ const Logout = () => {
         const handleUserLogout = async () => {
             const id = currentUser.id;
             // update descriptions on backand
-            const res = await axios.patch(`http://localhost:3001/api/user/${id}`, {
+            const res = await axios.patch(`/user/${id}`, {
                 isUserLogged: false,
             });
             //update frontend

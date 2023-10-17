@@ -1,10 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import Button from '../../Components/elements/Button/Button';
-import ErrorPage from '../ErrorPage'
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import './AdminPage.css'
 import { AppContext } from '../../Context/AppContext';
-import axios from 'axios';
+import axios from '../../tools/axiosTool';
 
 const AdminPage = () => {
     useEffect(() => {
@@ -23,7 +22,7 @@ const AdminPage = () => {
     //wylogowanie admina
     const handleAdminLogout = async () => {
         const id = currentUser.id
-        const res = await axios.patch(`http://localhost:3001/api/user/${id}`, {
+        const res = await axios.patch(`/user/${id}`, {
                 isUserLogged: false,
             });
         setIsAdminLogged(!isAdminLogged);

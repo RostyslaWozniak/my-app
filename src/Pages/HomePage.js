@@ -10,9 +10,7 @@ const HomePage = () => {
         })
     }, []);
     const { isAdminLogged, currentUser, registeredUsersMap } = useContext(AppContext); 
-    
 
-   
     const panell = registeredUsersMap.has(currentUser?.name) 
     ?
     <div>

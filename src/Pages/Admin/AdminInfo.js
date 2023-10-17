@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { AppContext } from "../../Context/AppContext";
 import ListElement from "../../Components/elements/ListElement/ListElement";
 import Button from "../../Components/elements/Button/Button";
-import axios from "axios";
+import axios from "../../tools/axiosTool";
 
 const AdminInfo = () => {
     useEffect(() => {
@@ -17,12 +17,11 @@ const AdminInfo = () => {
         setSendedOrderToAdmin, 
         registeredUsersMap,
         setCurrentUser,
-        currentUser,
     } = useContext(AppContext);
     const setButtonCompletedOrder = async (id) => {
         //send order data to backend
         try{
-            const res = await axios.patch(`http://localhost:3001/api/order/${id}`, {
+            const res = await axios.patch(`/order/${id}`, {
                 isOrderCompleted: true,
             })
          //set data on frontend
@@ -39,11 +38,10 @@ const AdminInfo = () => {
             console.log(err.message)
         }
         // send current users data to backend
-        
         try{
-                const userName = sendedOrderToAdmin.find(order => order.id === id).userName
-                const iserId = registeredUsersMap.get(userName).id;
-            const res = await axios.patch(`http://localhost:3001/api/user/${iserId}`, {
+            const userName = sendedOrderToAdmin.find(order => order.id === id).userName
+            const iserId = registeredUsersMap.get(userName).id;
+            const res = await axios.patch(`/user/${iserId}`, {
             isOrderSended: false,
             order: [],
         });
@@ -87,19 +85,17 @@ const AdminInfo = () => {
         const elementToDelete = sendedOrderToAdmin.filter(order => order.isOrderCompleted);
         const id = elementToDelete.map(async el =>{
             try{
-                await axios.delete(`http://localhost:3001/api/order/${el.id}`)  
+                await axios.delete(`/order/${el.id}`)  
                 let cloneArray = [...sendedOrderToAdmin];  
                 cloneArray = cloneArray.filter(order => order.id !== el.id);   
             setSendedOrderToAdmin(cloneArray);
             }catch(err){
                 console.log(err.message)
             }
-        });
-        
-        
+        });  
     }
     return (    
-        sendedOrderToAdmin.length === 0
+        !sendedOrderToAdmin.length
         ? 
             <h2>Brak Zamówień</h2>
         :
