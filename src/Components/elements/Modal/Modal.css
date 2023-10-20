@@ -56,9 +56,6 @@
     }
 }
 @media screen and (max-width: 450px){
-    .modal-container{
-        /* backdrop-filter: none; */
-    }
     .modal-content{
         width: 90%;
         height: 100px;
