@@ -4,16 +4,14 @@ const ScrollUp = () => {
     const [isArrowVisible, setIsArrowVisible] = useState(false)
     useEffect(() => {
         window.addEventListener("scroll", () => {
-            if(window.scrollY > 300){
+            if(window.scrollY > 400) {
                 setIsArrowVisible(true)
-            }else if(window.scrollY < 300){
-                setIsArrowVisible(false)
-            }
+             } else return setIsArrowVisible(false);
         })
     }, []);
     const scrollUp = () => {
         window.scrollTo({
-            top: 150,
+            top: window.innerWidth > 450 ? 150 : 300,
             behavior: "smooth",
         })
     }
@@ -24,7 +22,6 @@ const ScrollUp = () => {
                 (
                     <div className="arrow-container" onClick={scrollUp}>
                         <div className="arrow"></div>
-                        <p>Up</p>
                     </div> 
                 )   :   (
                     null

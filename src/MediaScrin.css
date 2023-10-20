@@ -90,7 +90,8 @@
     }
 /* Scroll up  */
     .arrow-container{
-        display: none;
+        top: 20px;
+        left: 10px;
     }
 /* Go back  */
     .arrow-back-container{
@@ -103,7 +104,7 @@
     .order-container .result-container{
       flex-direction: column;
     }
-    /* .admin-container, */
+/* .admin-container, */
     .registration-container,
     .login-container{
       width: 100%;
@@ -127,4 +128,5 @@
     .category-buttons button{
         width: 40%;
     }
+
 }

@@ -15,7 +15,7 @@ function App() {
         <Header/>
         <div className="body">
           <Navigation/>
-          <div className="page">
+          <div className="page" >
             <Pages/>
           </div>
           <Modal/>

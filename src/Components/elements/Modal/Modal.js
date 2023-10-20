@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
+import { AppContext } from '../../../Context/AppContext';
 import Button from '../Button/Button'
 import './Modal.css'
-import { AppContext } from '../../../Context/AppContext';
 
 const Modal = () => {
     const { modal, setModal } = useContext(AppContext);
@@ -14,9 +14,10 @@ const Modal = () => {
         }))
         setAddClass(false)
     }
+    
     const handleCloseModal = () => {
         setAddClass(true);
-        setTimeout(showAnimationAndCloseModal, 500)
+        setTimeout(showAnimationAndCloseModal, 500);
     }
     const handleAcceptModal = () => {
         console.log('accept')
@@ -26,7 +27,7 @@ const Modal = () => {
     }
     return ( 
         modal.isVisible ? (
-        <div className="modal-container" onClick={handleCloseModal}>
+        <div className="modal-container" onClick={handleCloseModal} >
             <div className={`modal-content ${addClass ? "add" : ""}`}>
                 <Button
                         name="x"

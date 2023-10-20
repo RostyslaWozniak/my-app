@@ -126,10 +126,10 @@ const AddOrEditArticle = ({type}) => {
             value: price,
         },
         {
-            label: "Składniki", 
+            label: "Opis", 
             name: `${type}Ingredients`, 
             type: "text", 
-            placeholder: "Wpisz składniki...", 
+            placeholder: "Wpisz opis...", 
             onChange: handleInputValue, 
             value: ingredients,
         },

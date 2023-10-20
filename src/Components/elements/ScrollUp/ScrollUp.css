@@ -6,15 +6,11 @@
     left: 18dvw;
     cursor: pointer;
     opacity: .5;
+    z-index: 10; 
 }
 .arrow{
-    height: 50px;
-    width: 4px;
-    background-color: var(--font-color);
-    border-radius: 10px;
-    position: absolute;
-    left: 30%;    
-}
+    position: absolute;    
+} 
 .arrow::before,
 .arrow::after{
     content: "";
@@ -24,13 +20,14 @@
     background-color: var(--font-color);
     border-radius: 10px;
     position: absolute;
+    
 }
 .arrow::before{
-    right: 6px;
+    right: -21px;
     transform: rotate(35deg)
 }
 .arrow::after{
-    left: 6px;
+    left: 26px;
     transform: rotate(-35deg)
 }
 .arrow-container p {

@@ -37,7 +37,7 @@
     border: none;
 }
 .add{
-    animation: disappear .6s ease-in-out;
+    animation: disappear .5s ease-in-out;
 }
 @keyframes appear {
     0%{
@@ -56,6 +56,9 @@
     }
 }
 @media screen and (max-width: 450px){
+    .modal-container{
+        /* backdrop-filter: none; */
+    }
     .modal-content{
         width: 90%;
         height: 100px;
