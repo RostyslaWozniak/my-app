@@ -13,6 +13,16 @@
         
         
     }
+    /* Scroll up  */
+    .arrow-container{
+        top: 20px;
+        left: 10px;
+    }
+    /* Go back  */
+    .arrow-back-container{
+        top: 5px;
+        left: 10px;
+    }
 }
 @media screen and (max-width: 650px){
 /* Pages */
@@ -28,7 +38,6 @@
     .page ul li{
         display: flex;
     }
-  
 }
 @media screen and (max-width: 450px){
 /* MenuPage */
@@ -88,17 +97,6 @@
         border: 0px ;
         padding: 0;
     }
-/* Scroll up  */
-    .arrow-container{
-        top: 20px;
-        left: 10px;
-    }
-/* Go back  */
-    .arrow-back-container{
-        top: 5px;
-        left: 10px;
-    }
-
     .admin-nav,
     .login-container div,
     .order-container .result-container{
