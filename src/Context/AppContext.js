@@ -54,6 +54,7 @@ const getCurrentUserData = async () => {
     if(localStorage.getItem("admin")){
         const id = localStorage?.getItem("admin");
         const res = await axios.get(`/user/${id}`);
+        if(res.data == null)return;
         const { _id, name, isUserLogged, order, isOrderSended} = res.data;
         //current user
         setIsAdminLogged(true);
@@ -88,6 +89,7 @@ const getCurrentUserData = async () => {
 //Get registrate users
     const getUsersData = async () => {
         const { data, status } = await axios.get('/user');
+        console.log(data)
         data.forEach(user => {
             setRegisteredUsersMap(registeredUsersMap.set(
                       user.name, {
