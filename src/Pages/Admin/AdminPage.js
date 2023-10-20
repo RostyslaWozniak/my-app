@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import Button from '../../Components/elements/Button/Button';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import './AdminPage.css'
@@ -6,12 +6,6 @@ import { AppContext } from '../../Context/AppContext';
 import axios from '../../tools/axiosTool';
 
 const AdminPage = () => {
-    useEffect(() => {
-        window.scrollTo({
-            top: 150,
-            behavior: "smooth",
-        })
-    }, []);
     const navigate = useNavigate();
     const location = useLocation();
     const { isAdminLogged, setIsAdminLogged, setModal, currentUser, setCurrentUser } = useContext(AppContext);

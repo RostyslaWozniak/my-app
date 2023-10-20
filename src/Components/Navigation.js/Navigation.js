@@ -9,8 +9,8 @@ const Navigation = () => {
         currentUser, 
         getOrderItemsQuantity, 
         isAdminLogged, 
-        isBurgerNavActive, 
-        registeredUsersMap 
+        isBurgerNavActive,
+        setIsBurgerNavActive,  
     } = useContext(AppContext);
 
  
@@ -26,13 +26,17 @@ const Navigation = () => {
         isAdminLogged ? {name: "Admin", path: "/admin"} : user,
     ];
     const activeNavClass = isBurgerNavActive && "active-nav";
+    const handleCloseMenuBar = () => {
+        if(window.innerWidth > 900) return;
+        setIsBurgerNavActive(false);
+    }
     const navigation = navNames.map(el => (
         <li key={el.name}>
-            <NavLink to={el.path}>{el.name}</NavLink>
+            <NavLink  to={el.path}>{el.name}</NavLink>
         </li>
     ))
     return ( 
-        <div className={`navigation  ${activeNavClass}`}>
+        <div className={`navigation  ${activeNavClass}`} onClick={handleCloseMenuBar}>
             <ul>
                 {navigation}
             </ul>

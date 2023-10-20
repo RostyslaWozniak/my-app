@@ -1,4 +1,4 @@
-import { HashRouter as Router } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import { AppProvider } from "../Context/AppContext";
 import Header from "./Header/Header";
 import Navigation from "./Navigation.js/Navigation";
@@ -10,7 +10,7 @@ import Modal from "./elements/Modal/Modal";
 
 function App() {
   return (
-    <Router>
+    <HashRouter>
       <AppProvider>
         <Header/>
         <div className="body">
@@ -22,7 +22,7 @@ function App() {
         </div>
         <Footer/>
       </AppProvider>
-    </Router>
+    </HashRouter>
   );
 }
 

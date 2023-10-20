@@ -1,14 +1,8 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { AppContext } from '../Context/AppContext';
 
 const HomePage = () => {
-    useEffect(() => {
-        
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-        })
-    }, []);
+    
     const { isAdminLogged, currentUser, registeredUsersMap } = useContext(AppContext); 
 
     const panell = registeredUsersMap.has(currentUser?.name) 

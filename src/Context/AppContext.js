@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from '../tools/axiosTool';
 import { useNavigate } from 'react-router-dom';
 import {formatCurency} from '../tools/formatCurency';
+
 export const AppContext = React.createContext();
 
 export const AppProvider = ({children}) => {
@@ -46,7 +47,8 @@ const [ registeredUsersMap, setRegisteredUsersMap ] = useState(new Map());
 
     const navigate = useNavigate();
     const admin = {name: "admin", password: "123"};
-    
+///////////////////////////////////////////////////
+   
 ////////////////////////////////////////////////////////////
 const getCurrentUserData = async () => {
     if(localStorage.getItem("admin")){
@@ -144,7 +146,12 @@ const getCurrentUserData = async () => {
     useEffect(() => {
         getOrdersData();
     }, [])
-
+    useEffect(() => {
+        window.scrollTo({
+            top: 200,
+            behavior: "smooth",
+        })
+    }, [isBurgerNavActive])
 //CHECK QUANTITY OF ITEM
 const  getItemQuantity = (id) => {
     return orderArray.find(item => item.id === id)?.quantity || 0;

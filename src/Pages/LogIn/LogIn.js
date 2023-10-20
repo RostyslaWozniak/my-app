@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import axios from '../../tools/axiosTool';
 import Input from '../../Components/elements/Input/Input';
@@ -6,15 +6,7 @@ import Button from '../../Components/elements/Button/Button';
 import { AppContext } from '../../Context/AppContext';
 import './LogIn.css';
 
-
-
 const LogIn = () => {
-    useEffect(() => {
-        window.scrollTo({
-            top: 150,
-            behavior: "smooth",
-        })
-    }, []);
     const {
         admin,
         isAdminLogged,
@@ -36,10 +28,10 @@ const LogIn = () => {
     }
         const formInputsArray = [
             {
-                label: "Imię", 
+                label: "Login", 
                 name: "loginName", 
                 type: "text", 
-                placeholder: "Wpisz imię", 
+                placeholder: "Wpisz imię...", 
                 onChange: (e) => handleInputLogin(e, "login"), 
                 value: loginName,
                 message: loginMessage,
@@ -48,7 +40,7 @@ const LogIn = () => {
                 label: "Hasło", 
                 name: "loginPassword", 
                 type: "password", 
-                placeholder: "Wpisz hasło", 
+                placeholder: "Wpisz hasło...", 
                 onChange: (e) => handleInputLogin(e, "login"), 
                 value: loginPassword,
                 message: loginMessage,

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { AppContext } from '../../Context/AppContext';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../Components/elements/Button/Button';
@@ -19,13 +19,6 @@ const OrderPage = () => {
         orderArray,
         setCurrentUser, 
     } = useContext(AppContext);
-    useEffect(() => {
-        window.scrollTo({
-            top: 150,
-            behavior: "smooth",
-        })
-        
-    }, []);
     const navigate = useNavigate()
  //check is user logged and get status of order
     const isOrderSended = currentUser?.isOrderSended || false; 

@@ -28,3 +28,6 @@
 .burger-nav-active div:nth-child(3){
     transform: translate(0, -15px) rotate(-45deg);
 } 
+.none{
+    display: none;
+}

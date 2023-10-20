@@ -1,16 +1,10 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { AppContext } from "../../Context/AppContext";
 import ListElement from "../../Components/elements/ListElement/ListElement";
 import Button from "../../Components/elements/Button/Button";
 import axios from "../../tools/axiosTool";
 
 const AdminInfo = () => {
-    useEffect(() => {
-        window.scrollTo({
-            top: 150,
-            behavior: "smooth",
-        })
-    }, []);
     const { 
         menuArray, 
         sendedOrderToAdmin, 

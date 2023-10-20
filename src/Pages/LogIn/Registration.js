@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState} from 'react';
+import React, { useContext, useState} from 'react';
 import { AppContext } from '../../Context/AppContext';
 import Input from '../../Components/elements/Input/Input'
 import Button from '../../Components/elements/Button/Button';
@@ -20,12 +20,6 @@ const Registration = () => {
         passwordMessage: null,
         password2Message: null,
     });
-    useEffect(() => {
-        window.scrollTo({
-            top: 150,
-            behavior: "smooth",
-        });
-    }, []);
     const { 
         registeredUsersMap,
         setCurrentUser,
@@ -39,10 +33,10 @@ const Registration = () => {
         }
     const formInputsArray = [
         {
-            label: "Imię", 
+            label: "Login", 
             name: "registerName", 
             type: "text", 
-            placeholder: "Wpisz imię", 
+            placeholder: "Wpisz login...", 
             onChange: handleInputLogin, 
             value: registerName, 
             message: nameMessage,
@@ -51,7 +45,7 @@ const Registration = () => {
             label: "Hasło", 
             name: "registerPassword", 
             type: "password", 
-            placeholder: "Wpisz hasło", 
+            placeholder: "Wpisz hasło...", 
             onChange: handleInputLogin, 
             value: registerPassword, 
             message: passwordMessage,
@@ -60,7 +54,7 @@ const Registration = () => {
             label: "Hasło", 
             name: "registerPassword2", 
             type: "password", 
-            placeholder: "Hasło jeszcze raz", 
+            placeholder: "Hasło jeszcze raz...", 
             onChange: handleInputLogin, 
             value: registerPassword2, 
             message: password2Message,

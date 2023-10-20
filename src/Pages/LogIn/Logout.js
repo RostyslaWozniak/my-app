@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { AppContext } from "../../Context/AppContext";
 import Button from '../../Components/elements/Button/Button';
 import './LogIn.css'
@@ -6,12 +6,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "../../tools/axiosTool";
 
 const Logout = () => {
-    useEffect(() => {
-        window.scrollTo({
-            top: 150,
-            behavior: "smooth",
-        })
-    }, []);
     const { 
         setModal,
         currentUser,

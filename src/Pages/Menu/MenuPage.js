@@ -1,16 +1,10 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext, useRef } from 'react';
 import Button from '../../Components/elements/Button/Button';
 import ListElement from '../../Components/elements/ListElement/ListElement';
 import { AppContext } from '../../Context/AppContext';
 import './MenuPage.css'
 
 const MenuPage = () => {
-    useEffect(() => {
-        window.scrollTo({
-            top: 150,
-            behavior: "smooth",
-        })
-    }, []);
     const { 
         currentUser, 
         menuArray,  

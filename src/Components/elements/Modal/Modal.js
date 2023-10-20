@@ -26,7 +26,7 @@ const Modal = () => {
     }
     return ( 
         modal.isVisible ? (
-        <div className="modal-container">
+        <div className="modal-container" onClick={handleCloseModal}>
             <div className={`modal-content ${addClass ? "add" : ""}`}>
                 <Button
                         name="x"

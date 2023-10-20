@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { AppContext } from '../../../Context/AppContext';
 import './BurgerNav.css'
 
@@ -7,9 +7,19 @@ const BurgerNav = () => {
     const handleBurgerNav = () => {
         setIsBurgerNavActive(!isBurgerNavActive);
     } 
-    const activeNavClass = isBurgerNavActive && "burger-nav-active";
+   
+    const isNavVisible = () => {
+
+        if(isBurgerNavActive) return "burger-nav-active";
+        return "";
+    }
+    
     return ( 
-        <div onClick={handleBurgerNav} className={`burger-nav  ${activeNavClass}`}>
+        <div 
+           
+            onClick={handleBurgerNav} 
+            className={`burger-nav  ${isNavVisible()}`}
+        >
             <div></div>
             <div></div>
             <div></div>

@@ -55,3 +55,29 @@
         opacity: 0;
     }
 }
+@media screen and (max-width: 450px){
+    .modal-content{
+        width: 90%;
+        height: 100px;
+        top: 60px;
+    }
+    .modal-content button{ 
+        display: none;
+    }
+    @keyframes appear {
+        0%{
+            top: -50px;
+        }
+        100%{
+            top: 60px;
+        }
+    }
+    @keyframes disappear {
+        0%{
+            top: 60px;
+        }
+        100%{
+            top: -50px;
+        }
+    }
+}

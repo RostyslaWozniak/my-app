@@ -45,36 +45,75 @@
       }
 /* Input */
     .label-input-element{
-        flex-direction: column;
-        align-items:center;
+        flex-direction: column; 
+        /* border: none; */
+      }
+      .label-input-element p {
+        text-align: center;
       }
     .label-input-element input{
         width: 100%;
         margin: 10px auto;
     }
-    input{
-        width: 100%;
-        margin: 10px auto;
+    .label-input-element span{
+        top: 95px;
+        left: 30px;
     }
 /* Button */
-    button .medium,
-    button .large{
+    button.medium,
+    button.large{
       width: 100%;
+      
     }
 /* BurgerNav  */
     .navigation{
         width: 100%;
         text-align: center;
-        border: 0px ;
+        
     }
     .navigation a{
         transition: none;
         transition: color .5s ease-in-out;
         transition: padding .5s ease-in-out;
-        
     }
     .navigation a.active{
         border: 0px ;
         padding: 0;
+    }
+/* Scroll up  */
+    .arrow-container{
+        display: none;
+    }
+/* Go back  */
+    .arrow-back-container{
+        top: 20px;
+        left: 20px;
+    }
+
+    .admin-nav,
+    .login-container div,
+    .order-container .result-container{
+      flex-direction: column;
+    }
+    /* .admin-container, */
+    .registration-container,
+    .login-container{
+      width: 100%;
+     
+    }
+/* ADMIN  */
+    .admin-container{
+        width: 100%;
+        
+    }
+    .admin-container .admin-edit-container .medium{
+        width: 250px;
+        
+    }
+    .admin-container .admin-edit-container li{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+
     }
 }

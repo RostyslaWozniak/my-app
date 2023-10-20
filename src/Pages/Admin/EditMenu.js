@@ -1,6 +1,6 @@
 import Button from "../../Components/elements/Button/Button";
 import ListElement from "../../Components/elements/ListElement/ListElement";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { AppContext } from "../../Context/AppContext";
 import ArrowBack from "../../Components/elements/GoBack/GoBack";
 import axios from "../../tools/axiosTool";
@@ -55,11 +55,11 @@ const EditMenu = () => {
         />
     )})
     return ( 
-        <>
+        <div className="admin-edit-container">
             <h2>Edytuj menu</h2>
             {item}
             <ArrowBack/>
-        </>
+        </div>
     );
 }
  
