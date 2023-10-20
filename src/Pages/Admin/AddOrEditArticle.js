@@ -194,7 +194,7 @@ const AddOrEditArticle = ({type}) => {
                     className="large accept"
                 />
             </form> 
-            <ArrowBack/>
+            <ArrowBack path="/admin"/>
         </>
      );
 }

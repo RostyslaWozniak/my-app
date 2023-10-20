@@ -1,5 +1,5 @@
 .arrow-back-container{
-    width: 70px;
+    width: 50px;
     height: 50px;
     position: absolute;
     top: 50px;
@@ -10,7 +10,7 @@
 .arrow-back-container .arrow-back{
     height: 4px;
     width: 70px;
-    background-color: var(--font-color);
+    background-color: transparent;
     border-radius: 10px;
     position: absolute;
     top: 60%;
@@ -26,19 +26,12 @@
     position: absolute;
 }
 .arrow-back-container .arrow-back::before{
-    top: -3px;
-    left: 6px;
+    top: -10px;
+    left: 20px;
     transform: rotate(-55deg)
 }
 .arrow-back-container  .arrow-back::after{
-    top: -13px;
-    left: 6px;
+    top: -20px;
+    left: 20px;
     transform: rotate(55deg);
-}
-.arrow-back-container p{
-    top: 0;
-    right: 0;
-    position: absolute;
-    color: var(--font-color);
-    font-size: 1.5rem;
 }

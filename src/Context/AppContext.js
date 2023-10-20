@@ -88,8 +88,7 @@ const getCurrentUserData = async () => {
 }
 //Get registrate users
     const getUsersData = async () => {
-        const { data, status } = await axios.get('/user');
-        console.log(data)
+        const { data } = await axios.get('/user');
         data.forEach(user => {
             setRegisteredUsersMap(registeredUsersMap.set(
                       user.name, {

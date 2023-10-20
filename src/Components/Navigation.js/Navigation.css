@@ -5,7 +5,7 @@
     height: 100dvh;
     padding: 50px 0;
     min-width: 15dvw; 
-    transition: .7s ease-in-out;  
+    transition: .3s ease-in-out;  
     position: sticky;
     top: 0;
     z-index: 2;
@@ -29,7 +29,7 @@
     padding: 5px 0 5px 50px;
 }
 .navigation a.active{
-    border-left:8px solid var(--primary-color);
+    border-left: 8px solid var(--primary-color);
     color: var(--primary-color);
     padding: 20px;
 }

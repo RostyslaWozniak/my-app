@@ -58,7 +58,7 @@ const EditMenu = () => {
         <div className="admin-edit-container">
             <h2>Edytuj menu</h2>
             {item}
-            <ArrowBack/>
+            <ArrowBack path="/admin"/>
         </div>
     );
 }

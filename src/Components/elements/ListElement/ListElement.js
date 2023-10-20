@@ -9,7 +9,7 @@ const ListElement = ({id, name, price, ingredients, button, quantity }) => {
                 <div className="name"><p>{name}</p></div>
                 <div className="descriptions">{ingredients}</div>
                 <div><p>{showPrice}</p></div>
-                <div>{button}</div>
+                <div className="button">{button}</div>
         </li>
      );
 }

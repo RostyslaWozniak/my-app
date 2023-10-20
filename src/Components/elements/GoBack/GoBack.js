@@ -1,17 +1,16 @@
 import React from "react";
 import './GoBack.css';
 import { useNavigate } from "react-router-dom";
-const ArrowBack = () => {
+const ArrowBack = ({ path }) => {
     const navigate = useNavigate();
-    // const navigateTo = () => {
-    //     navigate(-1)
-    // }
+    const navigateTo = () => {
+        navigate(path);
+    }
     return ( 
         <div>
-            <div className="arrow-back-container" onClick={() => navigate(-1)}>
-                        <div className="arrow-back"></div>
-                        <p>Back</p>
-                    </div> 
+            <div className="arrow-back-container" onClick={navigateTo}>
+                <div className="arrow-back"></div>
+            </div> 
         </div>
      );
 }

@@ -149,7 +149,7 @@ const Registration = () => {
                     className="large accept"
                 />
             </form>
-            <ArrowBack/>
+            <ArrowBack path="/login"/>
         </>
     )
 }

@@ -43,6 +43,9 @@
     .page ul li{
        flex-direction: column;
       }
+      .list-element .button{
+        width: 85%;
+      }
 /* Input */
     .label-input-element{
         flex-direction: column; 
@@ -60,10 +63,15 @@
         left: 30px;
     }
 /* Button */
-    button.medium,
+    button.medium{
+        width: 100%;
+    }
     button.large{
       width: 100%;
       
+    }
+    button:hover::before{
+        animation: none;
     }
 /* BurgerNav  */
     .navigation{
@@ -86,8 +94,8 @@
     }
 /* Go back  */
     .arrow-back-container{
-        top: 20px;
-        left: 20px;
+        top: 5px;
+        left: 10px;
     }
 
     .admin-nav,
@@ -104,16 +112,19 @@
 /* ADMIN  */
     .admin-container{
         width: 100%;
-        
-    }
-    .admin-container .admin-edit-container .medium{
-        width: 250px;
-        
     }
     .admin-container .admin-edit-container li{
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
 
+    }
+    .category-buttons p {
+        width: 100%;        
+        display: flex;
+        justify-content: center;
+    }
+    .category-buttons button{
+        width: 40%;
     }
 }
