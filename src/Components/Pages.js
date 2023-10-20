@@ -13,12 +13,14 @@ import Logout from '../Pages/LogIn/Logout';
 import MenuPage from '../Pages/Menu/MenuPage';
 import OrderPage from '../Pages/Order/OrderPage';
 import Registration from '../Pages/LogIn/Registration'
+import Cart from './elements/Cart/Cart';
 
 const Pages = () => {
     return ( 
         <>
         <ScrollUp/>
         <BurgerNav/>
+        <Cart/>
         <Routes>
             <Route path="/" element={<HomePage/>}/>
             <Route path="/menu" element={<MenuPage/>}/>

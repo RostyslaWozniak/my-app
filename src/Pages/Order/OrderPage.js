@@ -110,7 +110,7 @@ const OrderPage = () => {
     return ( 
         <div className="order-container">
             <div>
-                <h1>Twoje zamówienie {orderQuantity === 0 ? "" : `(${orderQuantity})`}</h1>
+                <h1>Twoje zamówienie</h1>
                 <ul>
                     {!orderQuantity ? <i>Brak zamówionych dań :(</i> : item}           
                 </ul>              

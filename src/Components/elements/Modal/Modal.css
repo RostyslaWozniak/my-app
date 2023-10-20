@@ -60,9 +60,13 @@
         width: 90%;
         height: 100px;
         top: 60px;
+        animation: appear .3s ease-in-out;
     }
     .modal-content button{ 
         display: none;
+    }
+    .add{
+        animation: disappear .6s ease-in-out;
     }
     @keyframes appear {
         0%{
@@ -75,6 +79,9 @@
     @keyframes disappear {
         0%{
             top: 60px;
+        }
+        50%{
+            top: -50px;
         }
         100%{
             top: -50px;
